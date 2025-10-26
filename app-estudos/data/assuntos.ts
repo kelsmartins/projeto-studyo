@@ -1,4 +1,4 @@
-import {AssuntoType} from '@/types/assuntoType';
+import {AssuntoType} from '@/types/assuntotype'
 
 export const Assuntos: AssuntoType[] = [
   {

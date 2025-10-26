@@ -6,12 +6,12 @@ export default function Home() {
     <div className="w-screen h-screen flex overflow-hidden">
       <div className="h-screen w-[300px] bg-zinc-800">
 
-      </div>
-      <div className="h-screen w-[100%] flex-1 bg-zinc-900">
-        <div className="h-[80px] flex items-center px-4">
+      </div>                                               {/* O min-w-0 permite que um item (flex-1) encolha para caber no layout, mesmo que o conteúdo dentro dele seja muito mais largo. */}
+      <div className="h-screen w-[100%] flex-1 bg-zinc-900 min-w-0">
+        <div className="h-[10%] flex items-center px-4">
           <h2 className="text-3xl">Estudos</h2>
-        </div>
-         <div className="flex-1 w-[100%] h-[90%] overflow-y-auto no-scrollbar"> {/* py-4 px-4 space-y-4 */}
+        </div>                      
+         <div className=" w-full h-[90%] overflow-y-auto no-scrollbar">
             <CardArea/>
             <CardArea/>
             <CardArea/>
