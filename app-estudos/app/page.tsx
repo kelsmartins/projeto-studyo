@@ -1,7 +1,8 @@
 'use client'
-import {CardArea} from '@/components/cardarea'
+import {CardArea} from '@/components/cardarea';
 
 export default function Home() {
+  
   return (
     <div className="w-screen h-screen flex overflow-hidden">
       <div className="h-screen w-[300px] bg-zinc-800">
@@ -12,14 +13,10 @@ export default function Home() {
           <h2 className="text-3xl">Estudos</h2>
         </div>                      
          <div className=" w-full h-[90%] overflow-y-auto no-scrollbar">
-            <CardArea/>
-            <CardArea/>
-            <CardArea/>
-            <CardArea/>
-            <CardArea/>
-            <CardArea/>
-            <CardArea/>
-            <CardArea/>
+            <CardArea title='Hoje'code={1}/>
+            <CardArea title='Amanhã' code={2}/>
+            <CardArea title='Depois de amanhã' code={3}/>
+            <CardArea title='Próximos dias' code={4}/>
         </div>
       </div>
     </div>
