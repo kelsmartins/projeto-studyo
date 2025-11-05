@@ -8,17 +8,8 @@ export default function Home() {
 
       </div>                                               {/* O min-w-0 permite que um item (flex-1) encolha para caber no layout, mesmo que o conteúdo dentro dele seja muito mais largo. */}
       <div className="h-screen w-[100%] flex-1 bg-zinc-900 min-w-0">
-        <div className="h-[10%] flex items-center px-4">
-          <h2 className="text-3xl">Estudos</h2>
-        </div>                      
-         <div className=" w-full h-[90%] overflow-y-auto no-scrollbar">
-            <CardArea/>
-            <CardArea/>
-            <CardArea/>
-            <CardArea/>
-            <CardArea/>
-            <CardArea/>
-            <CardArea/>
+          <h2 className=" h-[10%] flex justify-center items-center text-3xl">Estudos</h2>                   
+         <div className=" w-[95%] h-[90%] mx-auto">
             <CardArea/>
         </div>
       </div>
