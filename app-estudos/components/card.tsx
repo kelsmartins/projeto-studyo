@@ -11,10 +11,8 @@ export function Card({assuntoData}: Props) {
 
     const [show, setShow] = useState(false);
 
-    function handleShowDetails(id: number){
-        if(id === assuntoData.id){
-            setShow(!show);
-        }
+    function handleShowDetails(){
+        setShow(!show);
     }
 
     function handleCloseDetails(){
@@ -29,8 +27,8 @@ export function Card({assuntoData}: Props) {
                 <h2 className="w-full h-[80px] flex items-center text-sm font-bold">{assuntoData.assunto}</h2>
                 <div className="w-full h-[60px]"></div>
                 <div className="w-full h-[60px] flex justify-between items-center">
-                    <Button style="border-1 border-white/10 text-white/40" title="ver tudo" onClick={()=>handleShowDetails(assuntoData.id)} />
-                    <Button style="bg-red-300" title="concluir"/>
+                    <Button style="w-[100px] h-[30px] text-zinc-500 border border-zinc-700 rounded-md hover:bg-zinc-700 transition-colors font-bold" title="ver tudo" onClick={handleShowDetails} />
+                    <Button style="w-[100px] h-[30px] bg-red-300 font-bold" title="concluir"/>
                 </div>
                 {show &&
                     <CardDetalhado assuntoData={assuntoData} onClose={handleCloseDetails}/>
