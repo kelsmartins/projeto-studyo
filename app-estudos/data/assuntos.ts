@@ -25,7 +25,7 @@ export const Assuntos: AssuntoType[] = [
     id: 3,
     // Corrigido para 06 de NOVEMBRO (mês 10)
     dataAgendada: new Date(2025, 10, 6),
-    assunto: 'Ciclo de Krebs e Fosforilação',
+    assunto: 'Ciclo de Krebs e Fosforilação Sei lá blá blá blá ai ai ai',
     contexto: 'Biologia',
     linkRepositorio: 'https://pdf-resumo.org/ciclo-krebs.pdf',
     anotacoesRapidas: 'Revisar a produção de ATP.'
