@@ -83,6 +83,18 @@ export function CardArea({title, code}: Props){
                        <Card key={card.id} assuntoData={card} />
                     ))
                 }
+                { (code === 1 && today.length === 0) &&
+                    <p className='text-white/40 text-lg italic'>Nada para estudar hoje :D</p>
+                }
+                { (code === 2 && tomorrow.length === 0) &&
+                    <p className='text-white/40 italic'>Nada para estudar amanhã :D</p>
+                }
+                { (code === 3 && afterTomorrow.length === 0) &&
+                    <p className='text-white/40 italic'>Nada para estudar depois de amanhã :D</p>
+                }
+                { (code === 4 && nextDays.length === 0) &&
+                    <p className='text-white/40 italic'>Nada para estudar nos próximos dias :D</p>
+                }
             </div>            
         </div>
     )

@@ -8,7 +8,7 @@ export const Assuntos: AssuntoType[] = [
     id: 1,
     // Original: new Date(2025, 11, 5) -> 05 de DEZEMBRO
     // Corrigido para 05 de NOVEMBRO (mês 10)
-    dataAgendada: new Date(2025, 10, 5), 
+    dataAgendada: new Date(2025, 11, 5), 
     assunto: 'Revisão de Logaritmos',
     contexto: 'Matemática',
     linkRepositorio: 'https://youtu.be/logaritmos-revisao',
@@ -16,7 +16,7 @@ export const Assuntos: AssuntoType[] = [
   {
     id: 2,
     // Corrigido para 05 de NOVEMBRO (mês 10)
-    dataAgendada: new Date(2025, 10, 5),
+    dataAgendada: new Date(2025, 11, 5),
     assunto: 'A Expansão Marítima Europeia',
     contexto: 'História',
     linkRepositorio: 'https://artigo.com/expansao-maritima',
@@ -24,7 +24,7 @@ export const Assuntos: AssuntoType[] = [
   {
     id: 3,
     // Corrigido para 06 de NOVEMBRO (mês 10)
-    dataAgendada: new Date(2025, 10, 6),
+    dataAgendada: new Date(2025, 11, 6),
     assunto: 'Ciclo de Krebs e Fosforilação Sei lá blá blá blá ai ai ai',
     contexto: 'Biologia',
     linkRepositorio: 'https://pdf-resumo.org/ciclo-krebs.pdf',
@@ -49,7 +49,7 @@ export const Assuntos: AssuntoType[] = [
   {
     id: 6,
     // Corrigido para 09 de NOVEMBRO (mês 10)
-    dataAgendada: new Date(2025, 10, 9),
+    dataAgendada: new Date(2025, 11, 9),
     assunto: 'Formação e Estrutura do Solo',
     contexto: 'Geografia',
     linkRepositorio: 'https://manual.terra.br/solos-geografia',
