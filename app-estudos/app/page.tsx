@@ -16,6 +16,10 @@ export default function Home() {
   function handleCloseNewCard(){
     setNewCardVisible(false);
   }
+
+  function handleSaveNewCard(){
+    alert('salvo');
+  }
   
   return (
     <div className="w-screen h-screen flex overflow-hidden">
@@ -25,7 +29,8 @@ export default function Home() {
       <div className="h-screen w-[100%] flex-1 bg-zinc-900 min-w-0">
         <div className="h-[10%] w-[100%] flex flex-row items-center px-4 justify-between">
           <h2 className="text-3xl font-bold">Estudos</h2>
-          <button className='w-[110px] h-[40px] border-1 border-zinc-700 rounded-md font-bold p-1 text-sm text-zinc-400 hover:bg-zinc-700 transition-colors' onClick={handleOpenNewCard}>novo assunto</button>
+          <button className='w-[110px] h-[40px] border-1 border-zinc-700 rounded-md font-bold p-1 text-sm text-zinc-400 hover:bg-zinc-700 transition-colors' 
+          onClick={handleOpenNewCard}>novo assunto</button>
         </div>                      
          <div className=" w-full h-[90%] overflow-y-auto no-scrollbar">
             <CardArea title='Hoje'code={1}/>
@@ -35,7 +40,7 @@ export default function Home() {
         </div>
       </div>
       {newCardVisible &&
-        <NovoCard onClick={handleCloseNewCard}/>}
+        <NovoCard onClick={handleCloseNewCard} onConcluir={handleSaveNewCard}/>}
     </div>
   );
 }
