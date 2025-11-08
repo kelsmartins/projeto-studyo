@@ -1,9 +1,10 @@
 import {AssuntoType} from '@/types/assuntotype'
+import {useState} from 'react'
 
 // O MÊS DO JAVASCRIPT COMEÇA EM 0 (Jan=0, Fev=1, ..., Nov=10, Dez=11)
 // Eu ajustei suas datas para refletir Novembro (10) e Dezembro (11).
 
-export const Assuntos: AssuntoType[] = [
+export const Assuntos: AssuntoType[]= [
   {
     id: 1,
     // Original: new Date(2025, 11, 5) -> 05 de DEZEMBRO

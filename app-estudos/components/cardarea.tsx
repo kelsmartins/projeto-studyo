@@ -1,14 +1,14 @@
 import {Card} from '@/components/card'
 import { useEffect, useState } from 'react';
 import { AssuntoType } from '@/types/assuntotype';
-import { Assuntos } from '@/data/assuntos';
 
 type Props = {
     title: string;
-    code: number
+    code: number;
+    assuntos: AssuntoType[];
 }
 
-export function CardArea({title, code}: Props){
+export function CardArea({title, code, assuntos}: Props){
 
     const [ today, setToday ] = useState<AssuntoType[]>([]);
     const [ tomorrow, setTomorrow ] = useState<AssuntoType[]>([]);
@@ -30,7 +30,12 @@ export function CardArea({title, code}: Props){
   
     useEffect(() => {
 
-        Assuntos.forEach((assunto) => {
+        setToday([]); // para nao ter objetos duplicados
+        setTomorrow([]);
+        setAfterTomorrow([]);
+        setNextDays([]);
+
+        assuntos.forEach((assunto) => {
             
             const dataAssunto = assunto.dataAgendada; 
 
@@ -64,7 +69,7 @@ export function CardArea({title, code}: Props){
                 }
             }
         });
-    }, []);
+    }, [assuntos]);
     
     return (
         <div className="min-h-[200px] w-[100%] mx-auto flex flex-col">

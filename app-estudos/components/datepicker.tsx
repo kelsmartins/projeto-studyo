@@ -2,26 +2,31 @@ import { useState } from 'react'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale } from 'react-datepicker';
-// import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 
 registerLocale('pt-BR', ptBR)
 
-export const DatePickerComponent = () => {
+type Props = {
+    onPick: (date: Date) => void; // pegar data e salvar no comp-pai (novocard)
+}
+
+export const DatePickerComponent = ({onPick}: Props) => {
 
     const [date, setDate] = useState(new Date())
 
-    function handleSetDate(date: Date | null){
-        if(date){
-            setDate(date)
+    function handleSetDate(newDate: Date | null){
+        if(newDate){
+            setDate(newDate)
+            onPick(newDate); // pegou a data da state e levou para a comp-pai(novocard)
         }
     }
 
     return (
         <DatePicker selected={date}
             onChange={handleSetDate}
-            locale={`pt-BR`}
+            locale={`pt-BR`} // traduzir para portugues
             className='w-full h-[40px] border-1 border-zinc-700 rounded-md mb-3'
+            dateFormat={`dd/MM/yyyy`} // padrozinar para formato brasileiro
         />
     )
 

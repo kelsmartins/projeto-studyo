@@ -28,7 +28,7 @@ export function Card({assuntoData}: Props) {
                 <div className="w-full h-[60px]"></div>
                 <div className="w-full h-[60px] flex justify-between items-center">
                     <Button style="w-[100px] h-[30px] text-zinc-500 border border-zinc-700 rounded-md hover:bg-zinc-700 transition-colors font-bold" title="ver tudo" onClick={handleShowDetails} />
-                    <Button style="w-[100px] h-[30px] bg-red-300 font-bold" title="concluir"/>
+                    <Button style="w-[100px] h-[30px] bg-zinc-700 font-bold" title="concluir"/>
                 </div>
                 {show &&
                     <CardDetalhado assuntoData={assuntoData} onClose={handleCloseDetails}/>

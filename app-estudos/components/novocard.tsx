@@ -4,16 +4,21 @@ import { DatePickerComponent } from "./datepicker"
 
 type Props = {
     onClick: () => void;
-    onConcluir: () => void;
+    onConcluir: (title: string, date: Date, link: string) => void;
 }
 
 export function NovoCard({onClick, onConcluir}: Props) {
 
     const [title, setTitle] = useState('');
+    const [date, setDate] = useState(new Date())
     const [link, setLink] = useState('');
 
+    function handlePickDate(newDate: Date){
+        setDate(newDate);
+    }
+
     function handleOnConcluir(){
-        onConcluir();
+        onConcluir(title, date, link);
         onClick();  
     }
 
@@ -31,9 +36,9 @@ export function NovoCard({onClick, onConcluir}: Props) {
                 />
 
                 <h3 className="mb-1 text-sm uppercase">data agendada</h3>
-                <DatePickerComponent />
+                <DatePickerComponent onPick={handlePickDate} />
 
-                <div className="w-full h-[100px] border-1 border-dashed rounded-md border-zinc-700 mb-3"></div>
+                <div className="w-full h-[100px] border-2 border-dashed rounded-md border-zinc-700 mb-3"></div>
                 {/* <div className="h-[60px] w-full border-1 border-zinc-700 rounded-md p-2 text-white text-sm mb-3"></div> */}
 
                  <h3 className="mb-1 text-sm uppercase">link (Site ou YouTube)</h3>           
