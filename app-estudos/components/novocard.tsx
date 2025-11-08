@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Button } from "./button"
+import { DatePickerComponent } from "./datepicker"
 
 type Props = {
     onClick: () => void;
@@ -30,7 +31,7 @@ export function NovoCard({onClick, onConcluir}: Props) {
                 />
 
                 <h3 className="mb-1 text-sm uppercase">data agendada</h3>
-                <div className="h-[40px] w-full border-1 border-zinc-700 rounded-md p-2 text-white text-sm mb-3"></div>
+                <DatePickerComponent />
 
                 <div className="w-full h-[100px] border-1 border-dashed rounded-md border-zinc-700 mb-3"></div>
                 {/* <div className="h-[60px] w-full border-1 border-zinc-700 rounded-md p-2 text-white text-sm mb-3"></div> */}

@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 export default function Home() {
 
-  const [newCardVisible, setNewCardVisible] =  useState(false);
+  const [newCardVisible, setNewCardVisible] = useState(false);
 
   function handleOpenNewCard(){
     setNewCardVisible(true);
