@@ -3,27 +3,27 @@ import { Button } from "./button"
 import { DatePickerComponent } from "./datepicker"
 
 type Props = {
-    onClick: () => void;
-    onConcluir: (title: string, date: Date, link: string) => void;
+    handleCloseNewCard: () => void;
+    handleSaveNewCard: (title: string, date: Date, link: string) => void;
 }
 
-export function NovoCard({onClick, onConcluir}: Props) {
+export function NovoCard({handleCloseNewCard, handleSaveNewCard}: Props) {
 
     const [title, setTitle] = useState('');
     const [date, setDate] = useState(new Date())
     const [link, setLink] = useState('');
 
-    function handlePickDate(newDate: Date){
+    function handlePickDate(newDate: Date){ // atribuir valor de pickdate do componente filho
         setDate(newDate);
     }
 
-    function handleOnConcluir(){
-        onConcluir(title, date, link);
-        onClick();  
+    function handleClick(){
+        handleSaveNewCard(title, date, link); // enviar esses parametros para o compponente pai
+        handleCloseNewCard();  
     }
 
     return (
-        <div className="w-full h-full bg-black/30 fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm" onClick={onClick}>
+        <div className="w-full h-full bg-black/30 fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm" onClick={handleCloseNewCard}>
             <div className="w-[350px] h-[500px] bg-zinc-800 flex flex-col p-4 rounded-lg" onClick={e => e.stopPropagation()}> {/* explicacao linha 52 */}
 
                 <h2 className="w-full h-[35px] text-base flex items-center justify-center font-bold text-center uppercase">novo assunto</h2> {/* 38 caracteres*/}
@@ -48,7 +48,7 @@ export function NovoCard({onClick, onConcluir}: Props) {
                 onChange={text => setLink(text.target.value)}
                 />
 
-                <Button style="bg-red-400 m-auto h-[40px] w-[150px]" title="concluir" onClick={handleOnConcluir}/>
+                <Button style="bg-red-400 m-auto h-[40px] w-[150px]" title="concluir" onClick={handleClick}/>
 
             </div>
         </div>

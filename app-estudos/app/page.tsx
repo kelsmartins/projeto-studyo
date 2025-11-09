@@ -40,7 +40,7 @@ export default function Home() {
       <div className="h-screen w-[100%] flex-1 bg-zinc-900 min-w-0">
         <div className="h-[10%] w-[100%] flex flex-row items-center px-4 justify-between">
           <h2 className="text-3xl font-bold">Estudos</h2>
-          <button className='w-[110px] h-[40px] bg-zinc-700 rounded-md font-bold p-1 text-sm text-white/80 hover:bg-zinc-700 transition-colors' 
+          <button className='w-[110px] h-[40px] bg-zinc-700 rounded-md font-bold p-1 text-sm text-white/80 hover:bg-zinc-600 transition-colors cursor-pointer' 
           onClick={handleOpenNewCard}>novo assunto</button>
         </div>                      
          <div className=" w-full h-[90%] overflow-y-auto no-scrollbar">
@@ -51,7 +51,7 @@ export default function Home() {
         </div>
       </div>
       {newCardVisible &&
-        <NovoCard onClick={handleCloseNewCard} onConcluir={(title, date, link) => handleSaveNewCard(title, date, link)}/>}
+        <NovoCard handleCloseNewCard={handleCloseNewCard} handleSaveNewCard={(title, date, link) => handleSaveNewCard(title, date, link)}/>}
     </div>
   );
 }

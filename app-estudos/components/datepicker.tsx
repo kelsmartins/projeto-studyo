@@ -12,7 +12,7 @@ type Props = {
 
 export const DatePickerComponent = ({onPick}: Props) => {
 
-    const [date, setDate] = useState(new Date())
+    const [date, setDate] = useState(new Date());
 
     function handleSetDate(newDate: Date | null){
         if(newDate){
@@ -27,6 +27,7 @@ export const DatePickerComponent = ({onPick}: Props) => {
             locale={`pt-BR`} // traduzir para portugues
             className='w-full h-[40px] border-1 border-zinc-700 rounded-md mb-3'
             dateFormat={`dd/MM/yyyy`} // padrozinar para formato brasileiro
+            minDate={new Date()}
         />
     )
 
