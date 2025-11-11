@@ -74,7 +74,7 @@ export function CardArea({title, code, assuntos}: Props){
     return (
         <div className="min-h-[200px] w-[100%] mx-auto flex flex-col">
             <div className='w-full h-[40px] flex items-center'>
-                <h2 className='text-2xl px-4 font-bold text-white'>{title}</h2>
+                <h2 className='text-2xl px-4 font-bold text-zinc-800'>{title}</h2>
             </div>                           {/*padding para alinhar ponta do conteudo aos titulos e dar esço no fim, gap-x-4, espacamento entre elementos dentro da div*/}
             <div className='w-full h-full p-4 gap-x-4 flex flex-row justify-start items-center overflow-x-auto flex-nowrap no-scrollbar'> 
                 {
@@ -89,16 +89,16 @@ export function CardArea({title, code, assuntos}: Props){
                     ))
                 }
                 { (code === 1 && today.length === 0) &&
-                    <p className='text-white/40 text-lg italic'>Nada para estudar hoje :D</p>
+                    <p className='text-black/40 text-md italic'>Nada para estudar hoje :D</p>
                 }
                 { (code === 2 && tomorrow.length === 0) &&
-                    <p className='text-white/40 italic'>Nada para estudar amanhã :D</p>
+                    <p className='text-black/40 text-md italic'>Nada para estudar amanhã :D</p>
                 }
                 { (code === 3 && afterTomorrow.length === 0) &&
-                    <p className='text-white/40 italic'>Nada para estudar depois de amanhã :D</p>
+                    <p className='text-black/40 text-md italic'>Nada para estudar depois de amanhã :D</p>
                 }
                 { (code === 4 && nextDays.length === 0) &&
-                    <p className='text-white/40 italic'>Nada para estudar nos próximos dias :D</p>
+                    <p className='text-black/40 text-md italic'>Nada para estudar nos próximos dias :D</p>
                 }
             </div>            
         </div>
