@@ -17,9 +17,31 @@ export function NovoCard({handleCloseNewCard, handleSaveNewCard}: Props) {
         setDate(newDate);
     }
 
+    function isFieldsFilled(){
+        if(title != '' && link != ''){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function isFieldsEmpty(){
+        if(title == '' && link != ''){
+            alert('titulo obrigatório')
+        } else if(link == '' && title != ''){
+            alert('link obrigatório')
+        } else if(title == '' && link == ''){ 
+            alert('título e link obrigatórios')
+        }
+    }
+
     function handleClick(){
-        handleSaveNewCard(title, date, link); // enviar esses parametros para o componente pai
-        handleCloseNewCard();  
+        if(isFieldsFilled()){
+            handleSaveNewCard(title, date, link); // enviar esses parametros para o componente pai
+            handleCloseNewCard(); 
+        } else {
+            isFieldsEmpty();
+        }
     }
 
     return (
