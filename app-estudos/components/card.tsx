@@ -31,7 +31,7 @@ export function Card({assuntoData}: Props) {
                     <Button style="bg-zinc-700 font-bold hover:bg-zinc-600 transition-colors" title="concluir"/>
                 </div>
                 {show &&
-                    <CardDetalhado assuntoData={assuntoData} handleCloseDetails={handleCloseDetails}/>
+                    <CardDetalhado assuntoData={assuntoData} closeDetails={handleCloseDetails}/>
                 }
             </div>
         </div>
