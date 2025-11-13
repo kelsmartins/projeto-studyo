@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { Button } from "./button"
 import { DatePickerComponent } from "./datepicker"
+import { TopCategoryComponent } from "./categorycomponent"
+import { DropzoneComponent } from "./dropzonecomponent"
 
 type Props = {
     handleCloseNewCard: () => void;
@@ -12,6 +14,9 @@ export function NovoCard({handleCloseNewCard, handleSaveNewCard}: Props) {
     const [title, setTitle] = useState('');
     const [date, setDate] = useState(new Date())
     const [link, setLink] = useState('');
+
+    // const [selectedFile, setSelectedFile] = useState<File>();
+
 
     function handlePickDate(newDate: Date){ // atribuir valor de pickdate do componente filho
         setDate(newDate);
@@ -44,11 +49,15 @@ export function NovoCard({handleCloseNewCard, handleSaveNewCard}: Props) {
         }
     }
 
+    function getSelectedFile(newFile: File){
+        alert(newFile.name)
+    }
+
     return (
         <div className="w-full h-full bg-black/30 fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm" onClick={handleCloseNewCard}>
             <div className="w-[350px] h-[500px] bg-white flex flex-col rounded-lg" onClick={e => e.stopPropagation()}> {/* explicacao linha 52 */}
 
-                <span className="bg-black h-[20px] w-full rounded-t-lg"></span>
+                <TopCategoryComponent />
 
                 <div className="flex flex-col flex-1 p-4">
 
@@ -65,7 +74,7 @@ export function NovoCard({handleCloseNewCard, handleSaveNewCard}: Props) {
                     <DatePickerComponent onPick={handlePickDate} />
 
                     <h3 className="mb-1 text-sm uppercase text-zinc-600 font-bold">Arquivo</h3>
-                    <div className="w-full h-[70px] border border-dashed rounded-md border-zinc-700 mb-3"></div>
+                    <DropzoneComponent getSelectedFile={getSelectedFile}/>
                     {/* <div className="h-[60px] w-full border-1 border-zinc-700 rounded-md p-2 text-white text-sm mb-3"></div> */}
 
                     <h3 className="mb-1 text-sm uppercase text-zinc-600 font-bold">link (Site ou YouTube)</h3>           

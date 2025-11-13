@@ -2,6 +2,7 @@
   "dependencies": {
     "date-fns": "^4.1.0",
     "react-datepicker": "^8.8.0",
+    "react-dropzone": "^14.3.8",
     "tailwind-scrollbar-hide": "^4.0.0"
   },
   "devDependencies": {

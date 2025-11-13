@@ -2,6 +2,7 @@ import { AssuntoType } from "@/types/assuntotype"
 import { Button } from "./button"
 import { CardDetalhado } from "./carddetalhado";
 import { useState } from "react";
+import { LeftCategoryComponent } from "./categorycomponent";
 
 type Props = {
     assuntoData: AssuntoType;
@@ -21,7 +22,7 @@ export function Card({assuntoData}: Props) {
 
     return (
         <div className="h-[200px] w-[300px] rounded-lg flex-shrink-0 bg-white flex shadow-md shadow-zinc-400">
-            <span className="bg-white w-[20px] h-full rounded-l-lg"></span>
+            <LeftCategoryComponent/>
             <div className="w-full rounded-r-lg flex flex-col p-3">
                 <h3 className="w-full h-[25px] flex items-center text-sm font-bold text-zinc-500">{new Date(assuntoData.dataAgendada).toLocaleDateString()}</h3>
                 <h2 className="w-full h-[80px] flex items-center text-sm font-bold text-zinc-600">{assuntoData.assunto}</h2>

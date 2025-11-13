@@ -2,6 +2,7 @@ import { AssuntoType } from "@/types/assuntotype"
 import { Button } from "./button";
 import { useState } from "react";
 import { UpdateCard } from './updatecard'
+import { TopCategoryComponent } from "./categorycomponent";
 
 type Props = {
     assuntoData: AssuntoType;
@@ -28,13 +29,13 @@ export function CardDetalhado({assuntoData, closeDetails}: Props) {
         <div className="w-full h-full bg-black/30 fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm" onClick={closeDetails}>
             <div className="w-[350px] h-[500px] bg-white flex flex-col rounded-lg shadow-xl shadow-zinc-400" onClick={e => e.stopPropagation()}>
 
-                <span className="bg-black h-[20px] w-full rounded-t-lg"></span> {/*  span do contexto/materia/categoria */} 
+                <TopCategoryComponent /> {/*  span do contexto/materia/categoria */} 
                 <div className="flex-1 flex flex-col p-4"> {/*  div p restante dos elementos terem p-4  */} 
                     <div className="w-full h-[60px] flex flex-col items-center justify-center">
                         <h2 className="w-full h-[40px] text-base flex items-center justify-center font-bold text-zinc-600">{assuntoData.assunto}</h2> {/* 38 caracteres*/}
                         <h2 className="w-full h-[15px] text-base flex items-center justify-center font-bold text-zinc-500 mb-4">{new Date(assuntoData.dataAgendada).toLocaleDateString()}</h2>
                     </div>
-                    <div className="w-full h-[200px] flex flex-col bg-green-300">
+                    <div className="w-full flex-1 flex flex-col bg-green-300">
                         <h3 className="mt-2 text-base font-bold text-zinc-600">Fontes digitais</h3>
                         <div className="flex-1 bg-red-500"></div>
                         
@@ -45,7 +46,7 @@ export function CardDetalhado({assuntoData, closeDetails}: Props) {
                     </div>
                 </div>
                 {
-                    showUpdateCard && <UpdateCard asssuntoCard={assuntoData} closeUpdateCard={handleCloseUpdateCard}/>
+                    showUpdateCard && <UpdateCard AssuntoCard={assuntoData} handleCloseUpdateCard={handleCloseUpdateCard}/>
                 }
 
             </div>

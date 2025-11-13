@@ -25,7 +25,7 @@ export const DatePickerComponent = ({onPick}: Props) => {
         <DatePicker selected={date}
             onChange={handleSetDate}
             locale={`pt-BR`} // traduzir para portugues
-            className={`w-full h-[40px] border-1 border-zinc-700 rounded-md mb-3 text-zinc-600 text-md`}
+            className={`w-full h-[40px] border border-zinc-700 rounded-md mb-3 text-zinc-600 text-md`}
             dateFormat={`dd/MM/yyyy`} // padrozinar para formato brasileiro
             minDate={new Date()}
         />
