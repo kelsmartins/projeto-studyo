@@ -1,7 +1,7 @@
-import axios from 'axios'
+// import axios from 'axios'
 
-export const api = axios.create({
-    baseURL: 'https://jsonplaceholder.typicode.com' // exemplo
-})
+// export const api = axios.create({
+//     baseURL: 'https://jsonplaceholder.typicode.com' // exemplo
+// })
 
-// npm install axios
+// // npm install axios

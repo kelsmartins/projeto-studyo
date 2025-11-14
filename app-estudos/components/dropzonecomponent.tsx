@@ -3,21 +3,18 @@ import { useEffect } from 'react';
 import  {useDropzone} from 'react-dropzone'
 
 type Props = {
-    getSelectedFile: (newFile: File) => void;
+    getSelectedFiles: (newFile: File) => void;
 }
 
-export const DropzoneComponent = ({getSelectedFile}: Props) => {
+export const DropzoneComponent = ({getSelectedFiles}: Props) => {
     const {getRootProps, getInputProps, acceptedFiles} = useDropzone();
 
-    useEffect(()=>{
-        if(acceptedFiles.length > 0){ // se lista de arquivos nao estiver vazia...
-            getSelectedFile(acceptedFiles[0])
-            // for(let files in acceptedFiles){
-            //     getSelectedFile(acceptedFiles[files])
-            // }
-        }
+    useEffect(() => {
+        acceptedFiles.forEach(file => { // para cada arquivo, adicionar ao arraay
+        getSelectedFiles(file);
+        });
+    }, [acceptedFiles]);
 
-    }, [acceptedFiles])
     
 
     return (

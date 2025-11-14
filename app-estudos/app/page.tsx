@@ -1,11 +1,10 @@
 'use client'
-import { Button } from '@/components/button';
 import {CardArea} from '@/components/cardarea';
-import { CardDetalhado } from '@/components/carddetalhado';
 import { NovoCard } from '@/components/novocard';
 import { AssuntoType } from '@/types/assuntotype';
 import { useState } from 'react';
 import { Assuntos} from '@/data/assuntos';
+import axios from 'axios';
 
 export default function Home() {
 
@@ -20,17 +19,34 @@ export default function Home() {
     setNewCardVisible(false);
   }
 
-  function handleSaveNewCard(title: string, date: Date, link: string) {
-  setAssuntos(current => [
-    ...current,
-    {
-      id: current.length + 1,
-      assunto: title,
-      dataAgendada: date,
-      linkRepositorio: link
-    }
-  ]);
-}
+  // hospedando imagens em servidor online (banco de dados nao guarda arquivos) - CLOUDINARY
+  async function handleSaveNewCard(title: string, date: Date, files?: File[], link?: string ) {
+
+      // const uploadedUrls: string[] = []; // teste
+
+      if(files){
+        for (const file of files) { // PARA CADA FILE EM FILES, FACA REQUISICAO  CLOUDINARY SO ACEITA UM ARQUIVO POR REQUISIÇÃO 
+          const formData = new FormData();
+            formData.append('file', file);
+            formData.append('upload_preset', 'primeiropreset');
+                                                                    // minha url no cloudinary dil7jwa49
+          const res = await axios.post('https://api.cloudinary.com/v1_1/dil7jwa49/image/upload', // enviar somente imagem e devolver url
+                                                                                                // para salvarno banco de dados
+          formData
+          );
+          // uploadedUrls.push(res.data.secure_url); // teste: adiciona urls em cada posicao do vetor
+        }
+      }
+
+      //   // id
+      // const id = crypto.randomUUID();
+      // newFormData.append("id", id);
+
+      
+      // title
+      // date.toDateString()
+      // link
+  }
   
   return (
     <div className="w-screen h-screen flex overflow-hidden">
@@ -38,7 +54,7 @@ export default function Home() {
         
       </div>                                               {/* O min-w-0 permite que um item (flex-1) encolha para caber no layout, mesmo que o conteúdo dentro dele seja muito mais largo. */}
       <div className="h-screen w-[100%] flex-1 bg-gray-200 min-w-0">
-        <div className="h-[10%] w-[100%] flex flex-row items-center px-4 justify-between shadow-sm shadow-zinc-400">
+        <div className="h-[10%] w-[100%] flex flex-row items-center px-4 justify-between">
           <h2 className="text-3xl font-bold text-zinc-800">Estudos</h2>
           <button className='w-[110px] h-[40px] bg-zinc-800 rounded-md font-bold p-1 text-sm text-white/80 hover:bg-zinc-700 transition-colors cursor-pointer' 
           onClick={handleOpenNewCard}>novo assunto</button>
@@ -51,7 +67,7 @@ export default function Home() {
         </div>
       </div>
       {newCardVisible &&
-        <NovoCard handleCloseNewCard={handleCloseNewCard} handleSaveNewCard={(title, date, link) => handleSaveNewCard(title, date, link)}/>}
+        <NovoCard handleCloseNewCard={handleCloseNewCard} handleSaveNewCard={(title, date, files, link) => handleSaveNewCard(title, date, files, link)}/>}
     </div>
   );
 }

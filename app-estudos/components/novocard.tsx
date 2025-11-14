@@ -6,7 +6,7 @@ import { DropzoneComponent } from "./dropzonecomponent"
 
 type Props = {
     handleCloseNewCard: () => void;
-    handleSaveNewCard: (title: string, date: Date, link: string) => void;
+    handleSaveNewCard: (title: string, date: Date, files?: File[], link?: string) => void;
 }
 
 export function NovoCard({handleCloseNewCard, handleSaveNewCard}: Props) {
@@ -14,43 +14,48 @@ export function NovoCard({handleCloseNewCard, handleSaveNewCard}: Props) {
     const [title, setTitle] = useState('');
     const [date, setDate] = useState(new Date())
     const [link, setLink] = useState('');
-
-    // const [selectedFile, setSelectedFile] = useState<File>();
+    const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
 
     function handlePickDate(newDate: Date){ // atribuir valor de pickdate do componente filho
         setDate(newDate);
     }
 
-    function isFieldsFilled(){
-        if(title != '' && link != ''){
+    function atLeastTwoFilledFields(){
+        if(title != '' && link != '' && selectedFiles){
             return true;
+        } else if(title != '' && link != '' && !selectedFiles){
+            return true;   
+        } else if(title != '' && link == '' && selectedFiles){
+            return true;   
         } else {
             return false;
         }
     }
 
     function isFieldsEmpty(){
-        if(title == '' && link != ''){
-            alert('titulo obrigatório')
-        } else if(link == '' && title != ''){
-            alert('link obrigatório')
-        } else if(title == '' && link == ''){ 
-            alert('título e link obrigatórios')
+        
+        if(title =='' && link == '' && !selectedFiles){
+            alert('titulo e uma fonte digital obrigatorios')
+        } else if(link == '' && !selectedFiles){
+            alert('adicione ao menos uma fonte digital')
+        } else if(title == '' && (link != '' || selectedFiles)){
+            alert('tem fonte digital mas nao tem titulo')
         }
+
     }
 
     function handleClick(){
-        if(isFieldsFilled()){
-            handleSaveNewCard(title, date, link); // enviar esses parametros para o componente pai
-            handleCloseNewCard(); 
+        if(atLeastTwoFilledFields()){
+                handleSaveNewCard(title, date, selectedFiles, link ); // enviar esses parametros para o componente pai
+                handleCloseNewCard();
         } else {
             isFieldsEmpty();
         }
     }
 
-    function getSelectedFile(newFile: File){
-        alert(newFile.name)
+    function getSelectedFiles(newFile: File){
+       setSelectedFiles(prev => [...prev, newFile]) // adicionar à lista existente
     }
 
     return (
@@ -74,7 +79,7 @@ export function NovoCard({handleCloseNewCard, handleSaveNewCard}: Props) {
                     <DatePickerComponent onPick={handlePickDate} />
 
                     <h3 className="mb-1 text-sm uppercase text-zinc-600 font-bold">Arquivo</h3>
-                    <DropzoneComponent getSelectedFile={getSelectedFile}/>
+                    <DropzoneComponent getSelectedFiles={getSelectedFiles}/>
                     {/* <div className="h-[60px] w-full border-1 border-zinc-700 rounded-md p-2 text-white text-sm mb-3"></div> */}
 
                     <h3 className="mb-1 text-sm uppercase text-zinc-600 font-bold">link (Site ou YouTube)</h3>           

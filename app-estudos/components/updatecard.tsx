@@ -28,7 +28,7 @@ export function UpdateCard({AssuntoCard,handleCloseUpdateCard}: Props) {
     //     handleCloseDetails();
     // }
 
-    function getNewSelectedFile(updatedFile: File){
+    function getNewSelectedFiles(updatedFile: File){
         alert(updatedFile.name)
     }
 
@@ -45,23 +45,23 @@ export function UpdateCard({AssuntoCard,handleCloseUpdateCard}: Props) {
 
                 <div className="flex flex-col flex-1 p-4">
                 
-                    <h2 className="w-full h-[35px] text-base flex items-center justify-center font-bold text-center uppercase text-zinc-900">novo assunto</h2> {/* 38 caracteres*/}
+                    <h2 className="w-full h-[35px] text-base flex items-center justify-center font-bold text-center uppercase text-zinc-600">atualizar assunto</h2> {/* 38 caracteres*/}
 
-                    <h3 className="mb-1 text-sm uppercase text-zinc-600 font-bold">título</h3>        
+                    <h3 className="mb-1 text-sm uppercase text-zinc-500 font-bold">título</h3>        
                     <input type="text"
                     className="h-[40px] w-full border-1 border-zinc-600 rounded-md p-2 text-sm mb-3 placeholder-italic text-zinc-600"
                     value={updateTitle}
                     onChange={text => setUpdateTitle(text.target.value)}
                     />
 
-                    <h3 className="mb-1 text-sm uppercase text-zinc-600 font-bold">data agendada</h3>
+                    <h3 className="mb-1 text-sm uppercase text-zinc-500 font-bold">data agendada</h3>
                     <DatePickerComponent onPick={handlePickNewDate}/>
 
-                    <h3 className="mb-1 text-sm uppercase text-zinc-600 font-bold">Arquivos</h3>
-                    <DropzoneComponent getSelectedFile={getNewSelectedFile}/>
+                    <h3 className="mb-1 text-sm uppercase text-zinc-500 font-bold">Arquivos</h3>
+                    <DropzoneComponent getSelectedFiles={getNewSelectedFiles}/>
                     {/* <div className="h-[60px] w-full border-1 border-zinc-700 rounded-md p-2 text-white text-sm mb-3"></div> */}
 
-                    <h3 className="mb-1 text-sm uppercase text-zinc-600 font-bold">link (Site ou YouTube)</h3>           
+                    <h3 className="mb-1 text-sm uppercase text-zinc-500 font-bold">link (Site ou YouTube)</h3>           
                     <input type="text"
                     className="h-[40px] w-full border border-zinc-600 rounded-md p-2 text-zinc-600 text-sm mb-3"
                     value={updateLink}
