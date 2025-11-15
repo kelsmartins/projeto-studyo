@@ -5,12 +5,17 @@ import { UpdateCard } from './updatecard'
 import { TopCategoryComponent } from "./categorycomponent";
 
 type Props = {
-    assuntoData: AssuntoType;
+    cardData: {
+        title: string,
+        date: Date,
+        link?: string,
+        files?: File[]
+    };
     closeDetails: () => void;
-    getUpdateCardFields: (title: string, date: Date, link?: string, files?: File[]) => void;
+    getFields: (updatedTitle: string, updatedDate: Date, updatedLink?: string, updatedFiles?: File[]) => void;
 }
 
-export function CardDetalhado({assuntoData, closeDetails}: Props) {
+export function CardDetalhado({cardData, closeDetails, getFields}: Props) {
 
     const [showUpdateCard, setShowUpdateCard] = useState(false);
 
@@ -33,8 +38,8 @@ export function CardDetalhado({assuntoData, closeDetails}: Props) {
                 <TopCategoryComponent /> {/*  span do contexto/materia/categoria */} 
                 <div className="flex-1 flex flex-col p-4"> {/*  div p restante dos elementos terem p-4  */} 
                     <div className="w-full h-[60px] flex flex-col items-center justify-center">
-                        <h2 className="w-full h-[40px] text-base flex items-center justify-center font-bold text-zinc-600">{assuntoData.assunto}</h2> {/* 38 caracteres*/}
-                        <h2 className="w-full h-[15px] text-base flex items-center justify-center font-bold text-zinc-500 mb-4">{new Date(assuntoData.dataAgendada).toLocaleDateString()}</h2>
+                        <h2 className="w-full h-[40px] text-base flex items-center justify-center font-bold text-zinc-600">{cardData.title}</h2> {/* 38 caracteres*/}
+                        <h2 className="w-full h-[15px] text-base flex items-center justify-center font-bold text-zinc-500 mb-4">{cardData.date.toLocaleDateString()}</h2>
                     </div>
                     <div className="w-full flex-1 flex flex-col bg-green-300">
                         <h3 className="mt-2 text-base font-bold text-zinc-600">Fontes digitais</h3>
@@ -47,7 +52,8 @@ export function CardDetalhado({assuntoData, closeDetails}: Props) {
                     </div>
                 </div>
                 {
-                    showUpdateCard && <UpdateCard AssuntoCard={assuntoData} handleCloseUpdateCard={handleCloseUpdateCard}/>
+                    showUpdateCard && <UpdateCard cardData={cardData} handleCloseUpdateCard={handleCloseUpdateCard} getFields={getFields}/>
+                                                                                                                    // vai repassar a chamada de funcao getFields para updateCard
                 }
 
             </div>

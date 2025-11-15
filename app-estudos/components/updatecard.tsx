@@ -6,19 +6,22 @@ import { DropzoneComponent } from "./dropzonecomponent";
 import { TopCategoryComponent } from "./categorycomponent";
 
 type Props = {
-    AssuntoCard: AssuntoType;
+    cardData: {
+        title: string,
+        date: Date,
+        link?: string,
+        files?: File[]
+    };
     handleCloseUpdateCard: () => void;
+    getFields: (title: string, date: Date, link: string, files: File[])=> void;
 }
 
-export function UpdateCard({AssuntoCard,handleCloseUpdateCard}: Props) {
+export function UpdateCard({cardData,handleCloseUpdateCard, getFields}: Props) {
 
-    const [updateTitle, setUpdateTitle] = useState(AssuntoCard.assunto);
-    const [updateDate, setUpdateDate] = useState(AssuntoCard.dataAgendada)
-    const [updateLink, setUpdateLink] = useState(AssuntoCard.linkFonteDigital);
+    const [updateTitle, setUpdateTitle] = useState(cardData.title);
+    const [updateDate, setUpdateDate] = useState(cardData.date)
+    const [updateLink, setUpdateLink] = useState(cardData.link);
     const [updateFiles, setUpdateFiles] = useState<File[]>([]);
-
-    const [updateCardVisible, setUpdateCardVisible] = useState(false)
-    
 
     function handlePickNewDate(date: Date){
         setUpdateDate(date) // setar a data q pegou, antes eu tava setando a data como ela msm ou seja a antiga, nao a q quero como nova
@@ -28,9 +31,10 @@ export function UpdateCard({AssuntoCard,handleCloseUpdateCard}: Props) {
         setUpdateFiles(prevFiles => [...prevFiles, newUpdatedFile]) // "concatenar" com oq ja tem lá
     }
 
-    function handleChange(){
+    function saveUpdateCard(){
         // fazer algo: mostrar div para atualizar
-        setUpdateCardVisible(true)
+        getFields(updateTitle, updateDate, updateLink || '', updateFiles || []) // vai executar a chamada da funcao, adicionando os parâmetros necessarios
+        handleCloseUpdateCard()
     }
 
     return (
@@ -66,7 +70,7 @@ export function UpdateCard({AssuntoCard,handleCloseUpdateCard}: Props) {
 
                     <div className="w-full h-[40px] bg-red-200 flex justify-between items-center">
                         <Button style="text-zinc-500 border border-zinc-500 rounded-md hover:bg-zinc-500 hover:text-white transition-colors font-bold" title="voltar" onClick={handleCloseUpdateCard} />
-                        <Button style="bg-zinc-700 text-white font-bold hover:bg-zinc-600" title="salvar" onClick={handleChange}/>
+                        <Button style="bg-zinc-700 text-white font-bold hover:bg-zinc-600" title="salvar" onClick={saveUpdateCard}/>
                     </div>
                 
                 </div>
