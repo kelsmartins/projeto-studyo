@@ -10,24 +10,30 @@ type Props = {
 
 export function CardArea({title, code, assuntos}: Props){
 
+    useEffect(() => {
+    console.log("Assuntos recebidos:", assuntos);
+    assuntos.forEach(a => {
+      console.log("DataAgendada original:", a.dataAgendada);
+      console.log("Convertido para Date:", new Date(a.dataAgendada));
+    });
+  }, [assuntos]);
+
     const [ today, setToday ] = useState<AssuntoType[]>([]);
     const [ tomorrow, setTomorrow ] = useState<AssuntoType[]>([]);
     const [ afterTomorrow, setAfterTomorrow ] = useState<AssuntoType[]>([]);
     const [ nextDays, setNextDays ] = useState<AssuntoType[]>([]);
   
     const hoje = new Date();
-    hoje.setHours(0,0,0,0);
+    hoje.setHours(0,0,0,0); // setar default meia noite
 
     const amanha = new Date();
     amanha.setDate(hoje.getDate() + 1);
+    amanha.setHours(0,0,0,0); // setar default meia noite
 
     const depoisAmanha = new Date();
     depoisAmanha.setDate(hoje.getDate() + 2);
+    depoisAmanha.setHours(0,0,0,0); // setar default meia noite
 
-    const proximosDias = new Date();
-    proximosDias.setDate(hoje.getDate() + 3);
-    proximosDias.setHours(0,0,0,0);
-  
     useEffect(() => {
 
         setToday([]); // para nao ter objetos duplicados
@@ -37,37 +43,20 @@ export function CardArea({title, code, assuntos}: Props){
 
         assuntos.forEach((assunto) => {
             
-            const dataAssunto = assunto.dataAgendada; 
+            const dataAssunto = new Date(assunto.dataAgendada); // precisa criar nova data e atribuir a atual a ela
+            dataAssunto.setHours(0,0,0,0) // depois setar default meia noite
 
-            if (
-                dataAssunto.getFullYear() === hoje.getFullYear() &&
-                dataAssunto.getMonth() === hoje.getMonth() &&
-                dataAssunto.getDate() === hoje.getDate()
-            ) {
+            // assim, comparação fica mais simples
+            if(dataAssunto.getTime() === hoje.getTime()){
                 setToday(today => [...today, assunto]);
-
-            } else if (
-                dataAssunto.getFullYear() === amanha.getFullYear() &&
-                dataAssunto.getMonth() === amanha.getMonth() &&
-                dataAssunto.getDate() === amanha.getDate()
-            ) {
-                setTomorrow(tomorrow => [...tomorrow, assunto]);
-            } else if (
-                dataAssunto.getFullYear() === depoisAmanha.getFullYear() &&
-                dataAssunto.getMonth() === depoisAmanha.getMonth() &&
-                dataAssunto.getDate() === depoisAmanha.getDate()
-            ) {
-               setAfterTomorrow(afterTomorrow => [...afterTomorrow, assunto])
-
-            } else {
-                const dataAssuntoNormalizada = new Date(dataAssunto);
-                dataAssuntoNormalizada.setHours(0, 0, 0, 0);
-                
-                if (dataAssuntoNormalizada.getTime() >= proximosDias.getTime()) {
-                    setNextDays(nextDays => [...nextDays, assunto])
-
-                }
+            } else if(dataAssunto.getTime() === amanha.getTime()){
+                 setTomorrow(tomorrow => [...tomorrow, assunto]);
+            } else if(dataAssunto.getTime() === depoisAmanha.getTime()){
+                 setAfterTomorrow(afterTomorrow => [...afterTomorrow, assunto]);
+            } else if(dataAssunto.getTime() > depoisAmanha.getTime()){  // se data for maior que hoje + 3
+                 setNextDays(nextDays => [...nextDays, assunto]);
             }
+
         });
     }, [assuntos]);
     
@@ -84,9 +73,9 @@ export function CardArea({title, code, assuntos}: Props){
                         <Card key={card.id} assuntoData={card} />
                     )) : code === 3 ? afterTomorrow.map(card => ( 
                        <Card key={card.id} assuntoData={card} />
-                    )) : nextDays.map(card => (
+                    )) : code === 4 ? nextDays.map(card => (
                        <Card key={card.id} assuntoData={card} />
-                    ))
+                    )) : ''
                 }
                 { (code === 1 && today.length === 0) &&
                     <p className='text-black/40 text-md italic'>Nada para estudar hoje :D</p>

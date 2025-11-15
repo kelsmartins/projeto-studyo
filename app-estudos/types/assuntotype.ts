@@ -1,11 +1,10 @@
 import { UUID } from "crypto";
 
 export type AssuntoType = {
-    id: UUID;
+    id: string;
     dataAgendada: Date;
     assunto: string;
     contexto?: string;
-    linkRepositorio: string;
-    arquivo: File;
-    anotacoesRapidas?: string;
+    linkFonteDigital?: string;
+    arquivosFonteDigital?: File[]
 }

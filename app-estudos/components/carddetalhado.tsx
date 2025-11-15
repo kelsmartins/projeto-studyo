@@ -7,6 +7,7 @@ import { TopCategoryComponent } from "./categorycomponent";
 type Props = {
     assuntoData: AssuntoType;
     closeDetails: () => void;
+    getUpdateCardFields: (title: string, date: Date, link?: string, files?: File[]) => void;
 }
 
 export function CardDetalhado({assuntoData, closeDetails}: Props) {

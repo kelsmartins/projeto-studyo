@@ -12,6 +12,18 @@ export function Card({assuntoData}: Props) {
 
     const [show, setShow] = useState(false);
 
+    const [updateCardTitle, setUpdatedCard] = useState(assuntoData.assunto);
+    const [updateCardDate, setUpdateCarDate] = useState(assuntoData.dataAgendada);
+    const [updateCardLink, setUpdateCardLink] = useState(assuntoData.linkFonteDigital);
+    const [updateCardFiles, setUpdateCardFiles] = useState<File[]>([]);
+
+    function getUpdateCardFields(updatedTitle: string, updatedDate: Date, updatedLink?: string, updatedFiles?: File[]){
+        setUpdatedCard(updateCardTitle)
+        setUpdateCarDate(updateCardDate)
+        setUpdateCardLink(updateCardLink || assuntoData.linkFonteDigital)
+        setUpdateCardFiles(updateCardFiles || [])
+    }
+
     function handleShowDetails(){
         setShow(!show);
     }
@@ -32,7 +44,7 @@ export function Card({assuntoData}: Props) {
                     <Button style="bg-zinc-700 font-bold hover:bg-zinc-600 transition-colors" title="concluir"/>
                 </div>
                 {show &&
-                    <CardDetalhado assuntoData={assuntoData} closeDetails={handleCloseDetails}/>
+                    <CardDetalhado assuntoData={assuntoData} closeDetails={handleCloseDetails} getUpdateCardFields={(title, date, link, files)=> getUpdateCardFields(title, date, link, files)}/>
                 }
             </div>
         </div>

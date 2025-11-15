@@ -12,24 +12,20 @@ type Props = {
 
 export function UpdateCard({AssuntoCard,handleCloseUpdateCard}: Props) {
 
-    const [updateTitle, setUpdateTitle] = useState('');
-    const [updateDate, setUpdateDate] = useState(new Date())
-    const [updateLink, setUpdateLink] = useState('');
+    const [updateTitle, setUpdateTitle] = useState(AssuntoCard.assunto);
+    const [updateDate, setUpdateDate] = useState(AssuntoCard.dataAgendada)
+    const [updateLink, setUpdateLink] = useState(AssuntoCard.linkFonteDigital);
+    const [updateFiles, setUpdateFiles] = useState<File[]>([]);
 
     const [updateCardVisible, setUpdateCardVisible] = useState(false)
     
 
     function handlePickNewDate(date: Date){
-        setUpdateDate(updateDate)
+        setUpdateDate(date) // setar a data q pegou, antes eu tava setando a data como ela msm ou seja a antiga, nao a q quero como nova
     }
 
-    // function handleConclude(){
-    //     // fazer algo: excluir ou add à pasta 'concluídos'
-    //     handleCloseDetails();
-    // }
-
-    function getNewSelectedFiles(updatedFile: File){
-        alert(updatedFile.name)
+    function getNewSelectedFiles(newUpdatedFile: File){
+        setUpdateFiles(prevFiles => [...prevFiles, newUpdatedFile]) // "concatenar" com oq ja tem lá
     }
 
     function handleChange(){

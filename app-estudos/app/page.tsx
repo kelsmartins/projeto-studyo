@@ -22,30 +22,40 @@ export default function Home() {
   // hospedando imagens em servidor online (banco de dados nao guarda arquivos) - CLOUDINARY
   async function handleSaveNewCard(title: string, date: Date, files?: File[], link?: string ) {
 
-      // const uploadedUrls: string[] = []; // teste
+      // se enviou arquivo  (INICIO)  
+      const uploadedUrls: string[] = []; // teste
 
-      if(files){
+      if(files){ // se existir arquivo
         for (const file of files) { // PARA CADA FILE EM FILES, FACA REQUISICAO  CLOUDINARY SO ACEITA UM ARQUIVO POR REQUISIÇÃO 
           const formData = new FormData();
             formData.append('file', file);
             formData.append('upload_preset', 'primeiropreset');
                                                                     // minha url no cloudinary dil7jwa49
-          const res = await axios.post('https://api.cloudinary.com/v1_1/dil7jwa49/image/upload', // enviar somente imagem e devolver url
-                                                                                                // para salvarno banco de dados
-          formData
+          const fileRes = await axios.post('https://api.cloudinary.com/v1_1/dil7jwa49/image/upload', // enviar somente imagem e devolver url
+          formData                                                                               // para salvar no banco de dados
           );
-          // uploadedUrls.push(res.data.secure_url); // teste: adiciona urls em cada posicao do vetor
+          // alert('url arquivo: '+ fileRes.data.secure_url); TEST TEST TEST TEST TEST
+          uploadedUrls.push(fileRes.data.secure_url); // teste: adiciona urls em cada posicao do vetor se tiver
         }
       }
+      // se EXISTIREM ARQUIVOS (FIM)
 
-      //   // id
-      // const id = crypto.randomUUID();
-      // newFormData.append("id", id);
+      // REQUISICAO PRA API DO BACKEND
 
-      
-      // title
-      // date.toDateString()
-      // link
+      try {
+        
+        const newId = crypto.randomUUID().toString();
+
+        const res = axios.post('', {
+          id: newId,
+          dataAgendada: date,
+          assunto: title,
+          linkFonteDigital: link,
+          arquivosFonteDigital: uploadedUrls
+        })
+      } catch (error) {
+        console.log(error)
+      }
   }
   
   return (
