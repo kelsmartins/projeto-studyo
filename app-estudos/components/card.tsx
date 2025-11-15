@@ -3,6 +3,7 @@ import { Button } from "./button"
 import { CardDetalhado } from "./carddetalhado";
 import { useState } from "react";
 import { LeftCategoryComponent } from "./categorycomponent";
+import axios from "axios";
 
 type Props = {
     assuntoData: AssuntoType;
@@ -13,6 +14,7 @@ export function Card({assuntoData}: Props) {
     const [show, setShow] = useState(false);
 
     // valores salvos no componente updatecard
+    const [cardId, setCardId] = useState(assuntoData.id);
     const [updateCardTitle, setUpdatedCard] = useState(assuntoData.assunto);
     const [updateCardDate, setUpdateCarDate] = useState(assuntoData.dataAgendada);
     const [updateCardLink, setUpdateCardLink] = useState(assuntoData.linkFonteDigital);
@@ -45,7 +47,13 @@ export function Card({assuntoData}: Props) {
     // requisicao atualizar dados de card
     async function handleUpdateCard(){
         alert('> ' + updateCardTitle + '> ' + updateCardDate + '> ' + updateCardFiles + '> ' + updateCardLink)
+        const res = await axios.put('', )
 
+    }
+
+    async function handleDeleteCard(){
+        const res = await axios.delete('', )
+        console.log(res)
     }
 
     return (
@@ -57,13 +65,15 @@ export function Card({assuntoData}: Props) {
                 <div className="w-full h-[60px]"></div>
                 <div className="w-full h-[60px] flex justify-between items-center">
                     <Button style="text-zinc-500 border border-zinc-500 rounded-md hover:bg-zinc-500 hover:text-white transition-colors font-bold" title="ver tudo" onClick={handleShowDetails} />
-                    <Button style="bg-zinc-700 font-bold hover:bg-zinc-600 transition-colors" title="concluir" onClick={handleUpdateCard}/>
+                    <Button style="bg-zinc-700 font-bold hover:bg-zinc-600 transition-colors" title="concluir" onClick={handleDeleteCard}/>
                 </div>
                 {show &&
                     <CardDetalhado cardData={cardData} 
                     closeDetails={handleCloseDetails} 
-                    getFields={(updateCardTitle, updateCardDate, updateCardLink, updateCardFiles)=>getUpdateCardFields(updateCardTitle, updateCardDate, updateCardLink, updateCardFiles)} />
+                    getFields={(updateCardTitle, updateCardDate, updateCardLink, updateCardFiles)=>getUpdateCardFields(updateCardTitle, updateCardDate, updateCardLink, updateCardFiles)} 
+                     handleUpdateCard={ handleUpdateCard}
                     // vai passar uma chamada de funcao com getUpdateCardFields para pegar os campos de updatecard dentro de carddetalhado
+                    />
                 }
             </div>
         </div>

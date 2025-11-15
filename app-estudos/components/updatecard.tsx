@@ -14,9 +14,10 @@ type Props = {
     };
     handleCloseUpdateCard: () => void;
     getFields: (title: string, date: Date, link: string, files: File[])=> void;
+    handleUpdateCard: () => void;
 }
 
-export function UpdateCard({cardData,handleCloseUpdateCard, getFields}: Props) {
+export function UpdateCard({cardData,handleCloseUpdateCard, getFields, handleUpdateCard}: Props) {
 
     const [updateTitle, setUpdateTitle] = useState(cardData.title);
     const [updateDate, setUpdateDate] = useState(cardData.date)
@@ -35,6 +36,7 @@ export function UpdateCard({cardData,handleCloseUpdateCard, getFields}: Props) {
         // fazer algo: mostrar div para atualizar
         getFields(updateTitle, updateDate, updateLink || '', updateFiles || []) // vai executar a chamada da funcao, adicionando os parâmetros necessarios
         handleCloseUpdateCard()
+        handleUpdateCard()
     }
 
     return (
@@ -59,7 +61,6 @@ export function UpdateCard({cardData,handleCloseUpdateCard, getFields}: Props) {
 
                     <h3 className="mb-1 text-sm uppercase text-zinc-500 font-bold">Arquivos</h3>
                     <DropzoneComponent getSelectedFiles={getNewSelectedFiles}/>
-                    {/* <div className="h-[60px] w-full border-1 border-zinc-700 rounded-md p-2 text-white text-sm mb-3"></div> */}
 
                     <h3 className="mb-1 text-sm uppercase text-zinc-500 font-bold">link (Site ou YouTube)</h3>           
                     <input type="text"

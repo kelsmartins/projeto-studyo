@@ -13,9 +13,10 @@ type Props = {
     };
     closeDetails: () => void;
     getFields: (updatedTitle: string, updatedDate: Date, updatedLink?: string, updatedFiles?: File[]) => void;
+    handleUpdateCard: () => void;
 }
 
-export function CardDetalhado({cardData, closeDetails, getFields}: Props) {
+export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCard}: Props) {
 
     const [showUpdateCard, setShowUpdateCard] = useState(false);
 
@@ -52,8 +53,10 @@ export function CardDetalhado({cardData, closeDetails, getFields}: Props) {
                     </div>
                 </div>
                 {
-                    showUpdateCard && <UpdateCard cardData={cardData} handleCloseUpdateCard={handleCloseUpdateCard} getFields={getFields}/>
-                                                                                                                    // vai repassar a chamada de funcao getFields para updateCard
+                    showUpdateCard && <UpdateCard cardData={cardData} 
+                                            handleCloseUpdateCard={handleCloseUpdateCard} 
+                                            getFields={getFields} // vai repassar a chamada de funcao getFields para updateCard
+                                            handleUpdateCard={handleUpdateCard} />
                 }
 
             </div>
