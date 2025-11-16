@@ -63,7 +63,7 @@ export default function Home() {
       <div className="h-screen w-[300px] bg-zinc-900">
         
       </div>                                               {/* O min-w-0 permite que um item (flex-1) encolha para caber no layout, mesmo que o conteúdo dentro dele seja muito mais largo. */}
-      <div className="h-screen w-[100%] flex-1 bg-gray-200 min-w-0">
+      <div className="h-screen w-[100%] flex-1 bg-gray-200 min-w-0">  {/* transformar num componente futuramente*/}
         <div className="h-[10%] w-[100%] flex flex-row items-center px-4 justify-between">
           <h2 className="text-3xl font-bold text-zinc-800">Estudos</h2>
           <button className='w-[110px] h-[40px] bg-zinc-800 rounded-md font-bold p-1 text-sm text-white/80 hover:bg-zinc-700 transition-colors cursor-pointer' 

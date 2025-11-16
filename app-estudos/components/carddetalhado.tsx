@@ -39,8 +39,8 @@ export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCa
                 <TopCategoryComponent /> {/*  span do contexto/materia/categoria */} 
                 <div className="flex-1 flex flex-col p-4"> {/*  div p restante dos elementos terem p-4  */} 
                     <div className="w-full h-[60px] flex flex-col items-center justify-center">
-                        <h2 className="w-full h-[40px] text-base flex items-center justify-center font-bold text-zinc-600">{cardData.title}</h2> {/* 38 caracteres*/}
-                        <h2 className="w-full h-[15px] text-base flex items-center justify-center font-bold text-zinc-500 mb-4">{cardData.date.toLocaleDateString()}</h2>
+                        <h2 className="w-full h-[40px] text-base flex items-center justify-center font-bold text-zinc-600 text-center leading-tight">{cardData.title}</h2> {/* 38 caracteres*/}
+                        <h2 className="w-full h-[20px] text-base flex items-center justify-center font-bold text-zinc-500 mb-4">{cardData.date.toLocaleDateString()}</h2>
                     </div>
                     <div className="w-full flex-1 flex flex-col bg-green-300">
                         <h3 className="mt-2 text-base font-bold text-zinc-600">Fontes digitais</h3>

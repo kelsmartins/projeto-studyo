@@ -4,6 +4,7 @@ import { CardDetalhado } from "./carddetalhado";
 import { useState } from "react";
 import { LeftCategoryComponent } from "./categorycomponent";
 import axios from "axios";
+import { FaLink , FaFilePdf  } from 'react-icons/fa6'
 
 type Props = {
     assuntoData: AssuntoType;
@@ -60,9 +61,20 @@ export function Card({assuntoData}: Props) {
         <div className="h-[200px] w-[300px] rounded-lg flex-shrink-0 bg-white flex shadow-md shadow-zinc-400">
             <LeftCategoryComponent/>
             <div className="w-full rounded-r-lg flex flex-col p-3">
-                <h3 className="w-full h-[25px] flex items-center text-sm font-bold text-zinc-500">{updateCardDate.toLocaleDateString()}</h3>
-                <h2 className="w-full h-[80px] flex items-center text-sm font-bold text-zinc-600">{updateCardTitle}</h2>
-                <div className="w-full h-[60px]"></div>
+                <h3 className="w-full h-[20px] flex items-center text-sm font-bold text-zinc-500">{updateCardDate.toLocaleDateString()}</h3>
+                <h2 className="w-full h-[50px] flex items-center text-md font-bold text-zinc-600">{updateCardTitle}</h2>
+
+                <div className="w-full h-[90px] flex flex-col">
+                    
+                    {updateCardFiles.length > 0 &&
+                        <FaFilePdf  className="text-zinc-600 size-6 my-1" />
+                    }
+                    {updateCardLink != '' &&  
+                        <FaLink  className="text-zinc-600 size-6 my-1" />
+                    }
+                    
+                </div>
+
                 <div className="w-full h-[60px] flex justify-between items-center">
                     <Button style="text-zinc-500 border border-zinc-500 rounded-md hover:bg-zinc-500 hover:text-white transition-colors font-bold" title="ver tudo" onClick={handleShowDetails} />
                     <Button style="bg-zinc-700 font-bold hover:bg-zinc-600 transition-colors" title="concluir" onClick={handleDeleteCard}/>
