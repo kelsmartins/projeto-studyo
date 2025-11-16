@@ -64,7 +64,7 @@ export function Card({assuntoData}: Props) {
                 <h3 className="w-full h-[20px] flex items-center text-sm font-bold text-zinc-500">{updateCardDate.toLocaleDateString()}</h3>
                 <h2 className="w-full h-[50px] flex items-center text-md font-bold text-zinc-600">{updateCardTitle}</h2>
 
-                <div className="w-full h-[90px] flex flex-col">
+                <div className="w-full h-[90px] flex flex-row gap-1">
                     
                     {updateCardFiles.length > 0 &&
                         <FaFilePdf  className="text-zinc-600 size-6 my-1" />

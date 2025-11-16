@@ -69,10 +69,10 @@ export function UpdateCard({cardData,handleCloseUpdateCard, getFields, handleUpd
                     onChange={text => setUpdateLink(text.target.value)}
                     />
 
-                    <div className="w-full h-[40px] bg-red-200 flex justify-between items-center">
+                    <footer className="w-full h-[60px] flex justify-between items-center border-t border-t-zinc-400">
                         <Button style="text-zinc-500 border border-zinc-500 rounded-md hover:bg-zinc-500 hover:text-white transition-colors font-bold" title="voltar" onClick={handleCloseUpdateCard} />
                         <Button style="bg-zinc-700 text-white font-bold hover:bg-zinc-600" title="salvar" onClick={saveUpdateCard}/>
-                    </div>
+                    </footer>
                 
                 </div>
 

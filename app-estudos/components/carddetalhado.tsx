@@ -1,8 +1,8 @@
-import { AssuntoType } from "@/types/assuntotype"
 import { Button } from "./button";
 import { useState } from "react";
 import { UpdateCard } from './updatecard'
 import { TopCategoryComponent } from "./categorycomponent";
+import { FaLink , FaFilePdf  } from 'react-icons/fa6'
 
 type Props = {
     cardData: {
@@ -34,24 +34,34 @@ export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCa
 
     return (
         <div className="w-full h-full bg-black/30 fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm" onClick={closeDetails}>
-            <div className="w-[350px] h-[500px] bg-white flex flex-col rounded-lg shadow-xl shadow-zinc-400" onClick={e => e.stopPropagation()}>
+            <main className="w-[350px] h-[500px] bg-white flex flex-col rounded-lg shadow-xl shadow-zinc-400" onClick={e => e.stopPropagation()}>
 
                 <TopCategoryComponent /> {/*  span do contexto/materia/categoria */} 
-                <div className="flex-1 flex flex-col p-4"> {/*  div p restante dos elementos terem p-4  */} 
-                    <div className="w-full h-[60px] flex flex-col items-center justify-center">
+                <section className="flex-1 flex flex-col p-4"> {/*  div p restante dos elementos terem p-4  */} 
+                    <header className="w-full h-[60px] flex flex-col items-center justify-center">
                         <h2 className="w-full h-[40px] text-base flex items-center justify-center font-bold text-zinc-600 text-center leading-tight">{cardData.title}</h2> {/* 38 caracteres*/}
                         <h2 className="w-full h-[20px] text-base flex items-center justify-center font-bold text-zinc-500 mb-4">{cardData.date.toLocaleDateString()}</h2>
-                    </div>
-                    <div className="w-full flex-1 flex flex-col bg-green-300">
+                    </header>
+                    <div className="w-full flex-1 flex flex-col">
                         <h3 className="mt-2 text-base font-bold text-zinc-600">Fontes digitais</h3>
-                        <div className="flex-1 bg-red-500"></div>
+                        <ul className="min-h-0 max-h-40 overflow-y-auto flex-nowrap no-scrollbar">
+                            {
+                                cardData.files && cardData.files.length > 0 &&  
+                                cardData.files.map((file, index) =>
+                                    <li className="w-full h-10 bg-zinc-100 my-2 flex flex-row justify-start items-center gap-1 p-2 shadow-xs shadow-zinc-300 rounded-md hover:bg-zinc-200"  key={index}>
+                                        <FaFilePdf className="text-zinc-600 size-6"/>
+                                        <p className="text-sm text-zinc-600 truncate flex-1">{file.name}</p>
+                                    </li>)
+                            }
+                        </ul>
+                        <span className="flex-1"></span>
                         
-                        <div className="w-full h-[40px] bg-red-200 flex justify-between items-center">
+                        <footer className="w-full h-[60px] flex justify-between items-center border-t border-t-zinc-400">
                             <Button style="text-zinc-500 border border-zinc-500 rounded-md hover:bg-zinc-500 hover:text-white transition-colors font-bold" title="editar" onClick={handleShowUpdateCard} />
                             <Button style="bg-zinc-700 text-white font-bold hover:bg-zinc-600" title="concluir" onClick={handleConclude}/>
-                        </div>
+                        </footer>
                     </div>
-                </div>
+                </section>
                 {
                     showUpdateCard && <UpdateCard cardData={cardData} 
                                             handleCloseUpdateCard={handleCloseUpdateCard} 
@@ -59,7 +69,7 @@ export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCa
                                             handleUpdateCard={handleUpdateCard} />
                 }
 
-            </div>
+            </main>
         </div>
     )
 }
