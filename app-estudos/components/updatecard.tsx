@@ -41,11 +41,11 @@ export function UpdateCard({cardData,handleCloseUpdateCard, getFields, handleUpd
 
     return (
         <div className="w-full h-full fixed inset-0 flex items-center justify-center z-50">
-            <div className="w-[350px] h-[500px] bg-white flex flex-col rounded-lg" onClick={e => e.stopPropagation()}>
+            <main className="w-[350px] h-[500px] bg-white flex flex-col rounded-lg" onClick={e => e.stopPropagation()}>
 
                 <TopCategoryComponent />
 
-                <div className="flex flex-col flex-1 p-4">
+                <section className="flex flex-col flex-1 p-4">
                 
                     <h2 className="w-full h-[35px] text-base flex items-center justify-center font-bold text-center uppercase text-zinc-600">atualizar assunto</h2> {/* 38 caracteres*/}
 
@@ -68,16 +68,15 @@ export function UpdateCard({cardData,handleCloseUpdateCard, getFields, handleUpd
                     value={updateLink}
                     onChange={text => setUpdateLink(text.target.value)}
                     />
-
-                    <footer className="w-full h-[60px] flex justify-between items-center border-t border-t-zinc-400">
-                        <Button style="text-zinc-500 border border-zinc-500 rounded-md hover:bg-zinc-500 hover:text-white transition-colors font-bold" title="voltar" onClick={handleCloseUpdateCard} />
-                        <Button style="bg-zinc-700 text-white font-bold hover:bg-zinc-600" title="salvar" onClick={saveUpdateCard}/>
-                    </footer>
-                
-                </div>
-
-
-            </div>
+                </section>
+                <footer className="w-full h-[60px] flex flex-col justify-between px-4">
+                    <span className="w-full h-[4px] bg-zinc-400"></span>
+                    <div className="w-full h-50 flex justify-between items-center">
+                            <Button style="text-zinc-500 border border-zinc-500 rounded-md hover:bg-zinc-500 hover:text-white transition-colors font-bold" title="editar" onClick={handleCloseUpdateCard} />
+                            <Button style="bg-zinc-700 text-white font-bold hover:bg-zinc-600" title="concluir" onClick={saveUpdateCard}/>
+                    </div>
+                </footer>
+            </main>
         </div>
     )
 }

@@ -89,6 +89,15 @@ export function NovoCard({handleCloseNewCard, handleSaveNewCard}: Props) {
                         onChange={text => setLink(text.target.value)}
                     />
 
+                    {/* teste link2 
+                    <h3 className="mb-1 text-sm uppercase text-zinc-600 font-bold">link (Site ou YouTube)</h3>           
+                    <input type="text"
+                        className="h-[40px] w-full border border-zinc-600 rounded-md p-2 text-zinc-600 text-sm mb-3"
+                        value={link}
+                        onChange={text => setLink(text.target.value)}
+                    />
+                     teste link2 */}
+
                     <Button style="bg-zinc-900 m-auto h-[40px] w-[150px] font-bold" title="concluir" onClick={handleClick}/>
 
                 </div>
