@@ -18,14 +18,14 @@ export function Card({assuntoData}: Props) {
     const [cardId, setCardId] = useState(assuntoData.id);
     const [updateCardTitle, setUpdatedCard] = useState(assuntoData.assunto);
     const [updateCardDate, setUpdateCarDate] = useState(assuntoData.dataAgendada);
-    const [updateCardLink, setUpdateCardLink] = useState<string[]>(assuntoData.linkFonteDigital ?? []);
+    const [updateCardLinks, setUpdateCardLinks] = useState<string[]>(assuntoData.linkFonteDigital ?? []);
     const [updateCardFiles, setUpdateCardFiles] = useState<File[]>(assuntoData.arquivosFonteDigital ?? []);
     // para caso nao venha dados, continuar com oq ja tem
 
     const cardData = {
         title: updateCardTitle,
         date: updateCardDate, 
-        link: updateCardLink,
+        links: updateCardLinks,
         files: updateCardFiles
     }
 
@@ -41,13 +41,13 @@ export function Card({assuntoData}: Props) {
     function getUpdateCardFields(newUpdatedTitle: string, newUpdatedDate: Date, newUpdatedLink?: string[], newUpdatedFiles?: File[]){
         setUpdatedCard(newUpdatedTitle)
         setUpdateCarDate(newUpdatedDate)
-        setUpdateCardLink(newUpdatedLink ?? updateCardLink)
+        setUpdateCardLinks(newUpdatedLink ?? updateCardLinks)
         setUpdateCardFiles(newUpdatedFiles ?? updateCardFiles)
     }
 
     // requisicao atualizar dados de card
     async function handleUpdateCard(){
-        alert('> ' + updateCardTitle + '> ' + updateCardDate + '> ' + updateCardFiles + '> ' + updateCardLink)
+        alert('> ' + updateCardTitle + '> ' + updateCardDate + '> ' + updateCardFiles + '> ' + updateCardLinks)
         const res = await axios.put('', )
 
     }
@@ -69,7 +69,7 @@ export function Card({assuntoData}: Props) {
                     {updateCardFiles.length > 0 &&
                         <FaFilePdf  className="text-zinc-600 size-6 my-1" />
                     }
-                    {updateCardLink.length > 0 &&  
+                    {updateCardLinks.length > 0 &&  
                         <FaLink  className="text-zinc-600 size-6 my-1" />
                     }
                     
@@ -82,7 +82,7 @@ export function Card({assuntoData}: Props) {
                 {show &&
                     <CardDetalhado cardData={cardData} 
                     closeDetails={handleCloseDetails} 
-                    getFields={(updateCardTitle, updateCardDate, updateCardLink, updateCardFiles)=>getUpdateCardFields(updateCardTitle, updateCardDate, updateCardLink, updateCardFiles)} 
+                    getFields={(updateCardTitle, updateCardDate, updateCardLinks, updateCardFiles)=>getUpdateCardFields(updateCardTitle, updateCardDate, updateCardLinks, updateCardFiles)} 
                      handleUpdateCard={ handleUpdateCard}
                     // vai passar uma chamada de funcao com getUpdateCardFields para pegar os campos de updatecard dentro de carddetalhado
                     />

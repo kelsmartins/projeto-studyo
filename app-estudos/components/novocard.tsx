@@ -13,9 +13,9 @@ type Props = {
 export function NovoCard({handleCloseNewCard, handleSaveNewCard}: Props) {
 
     const [title, setTitle] = useState('');
-    const [date, setDate] = useState(new Date())
+    const [date, setDate] = useState(new Date());
     const [selectedLinks, setSelectedLinks] = useState<string[]>([]);
-    const [inputLink, setInputLink] = useState('')
+    const [inputLink, setInputLink] = useState('');
     const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
 
@@ -71,10 +71,9 @@ export function NovoCard({handleCloseNewCard, handleSaveNewCard}: Props) {
         <div className="w-full h-full bg-black/30 fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm" onClick={handleCloseNewCard}>
             <main className="w-[600px] h-[550px] bg-white flex flex-col rounded-lg" onClick={e => e.stopPropagation()}> {/* explicacao linha 52 */}
 
-                <header className="flex flex-col justify-between h-15 w-full">
+                <header className="flex flex-col justify-between h-15 w-full items-center">
                     <TopCategoryComponent />
                      <h2 className="w-full h-[35px] text-base flex items-center justify-center font-bold text-center uppercase text-zinc-900">novo assunto</h2> {/* 38 caracteres*/}
-
                 </header>
                 <section className="flex flex-row flex-1 justify-between items-center">
 

@@ -2,17 +2,17 @@ import { Button } from "./button";
 import { useState } from "react";
 import { UpdateCard } from './updatecard'
 import { TopCategoryComponent } from "./categorycomponent";
-import { FaLink , FaFilePdf  } from 'react-icons/fa6'
+import { FaLink , FaFilePdf, FaBucket } from 'react-icons/fa6'
 
 type Props = {
     cardData: {
         title: string,
         date: Date,
-        link?: string[],
+        links?: string[],
         files?: File[]
     };
     closeDetails: () => void;
-    getFields: (updatedTitle: string, updatedDate: Date, updatedLink?: string[], updatedFiles?: File[]) => void;
+    getFields: (updatedTitle: string, updatedDate: Date, updatedLinks?: string[], updatedFiles?: File[]) => void;
     handleUpdateCard: () => void;
 }
 
@@ -34,36 +34,45 @@ export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCa
 
     return (
         <div className="w-full h-full bg-black/30 fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm" onClick={closeDetails}>
-            <main className="w-[600px] h-[500px] bg-white flex flex-col rounded-lg" onClick={e => e.stopPropagation()}>
+            <main className="w-[600px] h-[550px] bg-white flex flex-col rounded-lg" onClick={e => e.stopPropagation()}>
 
-                <TopCategoryComponent /> {/*  span do contexto/materia/categoria */} 
-                <section className="flex-1 flex flex-col p-4"> {/*  div p restante dos elementos terem p-4  */} 
-                    <header className="w-full h-[60px] flex flex-col items-center justify-center">
-                        <h2 className="w-full h-[40px] text-base flex items-center justify-center font-bold text-zinc-600 text-center leading-tight">{cardData.title}</h2> {/* 38 caracteres*/}
-                        <h2 className="w-full h-[20px] text-base flex items-center justify-center font-bold text-zinc-500 mb-4">{cardData.date.toLocaleDateString()}</h2>
-                    </header>
-                    <div className="w-full h-70 flex flex-col">
-                        <h3 className="mt-2 text-lg font-bold text-zinc-600">Fontes digitais</h3>
-                        { cardData.files && cardData.files.length > 0 && <h4 className="mt-2 text-sm font-bold text-zinc-500">arquivos</h4>}
-                        <ul className="max-h-40 overflow-y-auto flex-nowrap no-scrollbar">
+                <TopCategoryComponent /> {/*  span do contexto/materia/categoria */}
+                <header className="w-full h-[80px] flex flex-col items-center justify-center">
+                    <h2 className="w-full h-[35px] text-base flex items-center justify-center font-bold text-zinc-600 text-center leading-tight">{cardData.title}</h2> {/* 38 caracteres*/}
+                    <h2 className="w-full h-[20px] text-base flex items-center justify-center font-bold text-zinc-500 mb-4">{cardData.date.toLocaleDateString()}</h2>
+                </header>
+                <section className="flex flex-row flex-1 justify-between items-center p-2">
+                
+                    <div className="w-[300px] h-full flex flex-col">
+
+                    </div>
+                
+                    <div className="w-[300px] h-full flex flex-col">
+                        <h3 className="text-sm uppercase text-zinc-600 font-bold h-3 flex justify-start items-center">FONTES DIGITAIS</h3> 
+                        <ul className="h-[180px] w-full mt-3 overflow-y-auto no-scrollbar">
                             {
-                                cardData.files && cardData.files.length > 0 &&  
-                                cardData.files.map((file, index) =>
-                                    <li className="w-full h-10 bg-zinc-100 my-2 flex flex-row justify-start items-center gap-1 p-2 shadow-xs shadow-zinc-300 rounded-md hover:bg-zinc-200"  key={index}>
-                                        <FaFilePdf className="text-zinc-600 size-6"/>
-                                        <p className="text-sm text-zinc-600 truncate flex-1">{file.name}</p>
-                                    </li>)
+                            cardData.links && cardData.links.length > 0 &&
+                            cardData.links.map((link, index) => 
+                                <li className="w-full h-10 bg-zinc-100 mb-2 flex flex-row justify-start items-center gap-1 px-2 shadow-xs shadow-zinc-300 rounded-md hover:bg-zinc-200" key={index}>
+                                    <FaLink  className="text-zinc-500 size-4 font-bold" />
+                                    <p className="text-xs text-zinc-600 truncate h-full w-[90%] flex justify-start items-center">{link}</p>
+                                    <FaBucket className="text-zinc-500 size-4 font-bold hover:text-red-400"/>
+                                </li>)
                             }
                         </ul>
-                        {cardData.link && <h4 className="mt-2 text-sm font-bold text-zinc-500">links</h4>}
-                        <ul className="min-h-0 max-h-40">
-                            <li className="w-full h-10 bg-zinc-100 my-2 flex flex-row justify-start items-center gap-1 p-2 shadow-xs shadow-zinc-300 rounded-md hover:bg-zinc-200">
-                                        <FaLink className="text-zinc-600 size-6"/>
-                                        <p className="text-sm text-zinc-600 truncate flex-1">{cardData.link}</p>
-                                    </li>
+                        <ul className="h-[180px] w-full overflow-y-auto no-scrollbar">
+                            {
+                            cardData.files && cardData.files.length > 0 &&
+                            cardData.files.map((file, index) => 
+                                <li className="w-full h-10 bg-zinc-100 my-2 flex flex-row justify-start items-center gap-1 p-2 shadow-xs shadow-zinc-300 rounded-md hover:bg-zinc-200" key={index}>
+                                    <FaFilePdf  className="text-zinc-500 size-4 font-bold" />
+                                    <p className="text-xs text-zinc-600 truncate h-full w-[90%] flex justify-start items-center">{file.name}</p>
+                                    <FaBucket className="text-zinc-500 size-4 font-bold hover:text-red-400"/>
+                                </li>)
+                            }
                         </ul>
-                    </div>
-                </section>
+                    </div> 
+                 </section>
                 <footer className="w-full h-[60px] flex flex-col justify-between px-4">
                     <span className="w-full h-[4px] bg-zinc-400"></span>
                     <div className="w-full h-50 flex justify-between items-center">
