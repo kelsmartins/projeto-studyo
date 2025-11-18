@@ -103,8 +103,8 @@ export function UpdateCard({cardData,handleCloseUpdateCard, getFields, handleUpd
                         <ul className="w-full h-23 mb-3 rounded-md overflow-y-auto no-scrollbar border border-zinc-300 px-2">
                             {
                                 updateFiles && updateFiles.length > 0 &&
-                                updateFiles.map(file => 
-                                    <li className="w-full h-8 flex justify-start items-center gap-1 border-b border-b-zinc-300">
+                                updateFiles.map((file, index) => 
+                                    <li className="w-full h-8 flex justify-start items-center gap-1 border-b border-b-zinc-300" key={index}>
                                         <FaFilePdf  className="text-zinc-500 size-4 font-bold" />
                                         <p className="text-xs text-zinc-600 h-full w-[90%] flex justify-start items-center truncate">{file.name}</p>
                                         <FaBucket className="text-zinc-500 size-4 font-bold hover:text-red-400"/>

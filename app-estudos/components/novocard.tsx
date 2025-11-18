@@ -106,7 +106,7 @@ export function NovoCard({handleCloseNewCard, handleSaveNewCard}: Props) {
                                 }
                             }}
                         />
-                        <ul className="w-full h-25 mb-3 rounded-md overflow-y-auto no-scrollbar border border-zinc-300 px-2">
+                        <ul className="w-full h-23 mb-3 rounded-md overflow-y-auto no-scrollbar border border-zinc-300 px-2">
                             {
                                 selectedLinks && selectedLinks.length > 0 &&
                                 selectedLinks.map(link => 
@@ -120,7 +120,7 @@ export function NovoCard({handleCloseNewCard, handleSaveNewCard}: Props) {
 
                         <h3 className="mb-1 text-sm uppercase text-zinc-600 font-bold">Arquivo</h3>
                         <DropzoneComponent getSelectedFiles={getSelectedFiles}/>
-                        <ul className="w-full h-25 mb-3 rounded-md overflow-y-auto no-scrollbar border border-zinc-300 px-2">
+                        <ul className="w-full h-23 mb-3 rounded-md overflow-y-auto no-scrollbar border border-zinc-300 px-2">
                             {
                                 selectedFiles && selectedFiles.length > 0 &&
                                 selectedFiles.map(file => 

@@ -6,7 +6,7 @@ export const Assuntos: AssuntoType[] = [
   {
     id: '1',
     // Mês 10 = Novembro. HOJE (15/11/2025)
-    dataAgendada: new Date(2025, 10, 15),
+    dataAgendada: new Date(2025, 10, 19),
     assunto: 'Teste para HOJE',
     contexto: 'Testes',
     linkFonteDigital: ['https://youtu.be/logaritmos-revisao', 'https://youtu.be/logaritmos-revisao'],
@@ -14,7 +14,7 @@ export const Assuntos: AssuntoType[] = [
   {
     id: '2',
     // Mês 10 = Novembro. AMANHÃ (16/11/2025)
-    dataAgendada: new Date(2025, 10, 16),
+    dataAgendada: new Date(2025, 10, 18),
     assunto: 'Teste para AMANHÃ',
     contexto: 'Testes',
     linkFonteDigital: ['https://youtu.be/logaritmos-revisao', 'https://youtu.be/logaritmos-revisao']
@@ -22,7 +22,7 @@ export const Assuntos: AssuntoType[] = [
   {
     id: '3',
     // Mês 10 = Novembro. DEPOIS DE AMANHÃ (17/11/2025)
-    dataAgendada: new Date(2025, 10, 17),
+    dataAgendada: new Date(2025, 10, 20),
     assunto: 'Teste para DEPOIS DE AMANHÃ',
     contexto: 'Testes',
     linkFonteDigital: ['https://youtu.be/logaritmos-revisao', 'https://youtu.be/logaritmos-revisao']
