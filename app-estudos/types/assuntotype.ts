@@ -5,6 +5,6 @@ export type AssuntoType = {
     dataAgendada: Date;
     assunto: string;
     contexto?: string;
-    linkFonteDigital?: string;
+    linkFonteDigital?: string[];
     arquivosFonteDigital?: File[]
 }

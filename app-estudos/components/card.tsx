@@ -18,8 +18,8 @@ export function Card({assuntoData}: Props) {
     const [cardId, setCardId] = useState(assuntoData.id);
     const [updateCardTitle, setUpdatedCard] = useState(assuntoData.assunto);
     const [updateCardDate, setUpdateCarDate] = useState(assuntoData.dataAgendada);
-    const [updateCardLink, setUpdateCardLink] = useState(assuntoData.linkFonteDigital);
-    const [updateCardFiles, setUpdateCardFiles] = useState<File[]>([]);
+    const [updateCardLink, setUpdateCardLink] = useState<string[]>(assuntoData.linkFonteDigital ?? []);
+    const [updateCardFiles, setUpdateCardFiles] = useState<File[]>(assuntoData.arquivosFonteDigital ?? []);
     // para caso nao venha dados, continuar com oq ja tem
 
     const cardData = {
@@ -38,11 +38,11 @@ export function Card({assuntoData}: Props) {
     }
 
     // ataualizar states com novos valores
-    function getUpdateCardFields(newUpdatedTitle: string, newUpdatedDate: Date, newUpdatedLink?: string, newUpdatedFiles?: File[]){
+    function getUpdateCardFields(newUpdatedTitle: string, newUpdatedDate: Date, newUpdatedLink?: string[], newUpdatedFiles?: File[]){
         setUpdatedCard(newUpdatedTitle)
         setUpdateCarDate(newUpdatedDate)
-        setUpdateCardLink(newUpdatedLink || assuntoData.linkFonteDigital)
-        setUpdateCardFiles(newUpdatedFiles || [])
+        setUpdateCardLink(newUpdatedLink ?? updateCardLink)
+        setUpdateCardFiles(newUpdatedFiles ?? updateCardFiles)
     }
 
     // requisicao atualizar dados de card
@@ -69,7 +69,7 @@ export function Card({assuntoData}: Props) {
                     {updateCardFiles.length > 0 &&
                         <FaFilePdf  className="text-zinc-600 size-6 my-1" />
                     }
-                    {updateCardLink != '' &&  
+                    {updateCardLink.length > 0 &&  
                         <FaLink  className="text-zinc-600 size-6 my-1" />
                     }
                     

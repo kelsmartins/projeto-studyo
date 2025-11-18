@@ -8,11 +8,11 @@ type Props = {
     cardData: {
         title: string,
         date: Date,
-        link?: string,
+        link?: string[],
         files?: File[]
     };
     closeDetails: () => void;
-    getFields: (updatedTitle: string, updatedDate: Date, updatedLink?: string, updatedFiles?: File[]) => void;
+    getFields: (updatedTitle: string, updatedDate: Date, updatedLink?: string[], updatedFiles?: File[]) => void;
     handleUpdateCard: () => void;
 }
 
@@ -34,7 +34,7 @@ export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCa
 
     return (
         <div className="w-full h-full bg-black/30 fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm" onClick={closeDetails}>
-            <main className="w-[350px] h-[500px] bg-white flex flex-col rounded-lg shadow-xl shadow-zinc-400" onClick={e => e.stopPropagation()}>
+            <main className="w-[600px] h-[500px] bg-white flex flex-col rounded-lg" onClick={e => e.stopPropagation()}>
 
                 <TopCategoryComponent /> {/*  span do contexto/materia/categoria */} 
                 <section className="flex-1 flex flex-col p-4"> {/*  div p restante dos elementos terem p-4  */} 

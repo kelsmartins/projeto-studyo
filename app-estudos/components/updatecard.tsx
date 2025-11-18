@@ -9,11 +9,11 @@ type Props = {
     cardData: {
         title: string,
         date: Date,
-        link?: string,
+        links?: string[],
         files?: File[]
     };
     handleCloseUpdateCard: () => void;
-    getFields: (title: string, date: Date, link: string, files: File[])=> void;
+    getFields: (title: string, date: Date, links: string[], files: File[])=> void;
     handleUpdateCard: () => void;
 }
 
@@ -21,11 +21,15 @@ export function UpdateCard({cardData,handleCloseUpdateCard, getFields, handleUpd
 
     const [updateTitle, setUpdateTitle] = useState(cardData.title);
     const [updateDate, setUpdateDate] = useState(cardData.date)
-    const [updateLink, setUpdateLink] = useState(cardData.link);
-    const [updateFiles, setUpdateFiles] = useState<File[]>([]);
+    const [updateLinks, setUpdateLinks] = useState<string[]>(cardData.links ?? []);
+    const [updateFiles, setUpdateFiles] = useState<File[]>(cardData.files ?? []);
 
     function handlePickNewDate(date: Date){
         setUpdateDate(date) // setar a data q pegou, antes eu tava setando a data como ela msm ou seja a antiga, nao a q quero como nova
+    }
+
+    function handleUpdateLinks(link: string){
+        setUpdateLinks(prev => [...prev, link])
     }
 
     function getNewSelectedFiles(newUpdatedFile: File){
@@ -34,7 +38,7 @@ export function UpdateCard({cardData,handleCloseUpdateCard, getFields, handleUpd
 
     function saveUpdateCard(){
         // fazer algo: mostrar div para atualizar
-        getFields(updateTitle, updateDate, updateLink || '', updateFiles || []) // vai executar a chamada da funcao, adicionando os parâmetros necessarios
+        getFields(updateTitle, updateDate, updateLinks || [], updateFiles || []) // vai executar a chamada da funcao, adicionando os parâmetros necessarios
         handleCloseUpdateCard()
         handleUpdateCard()
     }
@@ -65,8 +69,8 @@ export function UpdateCard({cardData,handleCloseUpdateCard, getFields, handleUpd
                     <h3 className="mb-1 text-sm uppercase text-zinc-500 font-bold">link (Site ou YouTube)</h3>           
                     <input type="text"
                     className="h-[40px] w-full border border-zinc-600 rounded-md p-2 text-zinc-600 text-sm mb-3"
-                    value={updateLink}
-                    onChange={text => setUpdateLink(text.target.value)}
+                    value={updateLinks}
+                    onChange={e => handleUpdateLinks(e.target.value)}
                     />
                 </section>
                 <footer className="w-full h-[60px] flex flex-col justify-between px-4">

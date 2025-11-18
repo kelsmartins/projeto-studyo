@@ -9,7 +9,7 @@ export const Assuntos: AssuntoType[] = [
     dataAgendada: new Date(2025, 10, 15),
     assunto: 'Teste para HOJE',
     contexto: 'Testes',
-    linkFonteDigital: 'https://youtu.be/logaritmos-revisao',
+    linkFonteDigital: ['https://youtu.be/logaritmos-revisao', 'https://youtu.be/logaritmos-revisao'],
   },
   {
     id: '2',
@@ -17,7 +17,7 @@ export const Assuntos: AssuntoType[] = [
     dataAgendada: new Date(2025, 10, 16),
     assunto: 'Teste para AMANHÃ',
     contexto: 'Testes',
-    linkFonteDigital: 'https://artigo.com/expansao-maritima',
+    linkFonteDigital: ['https://youtu.be/logaritmos-revisao', 'https://youtu.be/logaritmos-revisao']
   },
   {
     id: '3',
@@ -25,7 +25,7 @@ export const Assuntos: AssuntoType[] = [
     dataAgendada: new Date(2025, 10, 17),
     assunto: 'Teste para DEPOIS DE AMANHÃ',
     contexto: 'Testes',
-    linkFonteDigital: 'https://pdf-resumo.org/ciclo-krebs.pdf',
+    linkFonteDigital: ['https://youtu.be/logaritmos-revisao', 'https://youtu.be/logaritmos-revisao']
   },
   {
     id: '4',
@@ -33,7 +33,7 @@ export const Assuntos: AssuntoType[] = [
     dataAgendada: new Date(2025, 10, 20),
     assunto: 'Teste para PRÓXIMOS DIAS',
     contexto: 'Testes',
-    linkFonteDigital: 'https://youtu.be/colocacao-pronominal',
+    linkFonteDigital: ['https://youtu.be/logaritmos-revisao', 'https://youtu.be/logaritmos-revisao']
   },
   {
     id: '5',
@@ -41,7 +41,7 @@ export const Assuntos: AssuntoType[] = [
     dataAgendada: new Date(2025, 11, 5),
     assunto: 'Revisão de Logaritmos (Dezembro)',
     contexto: 'Matemática',
-    linkFonteDigital: 'https://youtu.be/logaritmos-revisao',
+    linkFonteDigital: ['https://youtu.be/logaritmos-revisao', 'https://youtu.be/logaritmos-revisao']
   },
   {
     id: '6',
@@ -49,6 +49,6 @@ export const Assuntos: AssuntoType[] = [
     dataAgendada: new Date(2025, 10, 7),
     assunto: 'Colocação Pronominal (Passado)',
     contexto: 'Português',
-    linkFonteDigital: 'https://youtu.be/colocacao-pronominal',
+    linkFonteDigital: ['https://youtu.be/logaritmos-revisao', 'https://youtu.be/logaritmos-revisao']
   },
 ];

@@ -20,7 +20,7 @@ export default function Home() {
   }
 
   // hospedando imagens em servidor online (banco de dados nao guarda arquivos) - CLOUDINARY
-  async function handleSaveNewCard(title: string, date: Date, files?: File[], link?: string ) {
+  async function handleSaveNewCard(title: string, date: Date, files?: File[], links?: string[] ) {
 
       // se enviou arquivo  (INICIO)  
       const uploadedUrls: string[] = []; // teste
@@ -50,7 +50,7 @@ export default function Home() {
           id: newId,
           dataAgendada: date,
           assunto: title,
-          linkFonteDigital: link,
+          linkFonteDigital: links,
           arquivosFonteDigital: uploadedUrls
         })
       } catch (error) {
@@ -77,7 +77,7 @@ export default function Home() {
         </div>
       </div>
       {newCardVisible &&
-        <NovoCard handleCloseNewCard={handleCloseNewCard} handleSaveNewCard={(title, date, files, link) => handleSaveNewCard(title, date, files, link)}/>}
+        <NovoCard handleCloseNewCard={handleCloseNewCard} handleSaveNewCard={(title, date, files, links) => handleSaveNewCard(title, date, files, links)}/>}
     </div>
   );
 }
