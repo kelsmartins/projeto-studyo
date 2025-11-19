@@ -169,10 +169,14 @@ export function FormCard({initialData, handleCloseCard, handleSaveCard, getField
                             {
                                 selectedLinks && selectedLinks.length > 0 &&
                                 selectedLinks.map((link, index) => 
-                                    <li className="w-full h-10 bg-zinc-100 my-2 flex flex-row justify-start items-center gap-1 px-2 shadow-xs shadow-zinc-300 rounded-md hover:bg-zinc-200" key={index}>
-                                        <FaLink  className="text-zinc-500 size-4 font-bold" />
-                                        <p className="text-xs text-zinc-600 truncate h-full w-[90%] flex justify-start items-center">{link}</p>
-                                        <FaBucket className="text-zinc-500 size-4 font-bold hover:text-red-400"/>
+                                    <li  key={index}> 
+                                        <a href={link} 
+                                            target="_blank" // para abrir em outra guia
+                                            className="w-full h-10 bg-zinc-100 my-2 flex flex-row justify-start items-center gap-1 px-2 shadow-xs shadow-zinc-300 rounded-md hover:bg-zinc-200">
+                                                <FaLink  className="text-zinc-500 size-4 font-bold" />
+                                                <p className="text-xs text-zinc-600 truncate h-full w-[90%] flex justify-start items-center">{link}</p>
+                                                <FaBucket className="text-zinc-500 size-4 font-bold hover:text-red-400"/>
+                                        </a>
                                     </li>)
                             }
                         </ul>
