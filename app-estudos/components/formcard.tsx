@@ -20,7 +20,7 @@ export function NovoCard({initialData, handleCloseCard, handleSaveCard, getField
     const [date, setDate] = useState(initialData?.dataAgendada ?? new Date());
 
     const [category, setCategory] = useState(initialData?.categoria ?? '');
-    const [color, setColor] = useState(initialData?.cor ?? 'bg-white')
+    const [color, setColor] = useState(initialData?.cor ?? 'bg-zinc-700')
     const [quickNotes, setQuickNotes] = useState(initialData?.notasRapidas ?? '');
 
     const [inputLink, setInputLink] = useState('');

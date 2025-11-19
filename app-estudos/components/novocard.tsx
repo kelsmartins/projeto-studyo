@@ -18,7 +18,7 @@ export function NovoCard({handleCloseNewCard, handleSaveNewCard}: Props) {
     const [selectedLinks, setSelectedLinks] = useState<string[]>([]);
 
     const [category, setCategory] = useState('');
-    const [color, setColor] = useState('')
+    const [color, setColor] = useState('bg-zinc-700')
     const [quickNotes, setQuickNotes] = useState('');
 
     const [inputLink, setInputLink] = useState('');
@@ -90,7 +90,7 @@ export function NovoCard({handleCloseNewCard, handleSaveNewCard}: Props) {
 
                 <header className="flex flex-col justify-between h-[50px] w-full items-center"> 
                     <TopCategoryComponent defColor={color}/>
-                     <h2 className="w-full h-[35px] text-base flex items-center justify-center font-bold text-center text-zinc-900">Novo Assunto</h2> {/* 38 caracteres*/}
+                     <h2 className="w-full h-[35px] text-base flex items-center justify-center font-bold text-center text-zinc-700">Novo Assunto</h2> {/* 38 caracteres*/}
                 </header>
                 <section className="flex flex-row flex-1 justify-between items-center">
 
@@ -181,7 +181,7 @@ export function NovoCard({handleCloseNewCard, handleSaveNewCard}: Props) {
                 <footer className="w-full h-[60px] flex flex-col justify-between px-4">
                     <span className="w-full h-[4px] bg-zinc-400"></span>
                     <div className="w-full h-50 flex justify-end items-center">
-                            <Button style="bg-zinc-900 text-white font-bold hover:bg-zinc-600" title="salvar" onClick={handleClick}/>
+                            <Button style="bg-zinc-700 text-white font-bold hover:bg-zinc-600" title="salvar" onClick={handleClick}/>
                     </div>
                 </footer>
             </main>

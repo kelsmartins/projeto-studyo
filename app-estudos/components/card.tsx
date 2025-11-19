@@ -20,7 +20,7 @@ export function Card({assuntoData}: Props) {
     const [updateCardDate, setUpdateCarDate] = useState(assuntoData.dataAgendada);
 
     const [UpdateCardCategory, setUpdateCardCategory] = useState(assuntoData.categoria ?? '');
-    const [updateCardColor, setUpdateCardColor] = useState(assuntoData.cor ?? 'text-white');
+    const [updateCardColor, setUpdateCardColor] = useState(assuntoData.cor ?? 'bg-zinc-700');
     const [updateCardQuickNotes, setUpdateCardQuickNotes] = useState(assuntoData.notasRapidas ?? '');
 
     const [updateCardLinks, setUpdateCardLinks] = useState<string[]>(assuntoData.linksFonteDigital ?? []);
