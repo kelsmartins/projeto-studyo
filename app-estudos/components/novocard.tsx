@@ -15,6 +15,11 @@ export function NovoCard({handleCloseNewCard, handleSaveNewCard}: Props) {
     const [title, setTitle] = useState('');
     const [date, setDate] = useState(new Date());
     const [selectedLinks, setSelectedLinks] = useState<string[]>([]);
+
+    const [category, setCategory] = useState('');
+    const [color, setColor] = useState('')
+    const [quickNotes, setQuickNotes] = useState('');
+
     const [inputLink, setInputLink] = useState('');
     const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
@@ -61,17 +66,21 @@ export function NovoCard({handleCloseNewCard, handleSaveNewCard}: Props) {
     }
 
     function handleGetLinks(){
-        setSelectedLinks(prev => [...prev, inputLink])
-        setInputLink('')
+        if(inputLink != ''){    
+            setSelectedLinks(prev => [...prev, inputLink])
+            setInputLink('')
+        } else {
+            alert('link não pode ser vazio')
+        }
     }
 
    
 
     return (
         <div className="w-full h-full bg-black/30 fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm" onClick={handleCloseNewCard}>
-            <main className="w-[600px] h-[550px] bg-white flex flex-col rounded-lg" onClick={e => e.stopPropagation()}> {/* explicacao linha 52 */}
+            <main className="w-[600px] h-[600px] bg-white flex flex-col rounded-lg" onClick={e => e.stopPropagation()}> {/* explicacao linha 52 */}
 
-                <header className="flex flex-col justify-between h-15 w-full items-center">
+                <header className="flex flex-col justify-between h-[50px] w-full items-center"> 
                     <TopCategoryComponent />
                      <h2 className="w-full h-[35px] text-base flex items-center justify-center font-bold text-center uppercase text-zinc-900">novo assunto</h2> {/* 38 caracteres*/}
                 </header>
@@ -79,6 +88,7 @@ export function NovoCard({handleCloseNewCard, handleSaveNewCard}: Props) {
 
                     <div className="w-[300px] h-full flex flex-col p-4">
 
+                        {/* TITULO */}
                         <h3 className="mb-1 text-sm uppercase text-zinc-600 font-bold">título</h3>        
                         <input type="text"
                             className="h-[40px] w-full border-1 border-zinc-600 rounded-md p-2 text-white text-sm mb-3 placeholder-italic text-zinc-600"
@@ -87,14 +97,30 @@ export function NovoCard({handleCloseNewCard, handleSaveNewCard}: Props) {
                             onChange={text => setTitle(text.target.value)}
                         />
 
+                        {/* DATA */}
                         <h3 className="mb-1 text-sm uppercase text-zinc-600 font-bold">data agendada</h3>
                         <DatePickerComponent onPick={handlePickDate} />
+
+                        {/* CATEGORIA */}
+                        <h3 className="mb-1 text-sm uppercase text-zinc-600 font-bold">categoria (Opcional)</h3>           
+                        <input type="text"
+                            className="h-[40px] w-full border border-zinc-600 rounded-md p-2 text-zinc-600 text-sm mb-3"
+                            placeholder="ex: Curso Informática Básica"
+                            value={category}
+                            onChange={e => setCategory(e.target.value)}
+                        />
+
+                        {/* COR */}
+
+
+                        {/* NOTAS RÁPIDAS */}
 
                     </div>
 
                     <div className="w-[300px] h-full flex flex-col p-4">
 
-                        <h3 className="mb-1 text-sm uppercase text-zinc-600 font-bold">link (Site ou YouTube)</h3>           
+                        {/* LINK */}
+                        <h3 className="mb-1 text-sm uppercase text-zinc-600 font-bold">links (Site ou YouTube)</h3>           
                         <input type="text"
                             className="h-[40px] w-full border border-zinc-600 rounded-md p-2 text-zinc-600 text-sm mb-3"
                             placeholder="Pressione Enter para adicionar"
@@ -106,11 +132,11 @@ export function NovoCard({handleCloseNewCard, handleSaveNewCard}: Props) {
                                 }
                             }}
                         />
-                        <ul className="w-full h-23 mb-3 rounded-md overflow-y-auto no-scrollbar border border-zinc-300 px-2">
+                        <ul className="w-full h-[120px] mb-3 rounded-md overflow-y-auto no-scrollbar border border-zinc-300 px-2">
                             {
                                 selectedLinks && selectedLinks.length > 0 &&
                                 selectedLinks.map(link => 
-                                    <li className="w-full h-8 flex justify-start items-center gap-1 border-b border-b-zinc-300">
+                                    <li className="w-full h-10 bg-zinc-100 my-2 flex flex-row justify-start items-center gap-1 px-2 shadow-xs shadow-zinc-300 rounded-md hover:bg-zinc-200">
                                         <FaLink  className="text-zinc-500 size-4 font-bold" />
                                         <p className="text-xs text-zinc-600 truncate h-full w-[90%] flex justify-start items-center">{link}</p>
                                         <FaBucket className="text-zinc-500 size-4 font-bold hover:text-red-400"/>
@@ -118,13 +144,14 @@ export function NovoCard({handleCloseNewCard, handleSaveNewCard}: Props) {
                             }
                         </ul>
 
+                        {/* ARQUIVO */}
                         <h3 className="mb-1 text-sm uppercase text-zinc-600 font-bold">Arquivo</h3>
                         <DropzoneComponent getSelectedFiles={getSelectedFiles}/>
-                        <ul className="w-full h-23 mb-3 rounded-md overflow-y-auto no-scrollbar border border-zinc-300 px-2">
+                        <ul className="w-full h-[120px] mb-3 rounded-md overflow-y-auto no-scrollbar border border-zinc-300 px-2">
                             {
                                 selectedFiles && selectedFiles.length > 0 &&
                                 selectedFiles.map(file => 
-                                    <li className="w-full h-8 flex justify-start items-center gap-1 border-b border-b-zinc-300">
+                                    <li className="w-full h-10 bg-zinc-100 my-2 flex flex-row justify-start items-center gap-1 px-2 shadow-xs shadow-zinc-300 rounded-md hover:bg-zinc-200">
                                         <FaFilePdf  className="text-zinc-500 size-4 font-bold" />
                                         <p className="text-xs text-zinc-600 h-full w-[90%] flex justify-start items-center truncate">{file.name}</p>
                                         <FaBucket className="text-zinc-500 size-4 font-bold hover:text-red-400"/>

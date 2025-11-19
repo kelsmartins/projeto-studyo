@@ -23,6 +23,11 @@ export function UpdateCard({cardData,handleCloseUpdateCard, getFields, handleUpd
     const [updateTitle, setUpdateTitle] = useState(cardData.title);
     const [updateDate, setUpdateDate] = useState(cardData.date);
     const [updateLinks, setUpdateLinks] = useState<string[]>(cardData.links ?? []);
+
+    const [category, setCategory] = useState('');
+    const [color, setColor] = useState('')
+    const [quickNotes, setQuickNotes] = useState('');
+
     const [inputLink, setInputLink] = useState('');
     const [updateFiles, setUpdateFiles] = useState<File[]>(cardData.files ?? []);
 
@@ -35,8 +40,12 @@ export function UpdateCard({cardData,handleCloseUpdateCard, getFields, handleUpd
     }
 
     function handleGeNewtLinks(){
-        setUpdateLinks(prev => [...prev, inputLink])
-        setInputLink('')
+        if(inputLink != ''){    
+            setUpdateLinks(prev => [...prev, inputLink])
+            setInputLink('')
+        } else {
+            alert('link não pode ser vazio')
+        }
     }
 
     function saveUpdateCard(){
@@ -48,17 +57,18 @@ export function UpdateCard({cardData,handleCloseUpdateCard, getFields, handleUpd
 
     return (
         <div className="w-full h-full fixed inset-0 flex items-center justify-center z-50">
-            <main className="w-[600px] h-[550px] bg-white flex flex-col rounded-lg" onClick={e => e.stopPropagation()}> {/* explicacao linha 52 */}
+            <main className="w-[600px] h-[600px] bg-white flex flex-col rounded-lg" onClick={e => e.stopPropagation()}> {/* explicacao linha 52 */}
 
-                <header className="flex flex-col justify-between h-15 w-full">
+                <header className="flex flex-col justify-between h-[50px] w-full">
                     <TopCategoryComponent />
                      <h2 className="w-full h-[35px] text-base flex items-center justify-center font-bold text-center uppercase text-zinc-900">Atualizar assunto</h2> {/* 38 caracteres*/}
 
                 </header>
                 <section className="flex flex-row flex-1 justify-between items-center">
 
-                    <div className="w-[300px] h-full flex flex-col p-4">
+                    <div className="w-[300px] h-full flex flex-col px-4">
 
+                        {/* TITULO */}
                         <h3 className="mb-1 text-sm uppercase text-zinc-600 font-bold">título</h3>        
                         <input type="text"
                             className="h-[40px] w-full border-1 border-zinc-600 rounded-md p-2 text-white text-sm mb-3 placeholder-italic text-zinc-600"
@@ -67,13 +77,24 @@ export function UpdateCard({cardData,handleCloseUpdateCard, getFields, handleUpd
                             onChange={text => setUpdateTitle(text.target.value)}
                         />
 
+                        {/* DATA */}
                         <h3 className="mb-1 text-sm uppercase text-zinc-600 font-bold">data agendada</h3>
                         <DatePickerComponent onPick={handlePickNewDate} />
 
+                        {/* CATEGORIA */}
+                        <h3 className="mb-1 text-sm uppercase text-zinc-600 font-bold">categoria (Opcional)</h3>           
+                        <input type="text"
+                            className="h-[40px] w-full border border-zinc-600 rounded-md p-2 text-zinc-600 text-sm mb-3"
+                            placeholder="ex: Curso Informática Básica"
+                            value={category}
+                            onChange={e => setCategory(e.target.value)}
+                        />
+
                     </div>
 
-                    <div className="w-[300px] h-full flex flex-col p-4">
+                    <div className="w-[300px] h-full flex flex-col px-4">
 
+                        {/* LINKS */}
                         <h3 className="mb-1 text-sm uppercase text-zinc-600 font-bold">link (Site ou YouTube)</h3>           
                         <input type="text"
                             className="h-[40px] w-full border border-zinc-600 rounded-md p-2 text-zinc-600 text-sm mb-3"
@@ -86,11 +107,11 @@ export function UpdateCard({cardData,handleCloseUpdateCard, getFields, handleUpd
                                 }
                             }}
                         />
-                        <ul className="w-full h-23 mb-3 rounded-md overflow-y-auto no-scrollbar border border-zinc-300 px-2">
+                        <ul className="w-full h-[140px] rounded-md overflow-y-auto no-scrollbar border border-zinc-300 px-2">
                             {
                                 updateLinks && updateLinks.length > 0 &&
-                                updateLinks.map(link => 
-                                    <li className="w-full h-8 flex justify-start items-center gap-1 border-b border-b-zinc-300">
+                                updateLinks.map((link, index) => 
+                                    <li className="w-full h-10 bg-zinc-100 my-2 flex flex-row justify-start items-center gap-1 px-2 shadow-xs shadow-zinc-300 rounded-md hover:bg-zinc-200" key={index}>
                                         <FaLink  className="text-zinc-500 size-4 font-bold" />
                                         <p className="text-xs text-zinc-600 truncate h-full w-[90%] flex justify-start items-center">{link}</p>
                                         <FaBucket className="text-zinc-500 size-4 font-bold hover:text-red-400"/>
@@ -98,13 +119,14 @@ export function UpdateCard({cardData,handleCloseUpdateCard, getFields, handleUpd
                             }
                         </ul>
 
-                        <h3 className="mb-1 text-sm uppercase text-zinc-600 font-bold">Arquivo</h3>
+                        {/* ARQUIVOS */}
+                        <h3 className="mb-1 text-sm uppercase text-zinc-600 font-bold mt-3">Arquivo</h3>
                         <DropzoneComponent getSelectedFiles={getNewSelectedFiles}/>
-                        <ul className="w-full h-23 mb-3 rounded-md overflow-y-auto no-scrollbar border border-zinc-300 px-2">
+                        <ul className="w-full h-[140px] rounded-md overflow-y-auto no-scrollbar border border-zinc-300 px-2">
                             {
                                 updateFiles && updateFiles.length > 0 &&
                                 updateFiles.map((file, index) => 
-                                    <li className="w-full h-8 flex justify-start items-center gap-1 border-b border-b-zinc-300" key={index}>
+                                    <li className="w-full h-10 bg-zinc-100 my-2 flex flex-row justify-start items-center gap-1 px-2 shadow-xs shadow-zinc-300 rounded-md hover:bg-zinc-200" key={index}>
                                         <FaFilePdf  className="text-zinc-500 size-4 font-bold" />
                                         <p className="text-xs text-zinc-600 h-full w-[90%] flex justify-start items-center truncate">{file.name}</p>
                                         <FaBucket className="text-zinc-500 size-4 font-bold hover:text-red-400"/>
