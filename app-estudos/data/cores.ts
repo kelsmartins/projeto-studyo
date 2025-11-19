@@ -1,7 +1,7 @@
 import { CorType } from "@/types/corType";
 
 export const Cores: CorType[] = [
-  {id: 1, nome: 'white', hex: 'bg-white'},
+  {id: 1, nome: 'zinc', hex: 'bg-zinc-700'},
     {id: 2, nome: 'red', hex: 'bg-red-400'},
     {id: 3, nome: 'orange', hex: 'bg-orange-400'},
     {id: 4, nome: 'yellow', hex: 'bg-yellow-400'},

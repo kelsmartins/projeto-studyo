@@ -5,6 +5,7 @@ import { AssuntoType } from '@/types/assuntotype';
 import { useState } from 'react';
 import { Assuntos} from '@/data/assuntos';
 import axios from 'axios';
+import { FormCard } from '@/components/formcard';
 
 export default function Home() {
 
@@ -93,9 +94,9 @@ export default function Home() {
         </div>
       </div>
         {newCardVisible &&
-        <NovoCard
-          handleCloseNewCard={handleCloseNewCard}
-          handleSaveNewCard={(title: string, date: Date, category?: string, color?: string, quickNotes?: string, links?: string[], files?: File[]) =>
+        <FormCard
+          handleCloseCard={handleCloseNewCard}
+          handleSaveCard={(title: string, date: Date, category?: string, color?: string, quickNotes?: string, links?: string[], files?: File[]) =>
           handleSaveNewCard(title, date, category, color, quickNotes, links, files)
           }
         />}

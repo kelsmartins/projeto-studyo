@@ -3,6 +3,7 @@ import { useState } from "react";
 import { UpdateCard } from './updatecard'
 import { TopCategoryComponent } from "./categorycomponent";
 import { FaLink , FaFilePdf, FaBucket } from 'react-icons/fa6'
+import { FormCard } from "./formcard";
 
 type Props = {
     cardData: {
@@ -98,10 +99,10 @@ export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCa
                     </div>
                 </footer>
                 {
-                    showUpdateCard && <UpdateCard cardData={cardData} 
-                                            handleCloseUpdateCard={handleCloseUpdateCard} 
+                    showUpdateCard && <FormCard initialData={cardData} 
+                                            handleCloseCard={handleCloseUpdateCard} 
                                             getFields={getFields} // vai repassar a chamada de funcao getFields para updateCard
-                                            handleUpdateCard={handleUpdateCard} />
+                                            handleSaveCard={handleUpdateCard} />
                 }
 
             </main>

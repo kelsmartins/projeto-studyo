@@ -8,30 +8,34 @@ import { AssuntoType } from "@/types/assuntotype"
 import { ColorComponent } from "./colorcomponent"
 
 type Props = {
-    initialData?: AssuntoType;
+    initialData?: {
+        title: string,
+        date: Date,
+        category?: string,
+        color?: string,
+        quickNotes?: string,
+        links?: string[],
+        files?: File[]
+    };
     handleCloseCard: () => void;
     handleSaveCard: (title: string, date: Date, category?: string, color?: string, quickNotes?: string, links?: string[], files?: File[]) => void;
     getFields?: (updatedTitle: string, updatedDate: Date, updatedCategory: string, updatedColor: string, updatedQuickNotes: string, updatedLinks?: string[], updatedFiles?: File[]) => void;
 }
 
-export function NovoCard({initialData, handleCloseCard, handleSaveCard, getFields}: Props) {
+export function FormCard({initialData, handleCloseCard, handleSaveCard, getFields}: Props) {
 
-    const [title, setTitle] = useState(initialData?.assunto ?? '');
-    const [date, setDate] = useState(initialData?.dataAgendada ?? new Date());
+    const [title, setTitle] = useState(initialData?.title ?? '');
+    const [date, setDate] = useState(initialData?.date ?? new Date());
 
-    const [category, setCategory] = useState(initialData?.categoria ?? '');
-    const [color, setColor] = useState(initialData?.cor ?? 'bg-zinc-700')
-    const [quickNotes, setQuickNotes] = useState(initialData?.notasRapidas ?? '');
+    const [category, setCategory] = useState(initialData?.category ?? '');
+    const [color, setColor] = useState(initialData?.color ?? 'bg-zinc-700')
+    const [quickNotes, setQuickNotes] = useState(initialData?.quickNotes ?? '');
 
     const [inputLink, setInputLink] = useState('');
-    const [selectedFiles, setSelectedFiles] = useState<File[]>(initialData?.arquivosFonteDigital ?? []);
-    const [selectedLinks, setSelectedLinks] = useState<string[]>(initialData?.linksFonteDigital ?? []);
+    const [selectedFiles, setSelectedFiles] = useState<File[]>(initialData?.files ?? []);
+    const [selectedLinks, setSelectedLinks] = useState<string[]>(initialData?.links ?? []);
 
-    const [isEditing, setIsEditing] = useState(false);
-
-    if(initialData){
-        setIsEditing(true)
-    }
+    const [isEditing, setIsEditing] = useState(!!initialData); // explicacao linha 255
 
     // funcoes pick fields
     function handlePickDate(newDate: Date){ // atribuir valor de pickdate do componente filho
@@ -96,10 +100,8 @@ export function NovoCard({initialData, handleCloseCard, handleSaveCard, getField
         }
     }
 
-   
-
     return (
-        <div className="w-full h-full bg-black/30 fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm" onClick={handleCloseCard}>
+        <div className={`w-full h-full fixed inset-0 flex items-center justify-center z-50 ${isEditing ? '': 'bg-black/30 backdrop-blur-sm'}`} onClick={handleCloseCard}>
             <main className="w-[600px] h-[600px] bg-white flex flex-col rounded-lg" onClick={e => e.stopPropagation()}> {/* explicacao linha 52 */}
 
                 <header className="flex flex-col justify-between h-[50px] w-full items-center"> 
@@ -201,7 +203,7 @@ export function NovoCard({initialData, handleCloseCard, handleSaveCard, getField
                     </div> 
                     : 
                     <div className="w-full h-50 flex justify-end items-center">
-                            <Button style="bg-zinc-900 text-white font-bold hover:bg-zinc-600" title="salvar" onClick={handleClick}/>
+                            <Button style="bg-zinc-700 text-white font-bold hover:bg-zinc-600" title="salvar" onClick={handleClick}/>
                     </div>}
                 </footer>
             </main>
@@ -215,3 +217,22 @@ export function NovoCard({initialData, handleCloseCard, handleSaveCard, getField
         "Ei, o clique aconteceu aqui neste card. Execute esta função (stopPropagation) e pare aqui.
         Não 'borbulhe' este evento de clique para nenhum componente pai."
 */  
+
+
+
+//              const [isEditing, setIsEditing] = useState(!!initialData);
+//
+// O que acontece aqui
+// useState(...) → inicializa um estado React.
+
+// !!initialData → é um truque em JavaScript para converter qualquer valor em um booleano:
+
+// Se initialData for undefined, null ou vazio → !!initialData vira false.
+
+// Se initialData tiver algum valor (um objeto válido) → !!initialData vira true.
+
+// Ou seja:
+
+// Se o componente recebeu initialData, o estado inicial de isEditing será true.
+
+// Se não recebeu, será false.
