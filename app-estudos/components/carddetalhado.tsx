@@ -1,6 +1,5 @@
 import { Button } from "./button";
 import { useState } from "react";
-import { UpdateCard } from './updatecard'
 import { TopCategoryComponent } from "./categorycomponent";
 import { FaLink , FaFilePdf, FaBucket } from 'react-icons/fa6'
 import { FormCard } from "./formcard";

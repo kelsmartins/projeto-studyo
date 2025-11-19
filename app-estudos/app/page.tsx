@@ -1,6 +1,5 @@
 'use client'
 import {CardArea} from '@/components/cardarea';
-import { NovoCard } from '@/components/novocard';
 import { AssuntoType } from '@/types/assuntotype';
 import { useState } from 'react';
 import { Assuntos} from '@/data/assuntos';
