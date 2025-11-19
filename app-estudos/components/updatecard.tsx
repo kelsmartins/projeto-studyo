@@ -69,7 +69,7 @@ export function UpdateCard({cardData,handleCloseUpdateCard, getFields, handleUpd
                     <div className="w-[300px] h-full flex flex-col px-4">
 
                         {/* TITULO */}
-                        <h3 className="mb-1 text-sm uppercase text-zinc-600 font-bold">título</h3>        
+                        <h3 className="mb-1 text-sm uppercase text-zinc-600 font-bold">Título</h3>        
                         <input type="text"
                             className="h-[40px] w-full border-1 border-zinc-600 rounded-md p-2 text-white text-sm mb-3 placeholder-italic text-zinc-600"
                             placeholder="ex: Lógica de Programação"
@@ -78,11 +78,11 @@ export function UpdateCard({cardData,handleCloseUpdateCard, getFields, handleUpd
                         />
 
                         {/* DATA */}
-                        <h3 className="mb-1 text-sm uppercase text-zinc-600 font-bold">data agendada</h3>
+                        <h3 className="mb-1 text-sm text-zinc-600 font-bold">Data Agendada</h3>
                         <DatePickerComponent onPick={handlePickNewDate} />
 
                         {/* CATEGORIA */}
-                        <h3 className="mb-1 text-sm uppercase text-zinc-600 font-bold">categoria (Opcional)</h3>           
+                        <h3 className="mb-1 text-sm text-zinc-500 font-bold">Categoria (Opcional)</h3>           
                         <input type="text"
                             className="h-[40px] w-full border border-zinc-600 rounded-md p-2 text-zinc-600 text-sm mb-3"
                             placeholder="ex: Curso Informática Básica"
@@ -90,12 +90,34 @@ export function UpdateCard({cardData,handleCloseUpdateCard, getFields, handleUpd
                             onChange={e => setCategory(e.target.value)}
                         />
 
+                        {/* COR */}
+                        <h3 className="mb-1 text-sm text-zinc-500 font-bold">Cor (Opcional)</h3>
+                        <ul className="h-[40px] w-full rounded-md mb-3 flex justify-between items-center gap-1">
+                            <li className="rounded-md size-8 bg-white border-2 border-zinc-600"></li>
+                            <li className="rounded-md size-8 bg-red-400 border-2 border-zinc-600"></li>
+                            <li className="rounded-md size-8 bg-orange-400 border-2 border-zinc-600"></li>
+                            <li className="rounded-md size-8 bg-yellow-400 border-2 border-zinc-600"></li>
+                            <li className="rounded-md size-8 bg-green-400 border-2 border-zinc-600"></li>
+                            <li className="rounded-md size-8 bg-blue-400 border-2 border-zinc-600"></li>
+                            <li className="rounded-md size-8 bg-purple-400 border-2 border-zinc-600"></li>
+                        </ul>
+
+
+                        {/* NOTAS RÁPIDAS */}
+                        <h3 className="mb-1 text-sm text-zinc-500 font-bold">Anotações rápidas (Opcional)</h3>           
+                        <input type="text"
+                            className="h-[80px] w-full border border-zinc-600 rounded-md p-2 text-zinc-600 text-sm mb-3"
+                            placeholder="ex: Curso Informática Básica"
+                            value={quickNotes}
+                            onChange={e => setQuickNotes(e.target.value)}
+                        />
+
                     </div>
 
                     <div className="w-[300px] h-full flex flex-col px-4">
 
                         {/* LINKS */}
-                        <h3 className="mb-1 text-sm uppercase text-zinc-600 font-bold">link (Site ou YouTube)</h3>           
+                        <h3 className="mb-1 text-sm text-zinc-600 font-bold">Links (Site ou YouTube)</h3>           
                         <input type="text"
                             className="h-[40px] w-full border border-zinc-600 rounded-md p-2 text-zinc-600 text-sm mb-3"
                             placeholder="Pressione Enter para adicionar"
@@ -120,7 +142,7 @@ export function UpdateCard({cardData,handleCloseUpdateCard, getFields, handleUpd
                         </ul>
 
                         {/* ARQUIVOS */}
-                        <h3 className="mb-1 text-sm uppercase text-zinc-600 font-bold mt-3">Arquivo</h3>
+                        <h3 className="mb-1 text-sm text-zinc-600 font-bold mt-3">Arquivos</h3>
                         <DropzoneComponent getSelectedFiles={getNewSelectedFiles}/>
                         <ul className="w-full h-[140px] rounded-md overflow-y-auto no-scrollbar border border-zinc-300 px-2">
                             {
