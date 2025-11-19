@@ -5,6 +5,7 @@ import { useState } from "react";
 import { DropzoneComponent } from "./dropzonecomponent";
 import { TopCategoryComponent } from "./categorycomponent";
 import { FaLink, FaFilePdf, FaBucket } from 'react-icons/fa6'
+import { ColorComponent } from "./colorcomponent";
 
 type Props = {
     cardData: {
@@ -14,7 +15,7 @@ type Props = {
         files?: File[]
     };
     handleCloseUpdateCard: () => void;
-    getFields: (title: string, date: Date, links: string[], files: File[])=> void;
+    getFields: (updatedTitle: string, updatedDate: Date, updatedCategory: string, updatedColor: string, updatedQuickNotes: string, updatedLinks?: string[], updatedFiles?: File[]) => void;
     handleUpdateCard: () => void;
 }
 
@@ -24,13 +25,14 @@ export function UpdateCard({cardData,handleCloseUpdateCard, getFields, handleUpd
     const [updateDate, setUpdateDate] = useState(cardData.date);
     const [updateLinks, setUpdateLinks] = useState<string[]>(cardData.links ?? []);
 
-    const [category, setCategory] = useState('');
-    const [color, setColor] = useState('')
-    const [quickNotes, setQuickNotes] = useState('');
+    const [updateCategory, setUpdateCategory] = useState('');
+    const [updateColor, setUpdateColor] = useState('')
+    const [updateQuickNotes, setUpdateQuickNotes] = useState('');
 
     const [inputLink, setInputLink] = useState('');
     const [updateFiles, setUpdateFiles] = useState<File[]>(cardData.files ?? []);
 
+    // funcoes pick fields
     function handlePickNewDate(date: Date){
         setUpdateDate(date) // setar a data q pegou, antes eu tava setando a data como ela msm ou seja a antiga, nao a q quero como nova
     }
@@ -48,9 +50,14 @@ export function UpdateCard({cardData,handleCloseUpdateCard, getFields, handleUpd
         }
     }
 
+    function getColor(color: string){
+        setUpdateColor(color)
+    }
+    // fim funcoes pick fields
+
     function saveUpdateCard(){
         // fazer algo: mostrar div para atualizar
-        getFields(updateTitle, updateDate, updateLinks || [], updateFiles || []) // vai executar a chamada da funcao, adicionando os parâmetros necessarios
+        getFields(updateTitle, updateDate, updateCategory, updateColor, updateQuickNotes, updateLinks || [], updateFiles || []) // vai executar a chamada da funcao, adicionando os parâmetros necessarios
         handleCloseUpdateCard()
         handleUpdateCard()
     }
@@ -60,7 +67,7 @@ export function UpdateCard({cardData,handleCloseUpdateCard, getFields, handleUpd
             <main className="w-[600px] h-[600px] bg-white flex flex-col rounded-lg" onClick={e => e.stopPropagation()}> {/* explicacao linha 52 */}
 
                 <header className="flex flex-col justify-between h-[50px] w-full">
-                    <TopCategoryComponent />
+                    <TopCategoryComponent defColor={updateColor} />
                      <h2 className="w-full h-[35px] text-base flex items-center justify-center font-bold text-center uppercase text-zinc-900">Atualizar assunto</h2> {/* 38 caracteres*/}
 
                 </header>
@@ -86,21 +93,13 @@ export function UpdateCard({cardData,handleCloseUpdateCard, getFields, handleUpd
                         <input type="text"
                             className="h-[40px] w-full border border-zinc-600 rounded-md p-2 text-zinc-600 text-sm mb-3"
                             placeholder="ex: Curso Informática Básica"
-                            value={category}
-                            onChange={e => setCategory(e.target.value)}
+                            value={updateCategory}
+                            onChange={e => setUpdateCategory(e.target.value)}
                         />
 
                         {/* COR */}
                         <h3 className="mb-1 text-sm text-zinc-500 font-bold">Cor (Opcional)</h3>
-                        <ul className="h-[40px] w-full rounded-md mb-3 flex justify-between items-center gap-1">
-                            <li className="rounded-md size-8 bg-white border-2 border-zinc-600"></li>
-                            <li className="rounded-md size-8 bg-red-400 border-2 border-zinc-600"></li>
-                            <li className="rounded-md size-8 bg-orange-400 border-2 border-zinc-600"></li>
-                            <li className="rounded-md size-8 bg-yellow-400 border-2 border-zinc-600"></li>
-                            <li className="rounded-md size-8 bg-green-400 border-2 border-zinc-600"></li>
-                            <li className="rounded-md size-8 bg-blue-400 border-2 border-zinc-600"></li>
-                            <li className="rounded-md size-8 bg-purple-400 border-2 border-zinc-600"></li>
-                        </ul>
+                        <ColorComponent  getColor={getColor}/>
 
 
                         {/* NOTAS RÁPIDAS */}
@@ -108,8 +107,8 @@ export function UpdateCard({cardData,handleCloseUpdateCard, getFields, handleUpd
                         <input type="text"
                             className="h-[80px] w-full border border-zinc-600 rounded-md p-2 text-zinc-600 text-sm mb-3"
                             placeholder="ex: Curso Informática Básica"
-                            value={quickNotes}
-                            onChange={e => setQuickNotes(e.target.value)}
+                            value={updateQuickNotes}
+                            onChange={e => setUpdateQuickNotes(e.target.value)}
                         />
 
                     </div>

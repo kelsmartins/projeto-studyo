@@ -8,11 +8,14 @@ type Props = {
     cardData: {
         title: string,
         date: Date,
+        category?: string,
+        color?: string,
+        quickNotes?: string,
         links?: string[],
         files?: File[]
     };
     closeDetails: () => void;
-    getFields: (updatedTitle: string, updatedDate: Date, updatedLinks?: string[], updatedFiles?: File[]) => void;
+    getFields: (updatedTitle: string, updatedDate: Date, updatedCategory: string, updatedColor: string, updatedQuickNotes: string, updatedLinks?: string[], updatedFiles?: File[]) => void;
     handleUpdateCard: () => void;
 }
 
@@ -36,7 +39,7 @@ export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCa
         <div className="w-full h-full bg-black/30 fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm" onClick={closeDetails}>
             <main className="w-[600px] h-[600px] bg-white flex flex-col rounded-lg" onClick={e => e.stopPropagation()}>
 
-                <TopCategoryComponent /> {/*  span do contexto/materia/categoria */}
+                <TopCategoryComponent defColor={cardData.color || 'text-white'}/> {/*  span do contexto/materia/categoria */}
                 <header className="w-full h-[80px] flex flex-col items-center justify-center">
                     <h2 className="w-full h-[35px] text-base flex items-center justify-center font-bold text-zinc-600 text-center leading-tight">{cardData.title}</h2> {/* 38 caracteres*/}
                     <h2 className="w-full h-[20px] text-base flex items-center justify-center font-bold text-zinc-500 mb-4">{cardData.date.toLocaleDateString()}</h2>

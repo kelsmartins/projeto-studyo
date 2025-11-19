@@ -4,7 +4,9 @@ export type AssuntoType = {
     id: string;
     dataAgendada: Date;
     assunto: string;
-    contexto?: string;
-    linkFonteDigital?: string[];
-    arquivosFonteDigital?: File[]
+    categoria?: string;
+    cor?: string;
+    notasRapidas?: string;
+    linksFonteDigital?: string[];
+    arquivosFonteDigital?: File[];
 }

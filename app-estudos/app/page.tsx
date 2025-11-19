@@ -20,42 +20,58 @@ export default function Home() {
   }
 
   // hospedando imagens em servidor online (banco de dados nao guarda arquivos) - CLOUDINARY
-  async function handleSaveNewCard(title: string, date: Date, files?: File[], links?: string[] ) {
+  async function handleSaveNewCard(title: string, date: Date, category?: string, color?: string, quickNotes?: string, links?: string[], files?: File[]) {
 
-      // se enviou arquivo  (INICIO)  
-      const uploadedUrls: string[] = []; // teste
+    const cardTest: AssuntoType = {
+      id: crypto.randomUUID.toString(),
+      assunto: title,
+      dataAgendada: date,
+      categoria: category,
+      cor: color,
+      notasRapidas: quickNotes,
+      linksFonteDigital: links,
+      arquivosFonteDigital: files
+    }
 
-      if(files){ // se existir arquivo
-        for (const file of files) { // PARA CADA FILE EM FILES, FACA REQUISICAO  CLOUDINARY SO ACEITA UM ARQUIVO POR REQUISIÇÃO 
-          const formData = new FormData();
-            formData.append('file', file);
-            formData.append('upload_preset', 'primeiropreset');
-                                                                    // minha url no cloudinary dil7jwa49
-          const fileRes = await axios.post('https://api.cloudinary.com/v1_1/dil7jwa49/image/upload', // enviar somente imagem e devolver url
-          formData                                                                               // para salvar no banco de dados
-          );
-          // alert('url arquivo: '+ fileRes.data.secure_url); TEST TEST TEST TEST TEST
-          uploadedUrls.push(fileRes.data.secure_url); // teste: adiciona urls em cada posicao do vetor se tiver
-        }
-      }
-      // se EXISTIREM ARQUIVOS (FIM)
+    setAssuntos(prev => [...prev, cardTest])
 
-      // REQUISICAO PRA API DO BACKEND
+      // // se enviou arquivo  (INICIO)  
+      // const uploadedUrls: string[] = []; // teste
 
-      try {
+      // if(files){ // se existir arquivo
+      //   for (const file of files) { // PARA CADA FILE EM FILES, FACA REQUISICAO  CLOUDINARY SO ACEITA UM ARQUIVO POR REQUISIÇÃO 
+      //     const formData = new FormData();
+      //       formData.append('file', file);
+      //       formData.append('upload_preset', 'primeiropreset');
+      //                                                               // minha url no cloudinary dil7jwa49
+      //     const fileRes = await axios.post('https://api.cloudinary.com/v1_1/dil7jwa49/image/upload', // enviar somente imagem e devolver url
+      //     formData                                                                               // para salvar no banco de dados
+      //     );
+      //     // alert('url arquivo: '+ fileRes.data.secure_url); TEST TEST TEST TEST TEST
+      //     uploadedUrls.push(fileRes.data.secure_url); // teste: adiciona urls em cada posicao do vetor se tiver
+      //   }
+      // }
+      // // se EXISTIREM ARQUIVOS (FIM)
+
+      // // REQUISICAO PRA API DO BACKEND
+
+      // try {
         
-        const newId = crypto.randomUUID().toString();
+      //   const newId = crypto.randomUUID().toString();
 
-        const res = axios.post('', {
-          id: newId,
-          dataAgendada: date,
-          assunto: title,
-          linkFonteDigital: links,
-          arquivosFonteDigital: uploadedUrls
-        })
-      } catch (error) {
-        console.log(error)
-      }
+      //   const res = axios.post('', {
+      //     id: newId,
+      //     dataAgendada: date,
+      //     assunto: title,
+      //     categoria: category,
+      //     cor: color,
+      //     notasRapidas: quickNotes,
+      //     linkFonteDigital: links,
+      //     arquivosFonteDigital: uploadedUrls
+      //   })
+      // } catch (error) {
+      //   console.log(error)
+      // }
   }
   
   return (
@@ -76,8 +92,14 @@ export default function Home() {
             <CardArea title='Próximos dias' code={4} assuntos={assuntos}/>
         </div>
       </div>
-      {newCardVisible &&
-        <NovoCard handleCloseNewCard={handleCloseNewCard} handleSaveNewCard={(title, date, files, links) => handleSaveNewCard(title, date, files, links)}/>}
+        {newCardVisible &&
+        <NovoCard
+          handleCloseNewCard={handleCloseNewCard}
+          handleSaveNewCard={(title: string, date: Date, category?: string, color?: string, quickNotes?: string, links?: string[], files?: File[]) =>
+          handleSaveNewCard(title, date, category, color, quickNotes, links, files)
+          }
+        />}
+      
     </div>
   );
 }

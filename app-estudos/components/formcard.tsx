@@ -4,27 +4,36 @@ import { DatePickerComponent } from "./datepicker"
 import { TopCategoryComponent } from "./categorycomponent"
 import { DropzoneComponent } from "./dropzonecomponent"
 import { FaLink, FaFilePdf, FaBucket } from 'react-icons/fa6'
+import { AssuntoType } from "@/types/assuntotype"
 import { ColorComponent } from "./colorcomponent"
 
 type Props = {
-    handleCloseNewCard: () => void;
-    handleSaveNewCard: (updatedTitle: string, updatedDate: Date, updatedCategory: string, updatedColor: string, updatedQuickNotes: string, updatedLinks?: string[], updatedFiles?: File[]) => Promise<void> | void;
+    initialData?: AssuntoType;
+    handleCloseCard: () => void;
+    handleSaveCard: (title: string, date: Date, category?: string, color?: string, quickNotes?: string, links?: string[], files?: File[]) => void;
+    getFields?: (updatedTitle: string, updatedDate: Date, updatedCategory: string, updatedColor: string, updatedQuickNotes: string, updatedLinks?: string[], updatedFiles?: File[]) => void;
 }
 
-export function NovoCard({handleCloseNewCard, handleSaveNewCard}: Props) {
+export function NovoCard({initialData, handleCloseCard, handleSaveCard, getFields}: Props) {
 
-    const [title, setTitle] = useState('');
-    const [date, setDate] = useState(new Date());
-    const [selectedLinks, setSelectedLinks] = useState<string[]>([]);
+    const [title, setTitle] = useState(initialData?.assunto ?? '');
+    const [date, setDate] = useState(initialData?.dataAgendada ?? new Date());
 
-    const [category, setCategory] = useState('');
-    const [color, setColor] = useState('')
-    const [quickNotes, setQuickNotes] = useState('');
+    const [category, setCategory] = useState(initialData?.categoria ?? '');
+    const [color, setColor] = useState(initialData?.cor ?? 'bg-white')
+    const [quickNotes, setQuickNotes] = useState(initialData?.notasRapidas ?? '');
 
     const [inputLink, setInputLink] = useState('');
-    const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+    const [selectedFiles, setSelectedFiles] = useState<File[]>(initialData?.arquivosFonteDigital ?? []);
+    const [selectedLinks, setSelectedLinks] = useState<string[]>(initialData?.linksFonteDigital ?? []);
 
-    // inicio funcoes pickfield
+    const [isEditing, setIsEditing] = useState(false);
+
+    if(initialData){
+        setIsEditing(true)
+    }
+
+    // funcoes pick fields
     function handlePickDate(newDate: Date){ // atribuir valor de pickdate do componente filho
         setDate(newDate);
     }
@@ -42,11 +51,11 @@ export function NovoCard({handleCloseNewCard, handleSaveNewCard}: Props) {
         }
     }
 
-    function getColor(color: string){
-        setColor(color)
+    function getColor(newColor: string){
+        setColor(newColor)
     }
 
-    // fim funcoes pickfield
+    // funcoes pick fields
 
     function atLeastTwoFilledFields(){
         if(title != '' && selectedLinks && selectedFiles){
@@ -72,25 +81,30 @@ export function NovoCard({handleCloseNewCard, handleSaveNewCard}: Props) {
 
     }
 
+    // se IsEditing = atualizar dados em card, se nao = salvar como novo card 
     function handleClick(){
         if(atLeastTwoFilledFields()){
-                handleSaveNewCard(title, date, category, color, quickNotes, selectedLinks, selectedFiles ); // enviar esses parametros para o componente pai
-                handleCloseNewCard();
+            if(isEditing && getFields){
+                getFields(title, date, category, color, quickNotes, selectedLinks, selectedFiles);
+                handleCloseCard()
+            } else {
+                handleSaveCard(title, date, category, color, quickNotes, selectedLinks, selectedFiles); // enviar esses parametros para o componente pai
+                handleCloseCard();
+            }
         } else {
             isFieldsEmpty();
         }
     }
 
-
    
 
     return (
-        <div className="w-full h-full bg-black/30 fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm" onClick={handleCloseNewCard}>
+        <div className="w-full h-full bg-black/30 fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm" onClick={handleCloseCard}>
             <main className="w-[600px] h-[600px] bg-white flex flex-col rounded-lg" onClick={e => e.stopPropagation()}> {/* explicacao linha 52 */}
 
                 <header className="flex flex-col justify-between h-[50px] w-full items-center"> 
                     <TopCategoryComponent defColor={color}/>
-                     <h2 className="w-full h-[35px] text-base flex items-center justify-center font-bold text-center text-zinc-900">Novo Assunto</h2> {/* 38 caracteres*/}
+                     <h2 className="w-full h-[35px] text-base flex items-center justify-center font-bold text-center text-zinc-900">{initialData ? 'Atualizar Assunto' :  'Novo Assunto'}</h2> {/* 38 caracteres*/}
                 </header>
                 <section className="flex flex-row flex-1 justify-between items-center">
 
@@ -120,7 +134,7 @@ export function NovoCard({handleCloseNewCard, handleSaveNewCard}: Props) {
 
                         {/* COR */}
                         <h3 className="mb-1 text-sm text-zinc-500 font-bold">Cor (Opcional)</h3>
-                        <ColorComponent getColor={getColor} />
+                        <ColorComponent getColor={getColor}/>
 
 
                         {/* NOTAS RÁPIDAS */}
@@ -167,7 +181,7 @@ export function NovoCard({handleCloseNewCard, handleSaveNewCard}: Props) {
                         <ul className="w-full h-[120px] mb-3 rounded-md overflow-y-auto no-scrollbar border border-zinc-300 px-2">
                             {
                                 selectedFiles && selectedFiles.length > 0 &&
-                                selectedFiles.map((file, index) => 
+                                selectedFiles.map((file, index)  => 
                                     <li className="w-full h-10 bg-zinc-100 my-2 flex flex-row justify-start items-center gap-1 px-2 shadow-xs shadow-zinc-300 rounded-md hover:bg-zinc-200" key={index}>
                                         <FaFilePdf  className="text-zinc-500 size-4 font-bold" />
                                         <p className="text-xs text-zinc-600 h-full w-[90%] flex justify-start items-center truncate">{file.name}</p>
@@ -180,9 +194,15 @@ export function NovoCard({handleCloseNewCard, handleSaveNewCard}: Props) {
                 </section>
                 <footer className="w-full h-[60px] flex flex-col justify-between px-4">
                     <span className="w-full h-[4px] bg-zinc-400"></span>
+
+                    {isEditing ? <div className="w-full h-50 flex justify-between items-center">
+                            <Button style="text-zinc-500 border border-zinc-500 rounded-md hover:bg-zinc-500 hover:text-white transition-colors font-bold" title="voltar" onClick={handleCloseCard} />
+                            <Button style="bg-zinc-700 text-white font-bold hover:bg-zinc-600" title="concluir" onClick={handleClick}/>
+                    </div> 
+                    : 
                     <div className="w-full h-50 flex justify-end items-center">
                             <Button style="bg-zinc-900 text-white font-bold hover:bg-zinc-600" title="salvar" onClick={handleClick}/>
-                    </div>
+                    </div>}
                 </footer>
             </main>
         </div>

@@ -18,13 +18,21 @@ export function Card({assuntoData}: Props) {
     const [cardId, setCardId] = useState(assuntoData.id);
     const [updateCardTitle, setUpdatedCard] = useState(assuntoData.assunto);
     const [updateCardDate, setUpdateCarDate] = useState(assuntoData.dataAgendada);
-    const [updateCardLinks, setUpdateCardLinks] = useState<string[]>(assuntoData.linkFonteDigital ?? []);
+
+    const [UpdateCardCategory, setUpdateCardCategory] = useState(assuntoData.categoria ?? '');
+    const [updateCardColor, setUpdateCardColor] = useState(assuntoData.cor ?? 'text-white');
+    const [updateCardQuickNotes, setUpdateCardQuickNotes] = useState(assuntoData.notasRapidas ?? '');
+
+    const [updateCardLinks, setUpdateCardLinks] = useState<string[]>(assuntoData.linksFonteDigital ?? []);
     const [updateCardFiles, setUpdateCardFiles] = useState<File[]>(assuntoData.arquivosFonteDigital ?? []);
     // para caso nao venha dados, continuar com oq ja tem
 
     const cardData = {
         title: updateCardTitle,
         date: updateCardDate, 
+        category: UpdateCardCategory,
+        color: updateCardColor,
+        quickNotes: updateCardQuickNotes,
         links: updateCardLinks,
         files: updateCardFiles
     }
@@ -38,10 +46,13 @@ export function Card({assuntoData}: Props) {
     }
 
     // ataualizar states com novos valores
-    function getUpdateCardFields(newUpdatedTitle: string, newUpdatedDate: Date, newUpdatedLink?: string[], newUpdatedFiles?: File[]){
+    function getUpdateCardFields(newUpdatedTitle: string, newUpdatedDate: Date, newUpdateCategory?: string, newUpdateColor?: string, newUpdateQuickNotes?: string, newUpdatedLinks?: string[], newUpdatedFiles?: File[]){
         setUpdatedCard(newUpdatedTitle)
         setUpdateCarDate(newUpdatedDate)
-        setUpdateCardLinks(newUpdatedLink ?? updateCardLinks)
+        setUpdateCardCategory(newUpdateCategory ?? UpdateCardCategory)
+        setUpdateCardColor(newUpdateColor ?? updateCardColor)
+        setUpdateCardQuickNotes(newUpdateQuickNotes ?? updateCardQuickNotes)
+        setUpdateCardLinks(newUpdatedLinks ?? updateCardLinks)
         setUpdateCardFiles(newUpdatedFiles ?? updateCardFiles)
     }
 
@@ -59,18 +70,18 @@ export function Card({assuntoData}: Props) {
 
     return (
         <div className="h-[200px] w-[300px] rounded-lg flex-shrink-0 bg-white flex shadow-md shadow-zinc-400">
-            <LeftCategoryComponent/>
+            <LeftCategoryComponent defColor={updateCardColor} />
             <div className="w-full rounded-r-lg flex flex-col p-3">
                 <h3 className="w-full h-[20px] flex items-center text-sm font-bold text-zinc-500">{updateCardDate.toLocaleDateString()}</h3>
                 <h2 className="w-full h-[50px] flex items-center text-md font-bold text-zinc-600">{updateCardTitle}</h2>
 
                 <div className="w-full h-[90px] flex flex-row gap-1">
                     
-                    {updateCardFiles.length > 0 &&
-                        <FaFilePdf  className="text-zinc-600 size-6 my-1" />
-                    }
                     {updateCardLinks.length > 0 &&  
                         <FaLink  className="text-zinc-600 size-6 my-1" />
+                    }
+                    {updateCardFiles.length > 0 &&
+                        <FaFilePdf  className="text-zinc-600 size-6 my-1" />
                     }
                     
                 </div>
@@ -82,8 +93,8 @@ export function Card({assuntoData}: Props) {
                 {show &&
                     <CardDetalhado cardData={cardData} 
                     closeDetails={handleCloseDetails} 
-                    getFields={(updateCardTitle, updateCardDate, updateCardLinks, updateCardFiles)=>getUpdateCardFields(updateCardTitle, updateCardDate, updateCardLinks, updateCardFiles)} 
-                     handleUpdateCard={ handleUpdateCard}
+                    getFields={(updateCardTitle, updateCardDate, UpdateCardCategory, updateCardColor, updateCardQuickNotes, updateCardLinks, updateCardFiles)=>getUpdateCardFields(updateCardTitle, updateCardDate, UpdateCardCategory, updateCardColor, updateCardQuickNotes, updateCardLinks, updateCardFiles)} 
+                    handleUpdateCard={ handleUpdateCard}
                     // vai passar uma chamada de funcao com getUpdateCardFields para pegar os campos de updatecard dentro de carddetalhado
                     />
                 }
