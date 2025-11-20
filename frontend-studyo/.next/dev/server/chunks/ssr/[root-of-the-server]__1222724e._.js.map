@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 18, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/kelso/OneDrive/Documentos/ProjetosReact/projeto-estudos/app-estudos/app/page.tsx"],"sourcesContent":["export default function Home() {\n  return (\n    <div className=\"w-screen h-screen flex\">\n      <div className=\"h-screen w-[400px] bg-zinc-800\">\n\n      </div>\n      <div className=\"h-screen w-[100%] bg-zinc-900\">\n        <h2 className=\"h-[10%] w-[100%] bg-red-200 flex items-center text-3xl\">Estudos</h2>\n         <div className=\"w-[100%] h-[90%] bg-red-700 overflow-x-scroll\">\n\n        </div>\n      </div>\n    </div>\n  );\n}\n"],"names":[],"mappings":";;;;;;AAAe,SAAS;IACtB,qBACE,8OAAC;QAAI,WAAU;;0BACb,8OAAC;gBAAI,WAAU;;;;;;0BAGf,8OAAC;gBAAI,WAAU;;kCACb,8OAAC;wBAAG,WAAU;kCAAyD;;;;;;kCACtE,8OAAC;wBAAI,WAAU;;;;;;;;;;;;;;;;;;AAMxB","debugId":null}}]
+}
