@@ -4,7 +4,6 @@ import { DatePickerComponent } from "./datepicker"
 import { TopCategoryComponent } from "./categorycomponent"
 import { DropzoneComponent } from "./dropzonecomponent"
 import { FaLink, FaFilePdf, FaBucket } from 'react-icons/fa6'
-import { AssuntoType } from "@/types/assuntotype"
 import { ColorComponent } from "./colorcomponent"
 
 type Props = {
