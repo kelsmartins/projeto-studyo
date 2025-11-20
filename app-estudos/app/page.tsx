@@ -76,19 +76,31 @@ export default function Home() {
   }
   
   return (
-    <div className="w-screen h-screen flex overflow-hidden">
-      <div className="h-screen w-[300px] bg-zinc-900">
-          <header className="w-full h-[90px] flex justify-center items-center gap-1">
-              <Image src="/studyorob.png" alt="studyo logo" width={70} height={70}/>
-              <Image src="/studyo_letra.png" alt="studyo logo" width={120} height={120}/>
+    <div className="w-screen h-screen flex flex-row">
+      
+      <div className="h-screen w-[300px] bg-zinc-900 flex flex-col">
+          <header className="w-full h-[73px] flex justify-start items-center  shadow-xs shadow-zinc-600 px-4 mb-4">
+              <Image src="/studyorob.png" alt="studyo logo" width={50} height={50}/>
+              <Image src="/studyo_letra.png" alt="studyo logo" width={110} height={110}/>
           </header>
-      </div>                                               {/* O min-w-0 permite que um item (flex-1) encolha para caber no layout, mesmo que o conteúdo dentro dele seja muito mais largo. */}
+          <section className="w-full h-[200px] px-4 flex flex-col text-zinc-400 font-bold">
+              <h2 className="h-[40px] uppercase text-base flex justify-start items-center text-zinc-300">Visualização</h2>
+              <ul className="h-full w-full flex flex-col px-4 text-sm">
+                  <li className="w-full h-[35px] flex justify-start items-center hover:text-zinc-300 hover:text-base"><a href='#'>Simples</a></li>
+                  <li className="w-full h-[35px] flex justify-start items-center hover:text-zinc-300 hover:text-base"><a href='#'>Datas</a></li>
+                  <li className="w-full h-[35px] flex justify-start items-center hover:text-zinc-300 hover:text-base"><a href='#'>Calendário</a></li>
+                  <li className="w-full h-[35px] flex justify-start items-center hover:text-zinc-300 hover:text-base"><a href='#'>Kanban</a></li>
+              </ul>
+          </section>
+
+      </div> 
+                                                    {/* O min-w-0 permite que um item (flex-1) encolha para caber no layout, mesmo que o conteúdo dentro dele seja muito mais largo. */}
       <div className="h-screen w-[100%] flex-1 bg-gray-200 min-w-0">  {/* transformar num componente futuramente*/}
-        <div className="h-[10%] w-[100%] flex flex-row items-center px-4 justify-between">
+        <header className="h-[10%] w-[100%] flex flex-row items-center px-4 justify-between shadow-xs shadow-zinc-400">
           <h2 className="text-3xl font-bold text-zinc-800">Estudos</h2>
           <button className='w-[110px] h-[40px] bg-zinc-800 rounded-md font-bold p-1 text-sm text-white/80 hover:bg-zinc-700 transition-colors cursor-pointer' 
           onClick={handleOpenNewCard}>novo assunto</button>
-        </div>                      
+        </header>                      
          <div className=" w-full h-[90%] overflow-y-auto no-scrollbar">
             <CardArea title='Hoje'code={1}assuntos={assuntos}/>
             <CardArea title='Amanhã' code={2} assuntos={assuntos}/>
