@@ -1,8 +1,9 @@
-import { Button } from "./button";
+import { Button } from "../button";
 import { useState } from "react";
-import { TopCategoryComponent } from "./categorycomponent";
+import { TopCategoryComponent } from "../pickers/categorycomponent";
 import { FaLink , FaFilePdf, FaBucket } from 'react-icons/fa6'
 import { FormCard } from "./formcard";
+import { NothingToShow } from "../nothingtoshow";
 
 type Props = {
     cardData: {
@@ -40,26 +41,22 @@ export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCa
             <main className="w-[600px] h-[600px] bg-white flex flex-col rounded-lg" onClick={e => e.stopPropagation()}>
 
                 <TopCategoryComponent defColor={cardData.color || 'text-white'}/> {/*  span do contexto/materia/categoria */}
-                <header className="w-full h-[80px] flex flex-col items-center justify-center">
-                    <h2 className="w-full h-[35px] text-base flex items-center justify-center font-bold text-zinc-600 text-center leading-tight">{cardData.title}</h2> {/* 38 caracteres*/}
-                    <h2 className="w-full h-[20px] text-base flex items-center justify-center font-bold text-zinc-500 mb-4">{cardData.date.toLocaleDateString()}</h2>
+                <header className="w-full h-[40px] flex flex-row items-center justify-between px-4 mb-4">
+                        <h2 className="w-full h-full flex items-end font-bold text-zinc-400 text-sm border-b border-b-zinc-400">DETALHES</h2>
+                        <h2 className="w-full h-full flex items-end font-bold text-zinc-400 text-sm  border-b border-b-zinc-400">FONTES DIGITAIS</h2>
                 </header>
+
                 <section className="flex flex-row flex-1 justify-between items-center">
                 
                     <div className="w-[300px] h-full flex flex-col px-4">
-
+                        <h2 className="w-full min-h-[30px] max-h-[70px] text-base flex items-end justify-start font-bold text-zinc-600 leading-tight text-xl break-words mb-1">{cardData.title}</h2> {/* 38 caracteres*/}
+                        <h2 className="w-full h-[30px] text-xl flex items-center justify-start font-bold text-zinc-500 mb-4">{cardData.date.toLocaleDateString()}</h2>
                     </div>
                 
                     <div className="w-[300px] h-full flex flex-col px-4">
-                        <h3 className="text-sm uppercase text-zinc-600 font-bold h-3 flex justify-start items-center">FONTES DIGITAIS</h3> 
-                        
-                        {/* DIV TITULO LINKS */}
-                        {
-                            cardData.links && cardData.links.length > 0 &&
-                            <h4 className="text-sm text-zinc-500 font-bold h-3 flex justify-start items-center mt-3">links</h4>
-                        }
                         {/* DIV LINKS */}
-                        <ul className="min-h-0 max-h-[185px] w-full mt-1 overflow-y-auto no-scrollbar">
+                        <h4 className="text-sm text-zinc-500 font-bold h-3 flex justify-start items-center">links</h4>
+                        <ul className="h-[185px] w-full mt-1 overflow-y-auto no-scrollbar">
                             {
                             cardData.links && cardData.links.length > 0 &&
                             cardData.links.map((link, index) => 
@@ -73,15 +70,15 @@ export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCa
                                     </a>
                                 </li>)
                             }
+                            {
+                                !cardData.links?.length && 
+                                <NothingToShow height="180"/>
+                            }
                         </ul>
 
-                        {/* DIV TITULO FILES*/}
-                        {
-                            cardData.files && cardData.files.length > 0 &&
-                            <h4 className="text-sm text-zinc-500 font-bold h-3 flex justify-start items-center mt-3">arquivos</h4>
-                        }
-                        {/* DIV FILES */}
-                        <ul className="min-h-0 max-h-[185px] w-full mt-1 overflow-y-auto no-scrollbar">
+                        {/* DIV FILES*/}
+                        <h4 className="text-sm text-zinc-500 font-bold h-3 flex justify-start items-center mt-3">arquivos</h4>
+                        <ul className="h-[185px] w-full mt-1 overflow-y-auto no-scrollbar">
                             {
                             cardData.files && cardData.files.length > 0 &&
                             cardData.files.map((file, index) => 
@@ -91,8 +88,14 @@ export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCa
                                     <FaBucket className="text-zinc-500 size-4 font-bold hover:text-red-400"/>
                                 </li>)
                             }
+                            {
+                                !cardData.files?.length && 
+                                <NothingToShow height="180"/>
+                            }
                         </ul>
-                    </div> 
+
+                    </div>
+
                  </section>
                 <footer className="w-full h-[60px] flex flex-col justify-between px-4">
                     <span className="w-full h-[4px] bg-zinc-400"></span>

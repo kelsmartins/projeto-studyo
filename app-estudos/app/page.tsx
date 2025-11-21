@@ -1,10 +1,10 @@
 'use client'
-import {CardArea} from '@/components/cardarea';
+import {CardArea} from '@/components/bigcomponents/cardarea';
 import { AssuntoType } from '@/types/assuntotype';
 import { useState } from 'react';
 import { Assuntos} from '@/data/assuntos';
 import axios from 'axios';
-import { FormCard } from '@/components/formcard';
+import { FormCard } from '@/components/bigcomponents/formcard';
 import Image from 'next/image';
 
 export default function Home() {

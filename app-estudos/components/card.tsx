@@ -1,8 +1,8 @@
 import { AssuntoType } from "@/types/assuntotype"
 import { Button } from "./button"
-import { CardDetalhado } from "./carddetalhado";
+import { CardDetalhado } from "./bigcomponents/carddetalhado";
 import { useState } from "react";
-import { LeftCategoryComponent } from "./categorycomponent";
+import { LeftCategoryComponent } from "./pickers/categorycomponent";
 import axios from "axios";
 import { FaLink , FaFilePdf  } from 'react-icons/fa6'
 
@@ -73,9 +73,9 @@ export function Card({assuntoData}: Props) {
             <LeftCategoryComponent defColor={updateCardColor} />
             <div className="w-full rounded-r-lg flex flex-col p-3">
                 <h3 className="w-full h-[20px] flex items-center text-sm font-bold text-zinc-500">{updateCardDate.toLocaleDateString()}</h3>
-                <h2 className="w-full h-[50px] flex items-center text-md font-bold text-zinc-600">{updateCardTitle}</h2>
+                <h2 className="w-full min-h-[40px] max-h-[300px] flex items-center text-md font-bold text-zinc-600 mb-1">{updateCardTitle}</h2>
 
-                <div className="w-full h-[90px] flex flex-row gap-1">
+                <div className="w-full h-[60px] flex flex-row gap-1">
                     
                     {updateCardLinks.length > 0 &&  
                         <FaLink  className="text-zinc-600 size-6 my-1" />
