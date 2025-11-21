@@ -49,8 +49,8 @@ export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCa
                 <section className="flex flex-row flex-1 justify-between items-center">
                 
                     <div className="w-[300px] h-full flex flex-col px-4">
-                        <h2 className="w-full min-h-[30px] max-h-[70px] text-base flex items-end justify-start font-bold text-zinc-600 leading-tight text-xl break-words mb-1">{cardData.title}</h2> {/* 38 caracteres*/}
-                        <h2 className="w-full h-[30px] text-xl flex items-center justify-start font-bold text-zinc-500 mb-4">{cardData.date.toLocaleDateString()}</h2>
+                        <h2 className="w-full min-h-[30px] max-h-[70px] flex items-end justify-start font-bold text-zinc-600 leading-tight text-xl break-words mb-1">{cardData.title}</h2> {/* 38 caracteres*/}
+                        <h2 className="w-full h-[30px] text-lg flex items-center justify-start font-bold text-zinc-500 mb-4">{cardData.date.toLocaleDateString()}</h2>
                     </div>
                 
                     <div className="w-[300px] h-full flex flex-col px-4">

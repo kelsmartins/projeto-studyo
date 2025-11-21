@@ -187,7 +187,7 @@ export function FormCard({initialData, handleCloseCard, handleSaveCard, getField
                         }
                         
                         {/* ARQUIVO */}
-                        <h3 className="mb-1 text-sm text-zinc-600 font-bold">Arquivo</h3>
+                        <h3 className="mb-1 text-sm text-zinc-600 font-bold">Arquivos</h3>
                         <DropzoneComponent getSelectedFiles={getSelectedFiles}/>
                         {
                             selectedFiles && selectedFiles.length > 0 &&
