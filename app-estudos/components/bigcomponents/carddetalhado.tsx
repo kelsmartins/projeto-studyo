@@ -48,17 +48,22 @@ export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCa
 
                 <section className="flex flex-row flex-1 justify-between items-center">
                 
+                {/* DIV ESQUERDA */}
                     <div className="w-[300px] h-full flex flex-col px-4">
+
                         <h2 className="w-full min-h-[30px] max-h-[90px] flex items-end justify-start font-bold text-zinc-600 leading-tight text-2xl break-words mb-1">{cardData.title}</h2> {/* 38 caracteres*/}
-                        <h2 className="w-full h-[30px] text-lg flex items-center justify-start font-bold text-zinc-500 mb-4">{cardData.date.toLocaleDateString()}</h2>
+                        <h2 className="w-full h-[30px] text-lg flex items-center justify-start font-bold text-zinc-500 mb-3">{cardData.date.toLocaleDateString()}</h2>
+                        <span className="w-full h-[300px] bg-yellow-500"></span>
+                        
                     </div>
                 
+                {/* DIV DIREITA */}
                     <div className="w-[300px] h-full flex flex-col px-4">
                         {/* DIV LINKS */}
                         <h4 className="text-sm text-zinc-500 font-bold h-3 flex justify-start items-center">links</h4>
 
                         { cardData.links && cardData.links.length > 0 &&
-                        <ul className="h-[210px] w-full mt-1 overflow-y-auto no-scrollbar">
+                        <ul className="h-[200px] w-full mt-1 overflow-y-auto no-scrollbar">
                             {
                             cardData.links && cardData.links.length > 0 &&
                             cardData.links.map((link, index) => 
@@ -76,14 +81,14 @@ export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCa
                         }
                         {
                             cardData.links?.length === 0 && 
-                            <NothingToShow height="210px"/>
+                            <NothingToShow height="200px" label="nenhum link adicionado"/>
                         }
 
                         {/* DIV FILES*/}
                         <h4 className="text-sm text-zinc-500 font-bold h-3 flex justify-start items-center mt-3">arquivos</h4>
                         
                         { cardData.files && cardData.files.length > 0 &&
-                        <ul className="h-[210px] w-full mt-1 overflow-y-auto no-scrollbar">
+                        <ul className="h-[200px] w-full mt-1 overflow-y-auto no-scrollbar">
                             {
                             cardData.files && cardData.files.length > 0 &&
                             cardData.files.map((file, index) => 
@@ -97,7 +102,7 @@ export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCa
                         }
                         {
                             cardData.files?.length === 0 && 
-                            <NothingToShow height="210px"/>
+                            <NothingToShow height="200px" label="nenhum arquivo adicionado"/>
                         }
 
                     </div>

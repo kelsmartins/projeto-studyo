@@ -101,12 +101,12 @@ export function FormCard({initialData, handleCloseCard, handleSaveCard, getField
     }
 
     return (
-        <div className={`w-full h-full fixed inset-0 flex items-center justify-center z-50 ${isEditing ? '': 'bg-black/30 backdrop-blur-sm'}`} onClick={handleCloseCard}>
+        <div className={`w-full h-full fixed inset-0 flex items-center justify-center z-50 ${isEditing ? '': 'bg-black/30 backdrop-blur-sm'}`}>
             <main className="w-[600px] h-[600px] bg-white flex flex-col rounded-lg" onClick={e => e.stopPropagation()}> {/* explicacao linha 52 */}
 
                 <header className="flex flex-col justify-between h-[50px] w-full items-center"> 
                     <TopCategoryComponent defColor={color}/>
-                     <h2 className="w-full h-[35px] text-base flex items-center justify-center font-bold text-center text-zinc-900">{initialData ? 'Atualizar Assunto' :  'Novo Assunto'}</h2> {/* 38 caracteres*/}
+                     <h2 className="w-full h-[30px] text-base flex items-center justify-center font-bold text-center text-zinc-900">{initialData ? 'Atualizar Assunto' :  'Novo Assunto'}</h2> {/* 38 caracteres*/}
                 </header>
                 <section className="flex flex-row flex-1 justify-between items-center">
 
@@ -115,7 +115,7 @@ export function FormCard({initialData, handleCloseCard, handleSaveCard, getField
                         {/* TITULO */}
                         <h3 className="mb-1 text-sm text-zinc-600 font-bold">Título</h3>        
                         <input type="text"
-                            className="h-[40px] w-full border-1 border-zinc-600 rounded-md p-2 text-white text-sm mb-3 placeholder-italic text-zinc-600"
+                            className="h-[40px] w-full border-1 border-zinc-600 rounded-md p-2 text-white text-sm mb-3 placeholder:italic text-zinc-600"
                             placeholder="ex: Lógica de Programação"
                             value={title}
                             onChange={text => setTitle(text.target.value)}
@@ -129,7 +129,7 @@ export function FormCard({initialData, handleCloseCard, handleSaveCard, getField
                         {/* CATEGORIA */}
                         <h3 className="mb-1 text-sm text-zinc-500 font-bold">Categoria (Opcional)</h3>           
                         <input type="text"
-                            className="h-[40px] w-full border border-zinc-600 rounded-md p-2 text-zinc-600 text-sm mb-3"
+                            className="h-[40px] w-full border border-zinc-600 rounded-md p-2 text-zinc-600 text-sm mb-3 placeholder:italic"
                             placeholder="ex: Curso Informática Básica"
                             value={category}
                             onChange={e => setCategory(e.target.value)}
@@ -142,8 +142,8 @@ export function FormCard({initialData, handleCloseCard, handleSaveCard, getField
 
                         {/* NOTAS RÁPIDAS */}
                         <h3 className="mb-1 text-sm text-zinc-500 font-bold">Anotações rápidas (Opcional)</h3>           
-                        <input type="text"
-                            className="h-[80px] w-full border border-zinc-600 rounded-md p-2 text-zinc-600 text-sm mb-3"
+                        <textarea
+                            className="h-[80px] w-full border border-zinc-600 rounded-md p-2 text-zinc-600 text-sm mb-3 resize-none placeholder:italic"
                             placeholder="ex: Curso Informática Básica"
                             value={quickNotes}
                             onChange={e => setQuickNotes(e.target.value)}
@@ -183,7 +183,7 @@ export function FormCard({initialData, handleCloseCard, handleSaveCard, getField
                         }
                         {
                             selectedLinks.length == 0 &&
-                            <NothingToShow height="120px"/>
+                            <NothingToShow height="120px" label="nenhum link adicionado"/>
                         }
                         
                         {/* ARQUIVO */}
@@ -204,7 +204,7 @@ export function FormCard({initialData, handleCloseCard, handleSaveCard, getField
                         } 
                         {
                             selectedFiles.length == 0 && 
-                             <NothingToShow height="120px"/>
+                             <NothingToShow height="120px" label="nenhum arquivo adicionado"/>
                         }
 
                     </div>
@@ -212,14 +212,10 @@ export function FormCard({initialData, handleCloseCard, handleSaveCard, getField
                 <footer className="w-full h-[60px] flex flex-col justify-between px-4">
                     <span className="w-full h-[4px] bg-zinc-400"></span>
 
-                    {isEditing ? <div className="w-full h-50 flex justify-between items-center">
+                    <div className="w-full h-50 flex justify-between items-center">
                             <Button style="text-zinc-500 border border-zinc-500 rounded-md hover:bg-zinc-500 hover:text-white transition-colors font-bold" title="voltar" onClick={handleCloseCard} />
                             <Button style="bg-zinc-700 text-white font-bold hover:bg-zinc-600" title="concluir" onClick={handleClick}/>
                     </div> 
-                    : 
-                    <div className="w-full h-50 flex justify-end items-center">
-                            <Button style="bg-zinc-700 text-white font-bold hover:bg-zinc-600" title="salvar" onClick={handleClick}/>
-                    </div>}
                 </footer>
             </main>
         </div>
