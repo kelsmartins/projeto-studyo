@@ -6,7 +6,7 @@ export const Assuntos: AssuntoType[] = [
   {
     id: '1',
     // Mês 10 = Novembro. HOJE (15/11/2025)
-    dataAgendada: new Date(2025, 10, 22),
+    dataAgendada: new Date(2025, 10, 28),
     assunto: 'Teste para HOJE',
     categoria: 'Testes',
     cor: 'bg-red-400',
@@ -15,7 +15,7 @@ export const Assuntos: AssuntoType[] = [
   {
     id: '2',
     // Mês 10 = Novembro. AMANHÃ (16/11/2025)
-    dataAgendada: new Date(2025, 10, 20),
+    dataAgendada: new Date(2025, 10, 29),
     assunto: 'Teste para AMANHÃ',
     categoria: 'Testes',
     linksFonteDigital: ['https://youtu.be/logaritmos-revisao', 'https://youtu.be/logaritmos-revisao']
@@ -23,7 +23,7 @@ export const Assuntos: AssuntoType[] = [
   {
     id: '3',
     // Mês 10 = Novembro. DEPOIS DE AMANHÃ (17/11/2025)
-    dataAgendada: new Date(2025, 10, 21),
+    dataAgendada: new Date(2025, 10, 29),
     assunto: 'Teste para DEPOIS DE AMANHÃ',
     categoria: 'Testes',
     linksFonteDigital: ['https://youtu.be/logaritmos-revisao', 'https://youtu.be/logaritmos-revisao']
@@ -31,7 +31,7 @@ export const Assuntos: AssuntoType[] = [
   {
     id: '4',
     // Mês 10 = Novembro. PRÓXIMOS DIAS (20/11/2025)
-    dataAgendada: new Date(2025, 10, 23),
+    dataAgendada: new Date(2025, 10, 30),
     assunto: 'Teste para PRÓXIMOS DIAS',
     categoria: 'Testes',
     linksFonteDigital: ['https://youtu.be/logaritmos-revisao', 'https://youtu.be/logaritmos-revisao']
@@ -39,7 +39,7 @@ export const Assuntos: AssuntoType[] = [
   {
     id: '5',
     // Mês 11 = Dezembro. PRÓXIMOS DIAS (05/12/2025)
-    dataAgendada: new Date(2025, 11, 5),
+    dataAgendada: new Date(2025, 11, 1),
     assunto: 'Revisão de Logaritmos (Dezembro)',
     categoria: 'Matemática',
     linksFonteDigital: ['https://youtu.be/logaritmos-revisao', 'https://youtu.be/logaritmos-revisao']
@@ -51,5 +51,21 @@ export const Assuntos: AssuntoType[] = [
     assunto: 'Colocação Pronominal (Passado)',
     categoria: 'Português',
     linksFonteDigital: ['https://youtu.be/logaritmos-revisao', 'https://youtu.be/logaritmos-revisao']
+  },
+  {
+    id: '7',
+    // Mês 10 = Novembro. PASSADO (07/11/2025) - Não deve aparecer
+    dataAgendada: new Date(2025, 10, 30),
+    assunto: 'Tabela Verdade',
+    categoria: 'Computação',
+    linksFonteDigital: ['https://youtu.be/tabela-verdade', 'https://youtu.be/truth-table']
+  },
+  {
+    id: '8',
+    // Mês 10 = Novembro. PRÓXIMOS DIAS (20/11/2025)
+    dataAgendada: new Date(2025, 11, 1),
+    assunto: 'Teste para SEI LÁ',
+    categoria: 'Testes',
+    linksFonteDigital: ['https://youtu.be/mundo-python', 'https://youtu.be/logaritmos-revisao']
   },
 ];
