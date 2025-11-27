@@ -40,7 +40,7 @@ export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCa
         <div className="w-full h-full bg-black/30 fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm" onClick={closeDetails}>
             <main className="w-[600px] h-[600px] bg-white flex flex-col rounded-lg" onClick={e => e.stopPropagation()}>
 
-                <TopCategoryComponent defColor={cardData.color || 'text-white'}/> {/*  span do contexto/materia/categoria */}
+                <TopCategoryComponent defColor={cardData.color || 'bg-white'}/> {/*  span do contexto/materia/categoria */}
                 <header className="w-full h-[40px] flex flex-row items-center justify-between px-4 mb-4">
                         <h2 className="w-full h-full flex items-end font-bold text-zinc-400 text-sm border-b border-b-zinc-400">DETALHES</h2>
                         <h2 className="w-full h-full flex items-end font-bold text-zinc-400 text-sm  border-b border-b-zinc-400">FONTES DIGITAIS</h2>
@@ -49,50 +49,56 @@ export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCa
                 <section className="flex flex-row flex-1 justify-between items-center">
                 
                     <div className="w-[300px] h-full flex flex-col px-4">
-                        <h2 className="w-full min-h-[30px] max-h-[70px] flex items-end justify-start font-bold text-zinc-600 leading-tight text-xl break-words mb-1">{cardData.title}</h2> {/* 38 caracteres*/}
+                        <h2 className="w-full min-h-[30px] max-h-[90px] flex items-end justify-start font-bold text-zinc-600 leading-tight text-2xl break-words mb-1">{cardData.title}</h2> {/* 38 caracteres*/}
                         <h2 className="w-full h-[30px] text-lg flex items-center justify-start font-bold text-zinc-500 mb-4">{cardData.date.toLocaleDateString()}</h2>
                     </div>
                 
                     <div className="w-[300px] h-full flex flex-col px-4">
                         {/* DIV LINKS */}
                         <h4 className="text-sm text-zinc-500 font-bold h-3 flex justify-start items-center">links</h4>
-                        <ul className="h-[185px] w-full mt-1 overflow-y-auto no-scrollbar">
+
+                        { cardData.links && cardData.links.length > 0 &&
+                        <ul className="h-[210px] w-full mt-1 overflow-y-auto no-scrollbar">
                             {
                             cardData.links && cardData.links.length > 0 &&
                             cardData.links.map((link, index) => 
                                 <li  key={index}> 
                                     <a href={link} 
                                         target="_blank" // para abrir em outra guia
-                                        className="w-full h-10 bg-zinc-100 my-2 flex flex-row justify-start items-center gap-1 px-2 shadow-xs shadow-zinc-300 rounded-md hover:bg-zinc-200">
+                                        className="w-full h-10 bg-zinc-50 my-2 flex flex-row justify-start items-center gap-1 px-2 shadow-xs shadow-zinc-300 rounded-md hover:bg-zinc-100">
                                             <FaLink  className="text-zinc-500 size-4 font-bold" />
                                             <p className="text-xs text-zinc-600 truncate h-full w-[90%] flex justify-start items-center">{link}</p>
                                             <FaBucket className="text-zinc-500 size-4 font-bold hover:text-red-400"/>
                                     </a>
                                 </li>)
                             }
-                            {
-                                !cardData.links?.length && 
-                                <NothingToShow height="180"/>
-                            }
                         </ul>
+                        }
+                        {
+                            cardData.links?.length === 0 && 
+                            <NothingToShow height="210px"/>
+                        }
 
                         {/* DIV FILES*/}
                         <h4 className="text-sm text-zinc-500 font-bold h-3 flex justify-start items-center mt-3">arquivos</h4>
-                        <ul className="h-[185px] w-full mt-1 overflow-y-auto no-scrollbar">
+                        
+                        { cardData.files && cardData.files.length > 0 &&
+                        <ul className="h-[210px] w-full mt-1 overflow-y-auto no-scrollbar">
                             {
                             cardData.files && cardData.files.length > 0 &&
                             cardData.files.map((file, index) => 
-                                <li className="w-full h-10 bg-zinc-100 my-2 flex flex-row justify-start items-center gap-1 px-2 shadow-xs shadow-zinc-300 rounded-md hover:bg-zinc-200" key={index}>
+                                <li className="w-full h-10 bg-zinc-50 my-2 flex flex-row justify-start items-center gap-1 px-2 shadow-xs shadow-zinc-300 rounded-md hover:bg-zinc-200" key={index}>
                                     <FaFilePdf  className="text-zinc-500 size-4 font-bold" />
                                     <p className="text-xs text-zinc-600 truncate h-full w-[90%] flex justify-start items-center">{file.name}</p>
                                     <FaBucket className="text-zinc-500 size-4 font-bold hover:text-red-400"/>
                                 </li>)
                             }
-                            {
-                                !cardData.files?.length && 
-                                <NothingToShow height="180"/>
-                            }
                         </ul>
+                        }
+                        {
+                            cardData.files?.length === 0 && 
+                            <NothingToShow height="210px"/>
+                        }
 
                     </div>
 

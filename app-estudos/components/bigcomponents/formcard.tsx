@@ -173,9 +173,9 @@ export function FormCard({initialData, handleCloseCard, handleSaveCard, getField
                                     <li  key={index}> 
                                         <a href={link} 
                                             target="_blank" // para abrir em outra guia
-                                            className="w-full h-10 bg-zinc-100 my-2 flex flex-row justify-start items-center gap-1 px-2 shadow-xs shadow-zinc-300 rounded-md hover:bg-zinc-200">
+                                            className="w-full h-10 bg-zinc-50 my-2 flex flex-row justify-start items-center gap-1 px-2 shadow-xs shadow-zinc-300 rounded-md hover:bg-zinc-100">
                                                 <FaLink  className="text-zinc-500 size-4 font-bold" />
-                                                <p className="text-xs text-zinc-600 truncate h-full w-[90%] flex justify-start items-center">{link}</p>
+                                                <p className="text-xs text-zinc-600 truncate h-full w-[90%] flex justify-start items-center hover:text-zinc-800">{link}</p>
                                                 <FaBucket className="text-zinc-500 size-4 font-bold hover:text-red-400"/>
                                         </a>
                                     </li>)}
@@ -183,7 +183,7 @@ export function FormCard({initialData, handleCloseCard, handleSaveCard, getField
                         }
                         {
                             selectedLinks.length == 0 &&
-                            <NothingToShow height="120"/>
+                            <NothingToShow height="120px"/>
                         }
                         
                         {/* ARQUIVO */}
@@ -194,7 +194,7 @@ export function FormCard({initialData, handleCloseCard, handleSaveCard, getField
                             <ul className="w-full h-[120px] mb-3 rounded-md overflow-y-auto no-scrollbar border border-zinc-300 px-2">
                                 {
                                     selectedFiles.map((file, index)  => 
-                                        <li className="w-full h-10 bg-zinc-100 my-2 flex flex-row justify-start items-center gap-1 px-2 shadow-xs shadow-zinc-300 rounded-md hover:bg-zinc-200" key={index}>
+                                        <li className="w-full h-10 bg-zinc-50 my-2 flex flex-row justify-start items-center gap-1 px-2 shadow-xs shadow-zinc-300 rounded-md hover:bg-zinc-200" key={index}>
                                             <FaFilePdf  className="text-zinc-500 size-4 font-bold" />
                                             <p className="text-xs text-zinc-600 h-full w-[90%] flex justify-start items-center truncate">{file.name}</p>
                                             <FaBucket className="text-zinc-500 size-4 font-bold hover:text-red-400"/>
@@ -204,7 +204,7 @@ export function FormCard({initialData, handleCloseCard, handleSaveCard, getField
                         } 
                         {
                             selectedFiles.length == 0 && 
-                             <NothingToShow height="120"/>
+                             <NothingToShow height="120px"/>
                         }
 
                     </div>
