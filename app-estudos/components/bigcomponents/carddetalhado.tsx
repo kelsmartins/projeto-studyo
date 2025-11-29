@@ -23,8 +23,6 @@ type Props = {
 export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCard}: Props) {
 
     const [showUpdateCard, setShowUpdateCard] = useState(false);
-    const [showQuickNotes, setShowQuickNotes] = useState(false);
-    const [newQuickNotes, setNewQuickNotes] = useState('');
 
     function handleShowUpdateCard(){
         setShowUpdateCard(true);
@@ -54,36 +52,26 @@ export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCa
                     <div className="w-[300px] h-full flex flex-col px-4">
 
                          <header className="bg-green-400 p-1 min-h-[50px] max-h-[130px] flex  flex-col justify-between">
-                            <h2 className="w-full flex items-end justify-start font-bold text-zinc-600 leading-tight text-2xl break-words mb-1 bg-purple-300">{cardData.title}</h2> {/* 38 caracteres*/}
+                            <h2 className="w-full flex items-end justify-start font-bold text-zinc-600 leading-tight text-xl mb-1 bg-purple-300">{cardData.title}</h2> {/* 38 caracteres*/}
                             <h2 className="w-full text-lg flex items-center justify-start font-bold text-zinc-500 bg-red-300">{cardData.date.toLocaleDateString()}</h2>    
                         </header>   
                         
                         <span className="w-full h-[200px] bg-yellow-500 mb-3"></span>
-{/* 
+
                         {
-                            !cardData.quickNotes &&
-                            <button className="w-full h-[30px] bg-zinc-100 hover:bg-zinc-200 rounded-xl shadow-xs shadow-zinc-300 mb-3 text-zinc-400 font-bold text-xs uppercase" onClick={()=> setShowQuickNotes(true)}>Adicionar notas rápidas</button>
-                        }
-                        {
-                            newQuickNotes &&
+                            cardData.quickNotes && cardData.quickNotes != '' &&
                             <p className="h-[80px] w-full bg-zinc-100 rounded-md p-2 text-zinc-400 text-sm mb-3 italic overflow-y-auto no-scrollbar">
-                                {cardData.quickNotes || newQuickNotes}
+                                {cardData.quickNotes}
                             </p>
                         }
                         {
-                            showQuickNotes &&
-                            <textarea
-                            className="h-[80px] w-full border border-zinc-600 rounded-md p-2 text-zinc-600 text-sm mb-3 resize-none placeholder:italic"
-                            placeholder="Pressione 'Enter' para salvar"
-                            value={newQuickNotes}
-                            onChange={e => setNewQuickNotes(e.target.value)}
-                            onKeyDown={e => {
-                                if(e.key == 'Enter'){
-                                    setShowQuickNotes(false);
-                                }
-                            }}
-                        />
-                        } */}
+                            !cardData.quickNotes && cardData.quickNotes == '' &&
+                            <button className="w-full h-[30px] bg-zinc-100 hover:bg-zinc-200 rounded-xl shadow-xs shadow-zinc-300 mb-3 text-zinc-400 font-bold text-xs uppercase" onClick={()=> setShowUpdateCard(true)}>Adicionar notas rápidas</button>
+                        }
+                        {
+                            cardData.quickNotes && cardData.quickNotes != '' &&
+                            <button className="w-full h-[30px] bg-zinc-100 hover:bg-zinc-200 rounded-xl shadow-xs shadow-zinc-300 mb-3 text-zinc-400 font-bold text-xs uppercase" onClick={()=> setShowUpdateCard(true)}>Editar notas rápidas</button>
+                        }
                         
                     </div>
                 

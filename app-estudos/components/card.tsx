@@ -73,7 +73,7 @@ export function Card({assuntoData}: Props) {
             <LeftCategoryComponent defColor={updateCardColor} />
             <div className="w-full rounded-r-lg flex flex-col p-3">
                 <h3 className="w-full h-[20px] flex items-center text-sm font-bold text-zinc-500">{updateCardDate.toLocaleDateString()}</h3>
-                <h2 className="w-full min-h-[40px] max-h-[300px] flex items-center text-md font-bold text-zinc-600 mb-1">{updateCardTitle}</h2>
+                <h2 className="w-full flex items-start text-md font-bold text-zinc-600 mb-1">{updateCardTitle}</h2>
 
                 <div className="w-full h-[60px] flex flex-row gap-1">
                     
