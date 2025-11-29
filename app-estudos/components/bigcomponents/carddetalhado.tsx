@@ -51,12 +51,12 @@ export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCa
                 {/* DIV ESQUERDA */}
                     <div className="w-[300px] h-full flex flex-col px-4">
 
-                         <header className="bg-green-400 p-1 min-h-[50px] max-h-[130px] flex  flex-col justify-between">
-                            <h2 className="w-full flex items-end justify-start font-bold text-zinc-600 leading-tight text-xl mb-1 bg-purple-300">{cardData.title}</h2> {/* 38 caracteres*/}
-                            <h2 className="w-full text-lg flex items-center justify-start font-bold text-zinc-500 bg-red-300">{cardData.date.toLocaleDateString()}</h2>    
+                         <header className="p-1 min-h-[50px] max-h-[130px] flex  flex-col justify-between">
+                            <h2 className="w-full flex items-end justify-start font-bold text-zinc-600 leading-tight text-xl mb-1">{cardData.title}</h2> {/* 38 caracteres*/}
+                            <h2 className="w-full text-lg flex items-center justify-start font-bold text-zinc-500">{cardData.date.toLocaleDateString()}</h2>    
                         </header>   
                         
-                        <span className="w-full h-[200px] bg-yellow-500 mb-3"></span>
+                        <span className="w-full h-[200px] border border-zinc-200 rounded-md mb-3 flex justify-center items-center text-zinc-300">em construção...</span>
 
                         {
                             cardData.quickNotes && cardData.quickNotes != '' &&

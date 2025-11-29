@@ -106,7 +106,7 @@ export function FormCard({initialData, handleCloseCard, handleSaveCard, getField
 
                 <header className="flex flex-col justify-between h-[50px] w-full items-center"> 
                     <TopCategoryComponent defColor={color}/>
-                     <h2 className="w-full h-[30px] text-base flex items-center justify-center font-bold text-center text-zinc-900">{initialData ? 'Atualizar Assunto' :  'Novo Assunto'}</h2> {/* 38 caracteres*/}
+                     <h2 className="w-full h-[30px] text-base flex items-center justify-center font-bold text-center text-zinc-600">{initialData ? 'Atualizar Assunto' :  'Novo Assunto'}</h2> {/* 38 caracteres*/}
                 </header>
                 <section className="flex flex-row flex-1 justify-between items-center">
 

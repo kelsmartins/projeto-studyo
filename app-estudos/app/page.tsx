@@ -79,17 +79,16 @@ export default function Home() {
     <div className="w-screen h-screen flex flex-row">
       
       <nav className="h-screen w-[280px] bg-zinc-900 flex flex-col">
-          <header className="w-full h-[73px] flex justify-start items-center  shadow-xs shadow-zinc-600 px-4 mb-4">
-              <Image src="/studyorob.png" alt="studyo logo" width={50} height={50}/>
-              <Image src="/studyo_letra.png" alt="studyo logo" width={110} height={110}/>
+          <header className="w-full h-[73px] flex justify-start items-center  shadow-xs shadow-zinc-600 px-4 mb-2">
+              <Image src="/studyo_logo.png" alt="studyo logo" width={160} height={160}/>
           </header>
           <section className="w-full h-[200px] px-4 flex flex-col text-zinc-400 font-bold">
-              <h2 className="h-[40px] uppercase text-sm flex justify-start items-center text-zinc-300">Visualização</h2>
+              <h2 className="h-[40px] uppercase text-sm flex justify-start items-center text-zinc-300">Visualização (não funcional)</h2>
               <ul className="h-full w-full flex flex-col px-4 text-sm">
-                  <li className="w-full h-[35px] flex justify-start items-center hover:text-zinc-300 hover:text-base"><a href='#'>Simples</a></li>
-                  <li className="w-full h-[35px] flex justify-start items-center hover:text-zinc-300 hover:text-base"><a href='#'>Datas</a></li>
-                  <li className="w-full h-[35px] flex justify-start items-center hover:text-zinc-300 hover:text-base"><a href='#'>Calendário</a></li>
-                  <li className="w-full h-[35px] flex justify-start items-center hover:text-zinc-300 hover:text-base"><a href='#'>Kanban</a></li>
+                  <li className="w-full h-[35px] flex justify-start items-center hover:text-zinc-300 hover:text-base"><a href='#'>Simples (em construção)</a></li>
+                  <li className="w-full h-[35px] flex justify-start items-center hover:text-zinc-300 hover:text-base"><a href='#'>Datas (em construção)</a></li>
+                  <li className="w-full h-[35px] flex justify-start items-center hover:text-zinc-300 hover:text-base"><a href='#'>Calendário (em construção)</a></li>
+                  <li className="w-full h-[35px] flex justify-start items-center hover:text-zinc-300 hover:text-base"><a href='#'>Kanban (em construção)</a></li>
               </ul>
           </section>
 

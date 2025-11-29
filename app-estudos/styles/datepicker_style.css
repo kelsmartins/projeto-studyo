@@ -1,0 +1,5 @@
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background-color: #4d4d4d; /* azul Tailwind (blue-600) */
+  color: white;
+}
