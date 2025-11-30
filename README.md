@@ -1,7 +1,4 @@
-<div style={display: 'flex'}>
-  <img src="/app-estudos/public/studyorob.png" alt="Logo do projeto" width="100" height="100" />
-  <img src="/app-estudos/public/studyo_letra.png" alt="Logo do projeto" width="150" height="150" />
-</div>
+<img src="/app-estudos/public/studyo_logo.png" alt="Logo do projeto" width="400" height="400" />
 
 ## Studyo
    Plataforma de estudos online onde o usuário cadastra assuntos a serem estudados em cartões que os auxilia com informações como: o título, a data em que o assunto será estudado e as fontes de estudo (que podem ser tanto links de sites ou videos no YouTube, quanto arquivos pdf).  
