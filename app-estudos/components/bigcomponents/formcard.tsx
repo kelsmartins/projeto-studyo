@@ -100,6 +100,15 @@ export function FormCard({initialData, handleCloseCard, handleSaveCard, getField
         }
     }
 
+    function deleteOneLink(index: number) {
+        setSelectedLinks(prev => prev.filter((_, i) => i !== index));
+    }
+
+    function deleteOneFile(index: number) {
+        setSelectedFiles(prev => prev.filter((_, i) => i !== index));
+    }
+
+
     return (
         <div className={`w-full h-full fixed inset-0 flex items-center justify-center z-50 ${isEditing ? '': 'bg-black/30 backdrop-blur-sm'}`}>
             <main className="w-[600px] h-[600px] bg-white flex flex-col rounded-lg" onClick={e => e.stopPropagation()}> {/* explicacao linha 52 */}
@@ -170,15 +179,19 @@ export function FormCard({initialData, handleCloseCard, handleSaveCard, getField
                             selectedLinks && selectedLinks.length > 0 &&
                             <ul className="w-full h-[120px] mb-3 rounded-md overflow-y-auto no-scrollbar border border-zinc-300 px-2">
                                 {selectedLinks.map((link, index) => 
-                                    <li  key={index}> 
-                                        <a href={link} 
-                                            target="_blank" // para abrir em outra guia
-                                            className="w-full h-10 bg-zinc-50 my-2 flex flex-row justify-start items-center gap-1 px-2 shadow-xs shadow-zinc-300 rounded-md hover:bg-zinc-100">
-                                                <FaLink  className="text-zinc-500 size-4 font-bold" />
-                                                <p className="text-xs text-zinc-600 truncate h-full w-[90%] flex justify-start items-center hover:text-zinc-800">{link}</p>
-                                                <FaBucket className="text-zinc-500 size-4 font-bold hover:text-red-400"/>
+                                    <li key={index} className="w-full h-10 bg-zinc-50 flex flex-row justify-between items-center gap-2 shadow-xs shadow-zinc-300 rounded-md hover:bg-zinc-100 px-2 my-2" >
+                                        {/* Link */}
+                                        <a href={link} target="_blank" className="flex flex-row items-center gap-2 flex-1 overflow-hidden" >
+                                            <FaLink className="text-zinc-500 size-4 font-bold" />
+                                            <p className="text-xs text-zinc-600 truncate whitespace-nowrap overflow-hidden flex-1">
+                                                {link}
+                                            </p>
                                         </a>
-                                    </li>)}
+                                        {/* Botão de deletar */}
+                                        <FaBucket className="text-zinc-500 size-4 font-bold hover:text-red-400 active:text-red-800 cursor-pointer" onClick={() => deleteOneLink(index)}
+                                        />
+                                    </li>
+                                )}
                             </ul>
                         }
                         {
@@ -194,12 +207,19 @@ export function FormCard({initialData, handleCloseCard, handleSaveCard, getField
                             <ul className="w-full h-[120px] mb-3 rounded-md overflow-y-auto no-scrollbar border border-zinc-300 px-2">
                                 {
                                     selectedFiles.map((file, index)  => 
-                                        <li className="w-full h-10 bg-zinc-50 my-2 flex flex-row justify-start items-center gap-1 px-2 shadow-xs shadow-zinc-300 rounded-md hover:bg-zinc-200" key={index}>
-                                            <FaFilePdf  className="text-zinc-500 size-4 font-bold" />
-                                            <p className="text-xs text-zinc-600 h-full w-[90%] flex justify-start items-center truncate">{file.name}</p>
-                                            <FaBucket className="text-zinc-500 size-4 font-bold hover:text-red-400"/>
-                                        </li>)
-                                }
+                                       <li key={index} className="w-full h-10 bg-zinc-50 flex flex-row justify-between items-center gap-2 shadow-xs shadow-zinc-300 rounded-md hover:bg-zinc-100 px-2 my-2" >
+                                            {/* Arquivo */}
+                                            <div className="flex flex-row items-center gap-2 flex-1 overflow-hidden">
+                                                <FaFilePdf className="text-zinc-500 size-4 font-bold" />
+                                                <p className="text-xs text-zinc-600 truncate whitespace-nowrap overflow-hidden flex-1">
+                                                    {file.name}
+                                                </p>
+                                            </div>
+                                            {/* Botão de deletar */}
+                                            <FaBucket className="text-zinc-500 size-4 font-bold hover:text-red-400 active:text-red-800 cursor-pointer" onClick={() => deleteOneFile(index)}
+                                            />
+                                        </li>
+                                        )}
                             </ul>
                         } 
                         {

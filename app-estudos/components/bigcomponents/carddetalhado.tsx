@@ -23,6 +23,8 @@ type Props = {
 export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCard}: Props) {
 
     const [showUpdateCard, setShowUpdateCard] = useState(false);
+    const [selectedLinks, setSelectedLinks] = useState<string[]>(cardData.links || []); // manipular remocao de links
+    const [selectedFiles, setSelectedFiles] = useState<File[]>(cardData.files || []); // manipular remocao de arquivos
 
     function handleShowUpdateCard(){
         setShowUpdateCard(true);
@@ -34,6 +36,14 @@ export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCa
 
     function handleConclude(){
         closeDetails();
+    }
+
+    function deleteOneLink(index: number) {
+        setSelectedLinks(prev => prev.filter((_, i) => i !== index));
+    }
+
+    function deleteOneFile(index: number) {
+        setSelectedFiles(prev => prev.filter((_, i) => i !== index));
     }
 
     return (
@@ -80,48 +90,52 @@ export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCa
                         {/* DIV LINKS */}
                         <h4 className="text-sm text-zinc-500 font-bold h-3 flex justify-start items-center">links</h4>
 
-                        { cardData.links && cardData.links.length > 0 &&
+                        { selectedLinks && selectedLinks.length > 0 &&
                         <ul className="h-[200px] w-full mt-1 overflow-y-auto no-scrollbar">
                             {
-                            cardData.links && cardData.links.length > 0 &&
-                            cardData.links.map((link, index) => 
-                                <li  key={index}
-                                    className="w-full h-10 bg-zinc-50 flex flex-row justify-start items-center gap-1 shadow-xs shadow-zinc-300 rounded-md hover:bg-zinc-100 px-2 my-2"> 
-                                    <a href={link} 
-                                        target="_blank" // para abrir em outra guia
-                                        className="flex justify-between items-center w-full">
-                                            <FaLink  className="text-zinc-500 size-4 font-bold" />
-                                            <p className="text-xs text-zinc-600 truncate h-full w-[90%] flex justify-start items-center">{link}</p>
-                                    </a>
-                                    <FaBucket className="text-zinc-500 size-4 font-bold hover:text-red-400"/>
-                                </li>)
-                            }
+                            selectedLinks && selectedLinks.length > 0 &&
+                            selectedLinks.map((link, index) => 
+                                <li key={index} className="w-full h-10 bg-zinc-50 flex flex-row justify-between items-center gap-2 shadow-xs shadow-zinc-300 rounded-md hover:bg-zinc-100 px-2 my-2" >
+                                        {/* Link */}
+                                        <a href={link} target="_blank" className="flex flex-row items-center gap-2 flex-1 overflow-hidden" >
+                                            <FaLink className="text-zinc-500 size-4 font-bold" />
+                                            <p className="text-xs text-zinc-600 truncate whitespace-nowrap overflow-hidden flex-1">
+                                                {link}
+                                            </p>
+                                        </a>
+                                        {/* Botão de deletar */}
+                                        <FaBucket className="text-zinc-500 size-4 font-bold hover:text-red-400 active:text-red-800 cursor-pointer" onClick={() => deleteOneLink(index)}
+                                        />
+                                    </li>
+                                )}
                         </ul>
                         }
                         {
-                            cardData.links?.length === 0 && 
+                            selectedLinks?.length === 0 && 
                             <NothingToShow height="200px" label="nenhum link adicionado"/>
                         }
 
                         {/* DIV FILES*/}
                         <h4 className="text-sm text-zinc-500 font-bold h-3 flex justify-start items-center mt-3">arquivos</h4>
                         
-                        { cardData.files && cardData.files.length > 0 &&
+                        { selectedFiles && selectedFiles.length > 0 &&
                         <ul className="h-[200px] w-full mt-1 overflow-y-auto no-scrollbar">
                             {
-                            cardData.files && cardData.files.length > 0 &&
-                            cardData.files.map((file, index) => 
-                                 <li  key={index}
-                                    className="w-full h-10 bg-zinc-50 flex flex-row justify-start items-center gap-1 shadow-xs shadow-zinc-300 rounded-md hover:bg-zinc-100 px-2 my-2"> 
-                                    <a href={file.name} 
-                                        target="_blank" // para abrir em outra guia
-                                        className="flex justify-between items-center w-full">
-                                            <FaFilePdf className="text-zinc-500 size-4 font-bold" />
-                                            <p className="text-xs text-zinc-600 truncate h-full w-[90%] flex justify-start items-center">{file.name}</p>
-                                    </a>
-                                    <FaBucket className="text-zinc-500 size-4 font-bold hover:text-red-400"/>
-                                </li>)
-                            }
+                            selectedFiles && selectedFiles.length > 0 &&
+                            selectedFiles.map((file, index) => 
+                                  <li key={index} className="w-full h-10 bg-zinc-50 flex flex-row justify-between items-center gap-2 shadow-xs shadow-zinc-300 rounded-md hover:bg-zinc-100 px-2 my-2" >
+                                            {/* Arquivo */}
+                                            <div className="flex flex-row items-center gap-2 flex-1 overflow-hidden">
+                                                <FaFilePdf className="text-zinc-500 size-4 font-bold" />
+                                                <p className="text-xs text-zinc-600 truncate whitespace-nowrap overflow-hidden flex-1">
+                                                    {file.name}
+                                                </p>
+                                            </div>
+                                            {/* Botão de deletar */}
+                                            <FaBucket className="text-zinc-500 size-4 font-bold hover:text-red-400 active:text-red-800 cursor-pointer" onClick={() => deleteOneFile(index)}
+                                            />
+                                        </li>
+                                    )}
                         </ul>
                         }
                         {
@@ -142,7 +156,12 @@ export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCa
                 {
                     showUpdateCard && <FormCard initialData={cardData} 
                                             handleCloseCard={handleCloseUpdateCard} 
-                                            getFields={getFields} // vai repassar a chamada de funcao getFields para updateCard
+                                            // vai repassar a chamada de funcao getFields para updateCard
+                                            getFields={(title, date, category, color, quickNotes, links, files) => {
+                                                setSelectedLinks(links || []);
+                                                setSelectedFiles(files || []);
+                                            }}
+
                                             handleSaveCard={handleUpdateCard} />
                 }
 
