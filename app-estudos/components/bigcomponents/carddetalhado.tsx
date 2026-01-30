@@ -154,18 +154,14 @@ export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCa
                     </div>
                 </footer>
                 {
-                    showUpdateCard && <FormCard initialData={{...cardData, 
-                                                                links: selectedLinks, // quando apagar em carddetalhado, atualizar aqui 
-                                                                files: selectedFiles // os dados de cardData mas com os links e files da state do carddetallhado
-                                                            }} 
+                    showUpdateCard && <FormCard initialData={cardData} 
                                             handleCloseCard={handleCloseUpdateCard} 
                                             // vai repassar a chamada de funcao getFields para updateCard
                                             getFields={(title, date, category, color, quickNotes, links, files) => {
-                                                setSelectedLinks(links || []); // para alterar estado no formcard
-                                                setSelectedFiles(files || []); // para alterar estado no formcard
-
-                                                getFields(title, date, category, color, quickNotes, links, files); // para fazer update dos dados no card-pai
+                                                setSelectedLinks(links || []);
+                                                setSelectedFiles(files || []);
                                             }}
+
                                             handleSaveCard={handleUpdateCard} />
                 }
 
