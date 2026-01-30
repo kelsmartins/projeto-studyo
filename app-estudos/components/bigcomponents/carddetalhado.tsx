@@ -154,7 +154,11 @@ export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCa
                     </div>
                 </footer>
                 {
-                    showUpdateCard && <FormCard initialData={cardData} 
+                    showUpdateCard && <FormCard initialData={{
+                                                    ...cardData, 
+                                                    links: selectedLinks,
+                                                    files: selectedFiles
+                                                    }} 
                                             handleCloseCard={handleCloseUpdateCard} 
                                             // vai repassar a chamada de funcao getFields para updateCard
                                             getFields={(title, date, category, color, quickNotes, links, files) => {
