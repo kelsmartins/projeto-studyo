@@ -1,5 +1,6 @@
 import { Button } from "../button";
 import { useState } from "react";
+import {useEffect} from "react";
 import { TopCategoryComponent } from "../pickers/categorycomponent";
 import { FaLink , FaFilePdf, FaBucket } from 'react-icons/fa6'
 import { FormCard } from "./formcard";
@@ -23,8 +24,21 @@ type Props = {
 export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCard}: Props) {
 
     const [showUpdateCard, setShowUpdateCard] = useState(false);
+
+    const [title, setTitle] = useState(cardData.title);
+    const [date, setDate] = useState(cardData.date);
+    const [quickNotes, setQuickNotes] = useState(cardData.quickNotes);
     const [selectedLinks, setSelectedLinks] = useState<string[]>(cardData.links || []); // manipular remocao de links
     const [selectedFiles, setSelectedFiles] = useState<File[]>(cardData.files || []); // manipular remocao de arquivos
+
+    // Sempre que o CardData mudar (vinda do componente Card), atualize o estado visual
+    useEffect(() => {
+        setTitle(cardData.title);
+        setDate(cardData.date);
+        setQuickNotes(cardData.quickNotes);
+        setSelectedLinks(cardData.links || []);
+        setSelectedFiles(cardData.files || []);
+    }, [cardData]);
 
     function handleShowUpdateCard(){
         setShowUpdateCard(true);
@@ -62,24 +76,24 @@ export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCa
                     <div className="w-[300px] h-full flex flex-col px-4">
 
                          <header className="p-1 min-h-[50px] max-h-[130px] flex  flex-col justify-between">
-                            <h2 className="w-full flex items-end justify-start font-bold text-zinc-600 leading-tight text-xl mb-1">{cardData.title}</h2> {/* 38 caracteres*/}
-                            <h2 className="w-full text-lg flex items-center justify-start font-bold text-zinc-500">{cardData.date.toLocaleDateString()}</h2>    
+                            <h2 className="w-full flex items-end justify-start font-bold text-zinc-600 leading-tight text-xl mb-1">{title}</h2> {/* 38 caracteres*/}
+                            <h2 className="w-full text-lg flex items-center justify-start font-bold text-zinc-500">{date.toLocaleDateString()}</h2>    
                         </header>   
                         
                         <span className="w-full h-[200px] border border-zinc-200 rounded-md mb-3 flex justify-center items-center text-zinc-300">em construção...</span>
 
                         {
-                            cardData.quickNotes && cardData.quickNotes != '' &&
+                            quickNotes && quickNotes != '' &&
                             <p className="h-[80px] w-full bg-zinc-100 rounded-md p-2 text-zinc-400 text-sm mb-3 italic overflow-y-auto no-scrollbar">
-                                {cardData.quickNotes}
+                                {quickNotes}
                             </p>
                         }
                         {
-                            !cardData.quickNotes && cardData.quickNotes == '' &&
+                            !quickNotes && quickNotes == '' &&
                             <button className="w-full h-[30px] bg-zinc-100 hover:bg-zinc-200 rounded-xl shadow-xs shadow-zinc-300 mb-3 text-zinc-400 font-bold text-xs uppercase" onClick={()=> setShowUpdateCard(true)}>Adicionar notas rápidas</button>
                         }
                         {
-                            cardData.quickNotes && cardData.quickNotes != '' &&
+                            quickNotes && quickNotes != '' &&
                             <button className="w-full h-[30px] bg-zinc-100 hover:bg-zinc-200 rounded-xl shadow-xs shadow-zinc-300 mb-3 text-zinc-400 font-bold text-xs uppercase" onClick={()=> setShowUpdateCard(true)}>Editar notas rápidas</button>
                         }
                         
@@ -139,7 +153,7 @@ export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCa
                         </ul>
                         }
                         {
-                            cardData.files?.length === 0 && 
+                            selectedFiles?.length === 0 && 
                             <NothingToShow height="200px" label="nenhum arquivo adicionado"/>
                         }
 
@@ -153,22 +167,34 @@ export function CardDetalhado({cardData, closeDetails, getFields, handleUpdateCa
                             <Button style="bg-zinc-700 text-white font-bold hover:bg-zinc-600" title="concluir" onClick={handleConclude}/>
                     </div>
                 </footer>
-                {
-                    showUpdateCard && <FormCard initialData={{
-                                                    ...cardData, 
-                                                    links: selectedLinks,
-                                                    files: selectedFiles
-                                                    }} 
-                                            handleCloseCard={handleCloseUpdateCard} 
-                                            // vai repassar a chamada de funcao getFields para updateCard
-                                            getFields={(title, date, category, color, quickNotes, links, files) => {
-                                                setSelectedLinks(links || []);
-                                                setSelectedFiles(files || []);
-                                            }}
+                {showUpdateCard && (
+                    <FormCard 
+                        initialData={{
+                            ...cardData, 
+                            title: title, // Passa o estado atual
+                            date: date,
+                            quickNotes: quickNotes,
+                            links: selectedLinks,
+                            files: selectedFiles
+                        }} 
+                        handleCloseCard={handleCloseUpdateCard} 
+                        
+                        getFields={(newTitle, newDate, newCategory, newColor, newNotes, newLinks, newFiles) => {
+                            
+                            // 1. Atualiza visualmente o CardDetalhado IMEDIATAMENTE
+                            setTitle(newTitle);
+                            setDate(newDate);
+                            setQuickNotes(newNotes);
+                            setSelectedLinks(newLinks || []);
+                            setSelectedFiles(newFiles || []);
 
-                                            handleSaveCard={handleUpdateCard} />
-                }
+                            // 2. Avisa o componente PAI (Card) que houve mudança para ele salvar 
+                            getFields(newTitle, newDate, newCategory, newColor, newNotes, newLinks, newFiles);
+                        }}
 
+                        handleSaveCard={handleUpdateCard} 
+                    />
+                )}
             </main>
         </div>
     )

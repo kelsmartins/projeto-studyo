@@ -61,29 +61,28 @@ export function FormCard({initialData, handleCloseCard, handleSaveCard, getField
 
     // funcoes pick fields
 
-    function atLeastTwoFilledFields(){
-        if(title != '' && selectedLinks && selectedFiles){
-            return true;
-        } else if(title != '' && selectedLinks && !selectedFiles){
-            return true;   
-        } else if(title != '' && selectedLinks && selectedFiles){
-            return true;   
-        } else {
-            return false;
-        }
+    function atLeastTwoFilledFields() {
+
+        const hasTitle = title.trim() !== '';
+        const hasContent = selectedLinks.length > 0 || selectedFiles.length > 0;
+
+        return hasTitle && hasContent;
     }
 
-    function isFieldsEmpty(){
-        
-        if(title =='' && selectedLinks && !selectedFiles){
-            alert('titulo e uma fonte digital obrigatorios')
-        } else if(selectedLinks && !selectedFiles){
-            alert('adicione ao menos uma fonte digital')
-        } else if(title == '' && (selectedLinks || selectedFiles)){
-            alert('tem fonte digital mas nao tem titulo')
-        }
+    function isFieldsEmpty() {
+    const hasTitle = title.trim() !== '';
+    const hasLinks = selectedLinks.length > 0;
+    const hasFiles = selectedFiles.length > 0;
+    const hasContent = hasLinks || hasFiles;
 
+    if (!hasTitle && !hasContent) {
+        alert('Título e uma fonte digital são obrigatórios');
+    } else if (hasTitle && !hasContent) {
+        alert('Adicione ao menos uma fonte digital (Link ou Arquivo)');
+    } else if (!hasTitle && hasContent) {
+        alert('Você adicionou fontes digitais, mas esqueceu o título');
     }
+}
 
     // se IsEditing = atualizar dados em card, se nao = salvar como novo card 
     function handleClick(){
@@ -133,7 +132,7 @@ export function FormCard({initialData, handleCloseCard, handleSaveCard, getField
 
                         {/* DATA */}
                         <h3 className="mb-1 text-sm text-zinc-600 font-bold">Data Agendada</h3>
-                        <DatePickerComponent onPick={handlePickDate} />
+                        <DatePickerComponent onPick={handlePickDate} selectedDate={date} />
 
                         {/* CATEGORIA */}
                         <h3 className="mb-1 text-sm text-zinc-500 font-bold">Categoria (Opcional)</h3>           

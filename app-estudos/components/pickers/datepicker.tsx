@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 import "../../styles/datepicker_style.css"
@@ -9,22 +9,19 @@ registerLocale('pt-BR', ptBR)
 
 type Props = {
     onPick: (date: Date) => void; // pegar data e salvar no comp-pai (novocard)
+    selectedDate?: Date;
 }
 
-export const DatePickerComponent = ({onPick}: Props) => {
-
-    const [date, setDate] = useState(new Date());
-
-    function handleSetDate(newDate: Date | null){
-        if(newDate){
-            setDate(newDate)
-            onPick(newDate); // pegou a data da state e levou para a comp-pai(novocard)
-        }
-    }
+export const DatePickerComponent = ({onPick, selectedDate}: Props) => {
 
     return (
-        <DatePicker selected={date}
-            onChange={handleSetDate}
+        <DatePicker 
+            selected={selectedDate}
+            onChange={(newDate: Date | null)=> {
+                if(newDate){
+                    onPick(newDate)
+                }
+            }}
             locale={`pt-BR`} // traduzir para portugues
             className={`w-full h-[40px] border border-zinc-700 rounded-md mb-3 text-zinc-600 text-md p-2`}
             dateFormat={`dd/MM/yyyy`} // padrozinar para formato brasileiro

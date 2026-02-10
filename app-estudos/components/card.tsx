@@ -91,12 +91,13 @@ export function Card({assuntoData}: Props) {
                     <Button style="bg-zinc-700 font-bold hover:bg-zinc-600 transition-colors" title="concluir" onClick={handleDeleteCard}/>
                 </div>
                 {show &&
-                    <CardDetalhado cardData={cardData} 
+                <CardDetalhado 
+                    cardData={cardData} 
                     closeDetails={handleCloseDetails} 
-                    getFields={(updateCardTitle, updateCardDate, UpdateCardCategory, updateCardColor, updateCardQuickNotes, updateCardLinks, updateCardFiles)=>getUpdateCardFields(updateCardTitle, updateCardDate, UpdateCardCategory, updateCardColor, updateCardQuickNotes, updateCardLinks, updateCardFiles)} 
-                    handleUpdateCard={ handleUpdateCard}
-                    // vai passar uma chamada de funcao com getUpdateCardFields para pegar os campos de updatecard dentro de carddetalhado
-                    />
+                    // Simplificando a passagem da função:
+                    getFields={getUpdateCardFields} 
+                    handleUpdateCard={handleUpdateCard}
+                />
                 }
             </div>
         </div>
