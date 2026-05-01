@@ -3,9 +3,7 @@ import {CardArea} from '@/components/bigcomponents/cardarea';
 import { AssuntoType } from '@/types/assuntotype';
 import { useState } from 'react';
 import { Assuntos} from '@/data/assuntos';
-import axios from 'axios';
 import { FormCard } from '@/components/bigcomponents/formcard';
-import Image from 'next/image';
 
 export default function Home() {
 
@@ -38,32 +36,16 @@ export default function Home() {
   }
   
   return (
-    <div className="w-screen h-screen flex flex-row">
-      
-      <nav className="h-screen w-[280px] bg-zinc-900 flex flex-col">
-          <header className="w-full h-[73px] flex justify-start items-center  shadow-xs shadow-zinc-600 px-4 mb-2">
-              <Image src="/studyo_logo.png" alt="studyo logo" width={160} height={160}/>
-          </header>
-          <section className="w-full h-[200px] px-4 flex flex-col text-zinc-400 font-bold">
-              <h2 className="h-[40px] uppercase text-sm flex justify-start items-center text-zinc-300">Visualização (não funcional)</h2>
-              <ul className="h-full w-full flex flex-col px-4 text-sm">
-                  <li className="w-full h-[35px] flex justify-start items-center hover:text-zinc-300 hover:text-base"><a href='#'>Simples (em construção)</a></li>
-                  <li className="w-full h-[35px] flex justify-start items-center hover:text-zinc-300 hover:text-base"><a href='#'>Datas (em construção)</a></li>
-                  <li className="w-full h-[35px] flex justify-start items-center hover:text-zinc-300 hover:text-base"><a href='#'>Calendário (em construção)</a></li>
-                  <li className="w-full h-[35px] flex justify-start items-center hover:text-zinc-300 hover:text-base"><a href='#'>Kanban (em construção)</a></li>
-              </ul>
-          </section>
-
-      </nav> 
+    <div className="flex-1 h-full flex flex-col overflow-hidden min-h-0">
                                                     {/* O min-w-0 permite que um item (flex-1) encolha para caber no layout, mesmo que o conteúdo dentro dele seja muito mais largo. */}
-      <div className="h-screen w-[100%] flex-1 bg-gray-200 min-w-0">  {/* transformar num componente futuramente*/}
+      <div className="flex-1 w-full bg-gray-200 min-w-0 flex flex-col min-h-0">  {/* transformar num componente futuramente*/}
         <header className="h-[10%] w-[100%] flex flex-row items-center px-4 justify-between">
           <h2 className="text-3xl font-bold text-zinc-800">Estudos</h2>
           <button className='w-[110px] h-[40px] bg-zinc-800 rounded-md font-bold p-1 text-sm text-white/80 hover:bg-zinc-700 transition-colors cursor-pointer' 
           onClick={handleOpenNewCard}>novo assunto</button>
         </header>                      
-         <div className=" w-full h-[90%] overflow-y-auto no-scrollbar">
-            <CardArea title='Hoje'code={1}assuntos={assuntos}/>
+         <div className="w-full flex-1 overflow-y-auto no-scrollbar">
+            <CardArea title='Hoje' code={1} assuntos={assuntos}/>
             <CardArea title='Amanhã' code={2} assuntos={assuntos}/>
             <CardArea title='Depois de amanhã' code={3} assuntos={assuntos}/>
             <CardArea title='Próximos dias' code={4} assuntos={assuntos}/>
